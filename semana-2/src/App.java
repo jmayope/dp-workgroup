@@ -203,7 +203,6 @@ public class App {
 
         /*
         
-        
         Actividad 1. Predicción 
             Sin ejecutar el programa, escriba qué cree que ocurrirá en cada llamada. 
                 a) Resultado esperado con new Auto (): 
