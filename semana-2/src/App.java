@@ -200,5 +200,54 @@ public class App {
 
         probarVehiculo(new Auto());         
         probarVehiculo(new Bicicleta()); 
+
+        /*
+        
+        
+        Actividad 1. Predicción 
+            Sin ejecutar el programa, escriba qué cree que ocurrirá en cada llamada. 
+                a) Resultado esperado con new Auto (): 
+                        Se ejecutará correctamente el método sobrescrito de Auto y se mostrará:
+                Motor del auto encendido
+                b) Resultado esperado con new Bicicleta (): 
+                Se producirá una excepción UnsupportedOperationException, porque Bicicleta no tiene motor y su método encenderMotor() lanza explícitamente esa excepción.
+        Actividad 2. Ejecución 
+            Copie las clases en su entorno de desarrollo, compile y ejecute el programa. Después, registre el resultado real. 
+                Salida obtenida con Auto: 
+                        Motor del auto encendido
+                Salida o error obtenido con Bicicleta: 
+                        Exception in thread "main" java.lang.UnsupportedOperationException: La bicicleta no tiene motor
+        Actividad 3. Identificación del problema Responda con sus propias palabras: 
+            1.	¿Cuál es la clase padre? 
+                Vehiculo
+            2.	¿Cuáles son las clases hijas? 
+                Las clases hijas son:
+                    - Auto
+                    - Bicicleta
+                Ambas extienden la clase Vehiculo.
+            3.	¿Qué clase ocasiona el error? 
+                La clase que ocasiona el error es:
+                    - Bicicleta
+                Esto ocurre porque su implementación de encenderMotor() lanza una UnsupportedOperationException.
+        4.	¿Por qué Bicicleta no puede cumplir correctamente el método encenderMotor()? 
+            Porque una bicicleta no tiene motor. Por lo tanto, aunque hereda el método de Vehiculo, no puede realizar correctamente la operación que ese método representa.
+            La clase Vehiculo está suponiendo incorrectamente que todos los vehículos tienen motor.
+        5.	¿Bicicleta puede reemplazar a Vehiculo sin que el programa falle? 
+        No. Aunque Bicicleta es una subclase de Vehiculo, al utilizarla en un lugar donde se espera un Vehiculo y se llama a encenderMotor(), el programa lanza una excepción.
+            Por ejemplo:
+                - Vehiculo vehiculo = new Bicicleta();
+                - vehiculo.encenderMotor();
+                - Esto provoca el error porque la bicicleta no puede cumplir la operación esperada.
+        6.	¿El código cumple o viola el Principio de Sustitución de Liskov? Explique. 
+            El código viola el Principio de Sustitución de Liskov (LSP).
+            LSP establece que una clase hija debe poder sustituir a su clase padre sin cambiar el comportamiento esperado del programa.
+            En este caso, Bicicleta hereda de Vehiculo, por lo que debería poder utilizarse como cualquier Vehiculo. Sin embargo, cuando se 
+            llama a encenderMotor(), la bicicleta lanza una excepción porque no tiene motor. El problema está en que Vehiculo agrupa objetos 
+            que no comparten realmente la capacidad de encender un motor. Una mejor solución sería separar la capacidad de tener/encender motor 
+            en una interfaz, por ejemplo Motorizado, que implementen únicamente Auto, Moto, etc. Así, Bicicleta podría seguir siendo un vehículo 
+            sin verse obligada a implementar una operación que no tiene sentido para ella.
+
+        
+        */
     }
 }
