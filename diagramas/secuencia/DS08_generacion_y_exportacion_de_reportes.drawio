@@ -1,0 +1,150 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Página-1" id="IFgLfU8HmN8Q7iJrYtLC">
+    <mxGraphModel dx="872" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="12C6rWFMR-dfvEykNbVA-1" value="Usuario autorizado" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="35" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-2" value="Aplicación Web" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="236" y="20" width="150" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-3" value="ReportController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="436" y="20" width="150" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-4" value="ReportService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="671" y="20" width="150" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-5" value="MongoDB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="913" y="20" width="150" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-6" value="Report Generator" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1113" y="20" width="150" height="1058" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-7" value="alt" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30" vertex="1" parent="1">
+          <mxGeometry x="500" y="605" width="699" height="282" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-8" value="[Exportar PDF]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="12C6rWFMR-dfvEykNbVA-7">
+          <mxGeometry x="30" width="669" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-9" value="[Exportar Excel]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="12C6rWFMR-dfvEykNbVA-7">
+          <mxGeometry y="146" width="699" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-10" value="Seleccionar reporte" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-1" target="12C6rWFMR-dfvEykNbVA-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="214" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-11" value="Seleccionar filtros" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-1" target="12C6rWFMR-dfvEykNbVA-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="214" y="171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-12" value="GET /reports" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-2" target="12C6rWFMR-dfvEykNbVA-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-13" value="generarReporte(filtros)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-3" target="12C6rWFMR-dfvEykNbVA-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="637" y="267" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-14" value="Consultar vacunaciones" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-4" target="12C6rWFMR-dfvEykNbVA-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="876" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-15" value="Datos" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-5" target="12C6rWFMR-dfvEykNbVA-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="879" y="363" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-16" value="Consultar campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-4" target="12C6rWFMR-dfvEykNbVA-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="876" y="411" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-17" value="Datos de campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-5" target="12C6rWFMR-dfvEykNbVA-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="879" y="459" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-18" value="Consolidar información" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-4" target="12C6rWFMR-dfvEykNbVA-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="797" y="507" />
+              <mxPoint x="797" y="537" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-19" value="Datos del reporte" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-4" target="12C6rWFMR-dfvEykNbVA-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="585" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-20" value="generarPDF(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-3" target="12C6rWFMR-dfvEykNbVA-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="858" y="678" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-21" value="Archivo PDF" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-6" target="12C6rWFMR-dfvEykNbVA-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="861" y="726" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-22" value="generarExcel(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-3" target="12C6rWFMR-dfvEykNbVA-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="858" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-23" value="Archivo Excel" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-6" target="12C6rWFMR-dfvEykNbVA-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="861" y="867" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-24" value="Descargar archivo" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-3" target="12C6rWFMR-dfvEykNbVA-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="423" y="925" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12C6rWFMR-dfvEykNbVA-25" value="Reporte generado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="12C6rWFMR-dfvEykNbVA-2" target="12C6rWFMR-dfvEykNbVA-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="217" y="973" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

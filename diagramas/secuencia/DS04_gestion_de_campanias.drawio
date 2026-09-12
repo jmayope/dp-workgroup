@@ -1,0 +1,239 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Página-1" id="o9k9FomTfzhS3Gqdd__H">
+    <mxGraphModel dx="872" dy="531" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-1" value="Administrador" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="35" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-2" value="Aplicación Web" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="322" y="20" width="150" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-3" value="CampaignController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="642" y="20" width="165" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-4" value="CampaignService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="940" y="20" width="150" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-5" value="CampaignRepository" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1216" y="20" width="170" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-6" value="MongoDB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1471" y="20" width="150" height="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-7" value="Crear campaña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-1" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="255" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-8" value="POST /campaigns" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-2" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="569" y="171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-9" value="crearCampaña(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="878" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-10" value="Validar fechas y configuración" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1066" y="267" />
+              <mxPoint x="1066" y="297" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-11" value="guardarCampaña(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1167" y="345" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-12" value="Insertar Campaign" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1432" y="393" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-13" value="Campaña creada" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-6" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="441" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-14" value="Campaña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="489" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-15" value="Campaña creada" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="881" y="537" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-16" value="Mostrar campaña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="572" y="585" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-17" value="Confirmación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-2" target="xdr7NxtkfZQgu-Ske2m5-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="258" y="633" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-18" value="Configurar campaña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-1" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="255" y="681" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-19" value="PUT /campaigns/{id}" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-2" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="569" y="729" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-20" value="actualizarConfiguracion(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="878" y="777" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-21" value="actualizarCampaña(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1167" y="825" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-22" value="Actualizar Campaign" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1432" y="873" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-23" value="Actualización exitosa" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-6" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="921" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-24" value="Campaña actualizada" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="969" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-25" value="Resultado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="881" y="1017" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-26" value="Configuración actualizada" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="572" y="1065" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-27" value="Asignar personal, metas y zonas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-1" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="255" y="1113" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-28" value="POST /campaigns/{id}/assignments" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-2" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="569" y="1161" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-29" value="asignarRecursos(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="878" y="1209" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-30" value="actualizarAsignaciones(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1167" y="1257" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-31" value="Actualizar campaña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1432" y="1305" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-32" value="Asignaciones guardadas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-6" target="xdr7NxtkfZQgu-Ske2m5-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="1353" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-33" value="Confirmación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-5" target="xdr7NxtkfZQgu-Ske2m5-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="1401" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-34" value="Resultado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-4" target="xdr7NxtkfZQgu-Ske2m5-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="881" y="1449" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-35" value="Asignaciones actualizadas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-3" target="xdr7NxtkfZQgu-Ske2m5-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="572" y="1497" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdr7NxtkfZQgu-Ske2m5-36" value="Mostrar campaña configurada" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="xdr7NxtkfZQgu-Ske2m5-2" target="xdr7NxtkfZQgu-Ske2m5-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="258" y="1545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

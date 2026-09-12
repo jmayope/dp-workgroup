@@ -1,0 +1,202 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Página-1" id="GxAFrLNahzXTocOxEUWy">
+    <mxGraphModel dx="872" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rwpUXed6cA3UUdW76nfH-1" value="Personal de Salud" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="35" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-2" value="Aplicación Web/Móvil" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="178" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-3" value="AuthController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="553" y="20" width="150" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-4" value="AuthService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="822" y="20" width="150" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-5" value="MedicalStaffRepository" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1022" y="20" width="188" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-6" value="MongoDB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1276" y="20" width="150" height="1476" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-7" value="alt" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30" vertex="1" parent="1">
+          <mxGeometry x="85" y="917" width="823" height="426" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-8" value="[Tiene múltiples perfiles]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="rwpUXed6cA3UUdW76nfH-7">
+          <mxGeometry x="30" width="793" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-9" value="[Tiene un perfil]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="rwpUXed6cA3UUdW76nfH-7">
+          <mxGeometry y="338" width="823" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-10" value="alt" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30" vertex="1" parent="1">
+          <mxGeometry x="75" y="509" width="908" height="892" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-11" value="[Credenciales incorrectas]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="rwpUXed6cA3UUdW76nfH-10">
+          <mxGeometry x="30" width="878" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-12" value="[Credenciales correctas]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="rwpUXed6cA3UUdW76nfH-10">
+          <mxGeometry y="194" width="908" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-13" value="Ingresa DNI y contraseña" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-1" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="241" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-14" value="POST /auth/login" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-2" target="rwpUXed6cA3UUdW76nfH-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="507" y="171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-15" value="autenticar(DNI, contraseña)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="771" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-16" value="buscarPorDNI(DNI)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1015" y="267" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-17" value="Consultar MedicalStaff" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-5" target="rwpUXed6cA3UUdW76nfH-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1242" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-18" value="Datos del personal" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-6" target="rwpUXed6cA3UUdW76nfH-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1245" y="363" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-19" value="MedicalStaff" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-5" target="rwpUXed6cA3UUdW76nfH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1018" y="411" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-20" value="Validar contraseña" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="948" y="459" />
+              <mxPoint x="948" y="489" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-21" value="Error de autenticación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="774" y="582" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-22" value="401 Credenciales inválidas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-23" value="Mostrar mensaje de error" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-2" target="rwpUXed6cA3UUdW76nfH-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="244" y="678" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-24" value="Generar token" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="948" y="771" />
+              <mxPoint x="948" y="801" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-25" value="Token + perfiles" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="774" y="849" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-26" value="Autenticación exitosa" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="897" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-27" value="Mostrar perfiles disponibles" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-2" target="rwpUXed6cA3UUdW76nfH-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="244" y="990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-28" value="Selecciona perfil" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-1" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="241" y="1038" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-29" value="Seleccionar perfil" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-2" target="rwpUXed6cA3UUdW76nfH-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="507" y="1086" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-30" value="Validar perfil" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="771" y="1134" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-31" value="Permisos del perfil" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-4" target="rwpUXed6cA3UUdW76nfH-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="774" y="1182" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-32" value="Menú y permisos" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="1230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-33" value="Menú y permisos" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-3" target="rwpUXed6cA3UUdW76nfH-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="1323" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwpUXed6cA3UUdW76nfH-34" value="Mostrar sistema autorizado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="rwpUXed6cA3UUdW76nfH-2" target="rwpUXed6cA3UUdW76nfH-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="244" y="1381" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

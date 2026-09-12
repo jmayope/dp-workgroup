@@ -1,0 +1,250 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Página-1" id="2F3EyhQtbYpWwVoh6mn8">
+    <mxGraphModel dx="872" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1ElePTBVnTLFSsagsCal-1" value="Personal de Salud" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="35" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-2" value="Aplicación Móvil" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="309" y="20" width="150" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-3" value="Base de Datos Local" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="593" y="20" width="165" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-4" value="Backend API" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="808" y="20" width="150" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-5" value="Campaign/Vaccination Service" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1037" y="20" width="240" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-6" value="MongoDB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1327" y="20" width="150" height="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-7" value="alt" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30" vertex="1" parent="1">
+          <mxGeometry x="85" y="527" width="1329" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-8" value="[Sin conexión]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1ElePTBVnTLFSsagsCal-7">
+          <mxGeometry x="30" width="1299" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-9" value="[Con conexión]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="1ElePTBVnTLFSsagsCal-7">
+          <mxGeometry y="272" width="1329" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-10" value="loop" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=40" vertex="1" parent="1">
+          <mxGeometry x="373" y="1328" width="1041" height="381" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-11" value="[Por cada registro pendiente]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1ElePTBVnTLFSsagsCal-10">
+          <mxGeometry x="40" width="1001" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-12" value="Consultar campañas activas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-1" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="248" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-13" value="GET /campaigns/active" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="642" y="171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-14" value="consultarCampañasActivas()" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1029" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-15" value="Consultar campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1288" y="267" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-16" value="Campañas activas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-6" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1291" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-17" value="Campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1032" y="363" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-18" value="Campañas activas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="645" y="411" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-19" value="Mostrar campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="459" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-20" value="Registrar vacunación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-1" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="248" y="507" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-21" value="Detectar ausencia de conexión" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="600" />
+              <mxPoint x="435" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-22" value="Guardar registro local" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="538" y="678" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-23" value="Registro almacenado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-3" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="541" y="726" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-24" value="Registro guardado localmente" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="774" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-25" value="POST /vaccinations" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="642" y="867" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-26" value="registrarVacunacion(datos)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1029" y="915" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-27" value="Guardar registro" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1288" y="963" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-28" value="Registro creado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-6" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1291" y="1011" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-29" value="Confirmación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1032" y="1059" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-30" value="Registro exitoso" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="645" y="1107" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-31" value="Registro sincronizado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="1155" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-32" value="Consultar registros pendientes" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="538" y="1260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-33" value="Registros pendientes" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-3" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="541" y="1308" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-34" value="Enviar registro" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="642" y="1401" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-35" value="Procesar registro" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1029" y="1449" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-36" value="Guardar registro" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1288" y="1497" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-37" value="Confirmación" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-6" target="1ElePTBVnTLFSsagsCal-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1291" y="1545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-38" value="OK" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-5" target="1ElePTBVnTLFSsagsCal-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1032" y="1593" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-39" value="Sincronización exitosa" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-4" target="1ElePTBVnTLFSsagsCal-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="645" y="1641" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-40" value="Marcar como sincronizado" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="1ElePTBVnTLFSsagsCal-2" target="1ElePTBVnTLFSsagsCal-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="538" y="1689" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ElePTBVnTLFSsagsCal-41" value="Cuando vuelve la conexión" style="fillColor=#ffff88;strokeColor=#9E916F;" vertex="1" parent="1">
+          <mxGeometry x="359" y="1185" width="342" height="47" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
