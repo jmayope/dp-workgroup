@@ -1,0 +1,180 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="u2vbZMr3kQ7JKB47SQaj">
+    <mxGraphModel dx="1406" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;graph TD\n    %% Estilos de nodos\n    classDef caja fill:#ffffff,stroke:#000000,stroke-width:1.5px,color:#000000;\n\n    %% Nodos Nivel 1\n    DE[\&quot;DIRECCION EJECUTIVA\&quot;] ::: caja\n\n    %% Nodos Nivel 2\n    OCI[\&quot;OFICINA DE CONTROL&lt;br/&gt;INSTITUCIONAL\&quot;] ::: caja\n    OPDI[\&quot;OFICINA DE PRESUPUESTO&lt;br/&gt;Y DESARROLLO&lt;br/&gt;INSTITUCIONAL\&quot;] ::: caja\n    OA[\&quot;OFICINA DE&lt;br/&gt;ADMINISTRACION\&quot;] ::: caja\n\n    %% Nodos Nivel 3 (Unidades de Administración)\n    UGDRH[\&quot;UNIDAD DE GESTION Y&lt;br/&gt;DESARROLLO DE&lt;br/&gt;RECURSOS HUMANOS\&quot;] ::: caja\n    UCT[\&quot;UNIDAD DE CONTABILIDAD&lt;br/&gt;Y TESORERIA\&quot;] ::: caja\n    UASA[\&quot;UNIDAD DE&lt;br/&gt;ABASTECIMIENTO Y&lt;br/&gt;SERVICIOS AUXILIARES\&quot;] ::: caja\n\n    %% Nodos Nivel 3 (Dirección y Microredes)\n    DSP[\&quot;DIRECCION DE SALUD&lt;br/&gt;PUBLICA\&quot;] ::: caja\n    M_ANCO[\&quot;MICRORED DE SALUD DE&lt;br/&gt;ANCO\&quot;] ::: caja\n    M_AYNA[\&quot;MICRORED DE SALUD DE&lt;br/&gt;AYNA\&quot;] ::: caja\n    M_SIVIA[\&quot;MICRORED DE SALUD DE&lt;br/&gt;SIVIA\&quot;] ::: caja\n\n    %% Nodos Nivel 4 (Hospitales)\n    H_SF[\&quot;HOSPITAL DE APOYO&lt;br/&gt;DE SAN FRANCISCO\&quot;] ::: caja\n    H_SIVIA[\&quot;HOSPITAL DE APOYO&lt;br/&gt;DE SIVIA\&quot;] ::: caja\n\n    %% Relaciones / Conexiones\n    DE --- OCI\n    DE --- OPDI\n    DE --- OA\n\n    OA --- UGDRH\n    OA --- UCT\n    OA --- UASA\n\n    DE --- DSP\n    DE --- M_ANCO\n    DE --- M_AYNA\n    DE --- M_SIVIA\n\n    M_AYNA --- H_SF\n    M_SIVIA --- H_SIVIA\n&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="pzuEWZr-mBXP2N29p2K8-1">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="DIRECCION EJECUTIVA" mermaidId="n:DE" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="DIRECCION EJECUTIVA" id="pzuEWZr-mBXP2N29p2K8-2">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="217" x="814" y="30" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OFICINA DE CONTROL&#xa;INSTITUCIONAL" mermaidId="n:OCI" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="OFICINA DE CONTROL&#xa;INSTITUCIONAL" id="pzuEWZr-mBXP2N29p2K8-3">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="213" x="30" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OFICINA DE PRESUPUESTO&#xa;Y DESARROLLO&#xa;INSTITUCIONAL" mermaidId="n:OPDI" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="OFICINA DE PRESUPUESTO&#xa;Y DESARROLLO&#xa;INSTITUCIONAL" id="pzuEWZr-mBXP2N29p2K8-4">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="93" width="244" x="293" y="134" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OFICINA DE&#xa;ADMINISTRACION" mermaidId="n:OA" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="OFICINA DE&#xa;ADMINISTRACION" id="pzuEWZr-mBXP2N29p2K8-5">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="180" x="587" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="UNIDAD DE GESTION Y&#xa;DESARROLLO DE&#xa;RECURSOS HUMANOS" mermaidId="n:UGDRH" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="UNIDAD DE GESTION Y&#xa;DESARROLLO DE&#xa;RECURSOS HUMANOS" id="pzuEWZr-mBXP2N29p2K8-6">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="93" width="218" x="287" y="277" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="UNIDAD DE CONTABILIDAD&#xa;Y TESORERIA" mermaidId="n:UCT" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="UNIDAD DE CONTABILIDAD&#xa;Y TESORERIA" id="pzuEWZr-mBXP2N29p2K8-7">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="245" x="555" y="287" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="UNIDAD DE&#xa;ABASTECIMIENTO Y&#xa;SERVICIOS AUXILIARES" mermaidId="n:UASA" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="UNIDAD DE&#xa;ABASTECIMIENTO Y&#xa;SERVICIOS AUXILIARES" id="pzuEWZr-mBXP2N29p2K8-8">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="93" width="216" x="977" y="277" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="DIRECCION DE SALUD&#xa;PUBLICA" mermaidId="n:DSP" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="DIRECCION DE SALUD&#xa;PUBLICA" id="pzuEWZr-mBXP2N29p2K8-9">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="210" x="817" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MICRORED DE SALUD DE&#xa;ANCO" mermaidId="n:M_ANCO" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="MICRORED DE SALUD DE&#xa;ANCO" id="pzuEWZr-mBXP2N29p2K8-10">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="230" x="1077" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MICRORED DE SALUD DE&#xa;AYNA" mermaidId="n:M_AYNA" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="MICRORED DE SALUD DE&#xa;AYNA" id="pzuEWZr-mBXP2N29p2K8-11">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="230" x="1357" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MICRORED DE SALUD DE&#xa;SIVIA" mermaidId="n:M_SIVIA" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="MICRORED DE SALUD DE&#xa;SIVIA" id="pzuEWZr-mBXP2N29p2K8-12">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="230" x="1637" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="HOSPITAL DE APOYO&#xa;DE SAN FRANCISCO" mermaidId="n:H_SF" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="HOSPITAL DE APOYO&#xa;DE SAN FRANCISCO" id="pzuEWZr-mBXP2N29p2K8-13">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="203" x="1371" y="287" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="HOSPITAL DE APOYO&#xa;DE SIVIA" mermaidId="n:H_SIVIA" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="HOSPITAL DE APOYO&#xa;DE SIVIA" id="pzuEWZr-mBXP2N29p2K8-14">
+          <mxCell parent="pzuEWZr-mBXP2N29p2K8-1" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="73" width="203" x="1651" y="287" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;OCI#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.63;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-15">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.63;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-3">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="137" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;OPDI#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.7;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-16">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.7;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-4">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="415" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;OA#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.93;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-17">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.93;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-5">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="677" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:OA-&gt;UGDRH#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.81;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-18">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-5" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.81;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-6">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="396" y="252" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:OA-&gt;UCT#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-19">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-5" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-7">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:OA-&gt;UASA#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.71;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-20">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-5" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.71;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-8">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1085" y="252" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;DSP#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-21">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-9">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;M_ANCO#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.89;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-22">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.89;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-10">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1192" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;M_AYNA#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-23">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-11">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1472" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:DE-&gt;M_SIVIA#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.63;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-24">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-2" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.63;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-12">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1752" y="109" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:M_AYNA-&gt;H_SF#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-25">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-11" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-13">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:M_SIVIA-&gt;H_SIVIA#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="pzuEWZr-mBXP2N29p2K8-26">
+          <mxCell edge="1" parent="pzuEWZr-mBXP2N29p2K8-1" source="pzuEWZr-mBXP2N29p2K8-12" style="curved=1;startArrow=none;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="pzuEWZr-mBXP2N29p2K8-14">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
