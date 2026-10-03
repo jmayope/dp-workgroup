@@ -1,0 +1,142 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-8 mb-3 text-primary-color">
+      <i class="bi bi-layout-wtf me-1"></i>Reporteria
+    </div>
+    <div class="col-4 mb-3 text-end">
+      <button class="btn btn-sm btn-light" [ngClass]="{'text-primary-color': filter.show, 'text-danger': !filter.show}"
+        (click)="toggleFilters()">
+        <i class="bi bi-sliders2 me-1"></i>Filtros
+      </button>
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="row">
+            <div class="col-12" *ngIf="filter.show">
+              <div class="card mb-2">
+                <div class="card-header p-1">
+                  <i class="bi-bi-filter me-1"></i>Filtros
+                </div>
+                <div class="card-body p-1">
+                  <div class="row">
+                    <div class="col-2">
+                      <small>Micro RED</small>
+                      <select name="healthNetwork" [(ngModel)]="filter.where.healthNetwork"
+                        class="form-select form-select-sm">
+                        <option [ngValue]="undefined">--TODOS--</option>
+                        <option *ngFor="let h of healthNetworks" [ngValue]="h._id">{{h.name | uppercase}}</option>
+                      </select>
+                    </div>
+                    <div class="col-2">
+                      <small>IPRESS</small>
+                      <select name="serviceDeliveryInstitution" [(ngModel)]="filter.where.serviceDeliveryInstitution"
+                        class="form-select form-select-sm">
+                        <option [ngValue]="undefined">--TODOS--</option>
+                        <option *ngFor="let s of serviceDeliveryInstitutions" [ngValue]="s._id">{{s.name | uppercase}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-2">
+                      <small>Genero</small>
+                      <select name="gender" [(ngModel)]="filter.where.gender" class="form-select form-select-sm">
+                        <option [ngValue]="undefined">--TODOS--</option>
+                        <option *ngFor="let s of genders" [ngValue]="s._id">{{s.name | uppercase}}</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <small>Busca por texto</small>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control text-uppercase" placeholder="BUSCAR POR TEXTO"
+                          [(ngModel)]="filter.text" aria-label="text" aria-describedby="basic-addon1">
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <small>Resultado en</small>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text" id="basic-addon1">Filas</span>
+                        <select name="limit" [(ngModel)]="filter.pagination.limit" (change)="resetSearch()"
+                          class="form-select form-select-sm">
+                          <option *ngFor="let r of numberRows" [ngValue]="r">{{r}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-5 mt-3 text-center">
+              <button class="btn bg-primary-color text-white" (click)="getQuantity()">
+                <i class="bi bi-search me-1"></i>Buscar
+              </button>
+            </div>
+            <div class="col-12 text-center" *ngIf="!filter.searched">
+              <i class="bi bi-search"></i><br>
+              Busca pacientes por un filtro específico.
+            </div>
+            <ng-container *ngIf="filter.searched">
+              <div class="col-12 text-center" *ngIf="!results.length">
+                <i class="bi bi-x-lg"></i><br>
+                No se encontraron registros
+              </div>
+              <div class="col-12" *ngIf="results.length">
+                <div class="row">
+                  <div class="col-9">
+                    <button class="btn btn-sm btn-light text-primary-color" (click)="exportData()">
+                      <i class="bi bi-download me-1"></i>Exportar resultados
+                    </button>
+                  </div>
+                  <div class="col-3">
+                    <div class="input-group input-group-sm" *ngIf="filter.searched && results.length">
+                      <span class="input-group-text" id="basic-addon2">{{(filter.pagination.page - 1) *
+                        filter.pagination.limit + 1 }} a&nbsp;<span
+                          *ngIf="filter.pagination.page === pages.length">{{filter.totalRows}}</span><span
+                          *ngIf="filter.pagination.page !== pages.length">{{filter.pagination.page *
+                          filter.pagination.limit}}</span>&nbsp;de {{filter.totalRows}} registros | Pagina</span>
+                      <select name="page" [(ngModel)]="filter.pagination.page" (change)="getPatients()"
+                        class="form-select">
+                        <option *ngFor="let p of pages" [ngValue]="p">{{p}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <table class="table table-sm table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Atención</th>
+                          <th>DNI</th>
+                          <th>Edad</th>
+                          <th>Nombres Completo</th>
+                          <th>Celular</th>
+                          <th>Historia Clínica</th>
+                          <th>Personal de Salud</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let r of results">
+                        <tr>
+                          <td>-</td>
+                          <td>{{r.code}}</td>
+                          <td>{{r.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+                          <td>{{r.paternalSurname | uppercase}} {{(r.maternalSurname || '') | uppercase}}, {{r.firstName
+                            | titlecase}}</td>
+                          <td>-</td>
+                          <td>
+                            <button class="btn btn-sm btn-light text-primary-color" (click)="toggleMedicalHistory(r)">
+                              <i class="bi-eye"></i>
+                            </button>
+                          </td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

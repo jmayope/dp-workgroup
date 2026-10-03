@@ -1,0 +1,163 @@
+<div class="row">
+  <div class="col-4" *ngFor="let ms of menuStates">
+    <div class="card">
+      <div class="card-body">
+        <strong>
+          {{ms.quantity}}
+        </strong>
+        <br>
+        <span>
+          {{ms.name | uppercase}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4 pt-2">
+            <strong>Listado de Menus</strong>
+            <button class="btn btn-light btn-sm float-end" (click)="toggleMenu()">
+              <i class="fa fa-plus me-1"></i>Nuevo
+            </button>
+          </div>
+          <div class="col-5">
+            <input type="text" class="form-control text-uppercase" placeholder="BUSCAR MENU" name="byText"
+              [(ngModel)]="filter.byText">
+          </div>
+          <div class="col-3">
+            <select name="state" class="form-select" [(ngModel)]="filter.byState">
+              <option [ngValue]="undefined">--TODOS--</option>
+              <option *ngFor="let s of states" [ngValue]="s.id">{{s.name | uppercase}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group list-group-flush" style="max-height: 600px !important; overflow: auto;">
+        <li class="list-group-item">
+          <div class="row text-secondary">
+            <div class="col-7">
+              MENÚ
+            </div>
+            <div class="col-2">
+              ESTADO
+            </div>
+            <div class="col-3 text-end">
+              ACCIONES
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngFor="let m of menus | filter: filter.byText | filter: filter.byState">
+          <div class="row">
+            <div class="col-7">
+              <div class="row">
+                <div class="col-1 pt-3">
+                  <span class="p-2 bg-success rounded text-white">
+                    <i class="{{m.icon}}"></i>
+                  </span>
+                </div>
+                <div class="col-11">
+                  <strong>{{m.name | uppercase}}</strong> <br>
+                  <span class="text-secondary" *ngIf="m.identifier">
+                    <span *ngIf="m.parent" class="me-2"><span class="badge bg-success">{{m.parent.name |
+                        uppercase}}</span></span>
+                    {{m.identifier | uppercase}}
+                  </span>
+                  <span class="text-secondary" *ngIf="!m.identifier">{{m.url}}</span>
+                </div>
+                <div class="col-5"></div>
+              </div>
+            </div>
+            <div class="col-2">
+              <span [ngClass]="{'text-success': m.status, 'text-secondary': !m.status}">
+                {{m.status ? 'Activo' : 'Inactivo'}}
+              </span>
+            </div>
+            <div class="col-3 text-end">
+              <button class="btn btn-sm btn-light me-2 text-primary" (click)="toggleMenu(m)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-light text-danger" (click)="deleteMenu(m)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #menuModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-nm" *ngIf="newMenu">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">{{newMenu.editing ? 'Edita' : 'Nuevo'}} Menu</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleMenu()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #menuForm="ngForm">
+          <div class="row">
+            <div class="col-5">
+              <small class="text-secondary">Icono</small>
+              <div class="input-group input-group-sm">
+                <input type="text" name="icon" [(ngModel)]="newMenu.icon" class="form-control" required>
+                <span class="input-group-text" id="basic-addon2">
+                  <i class="{{newMenu.icon || 'bi bi-123'}}"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-7">
+              <small class="text-secondary">Nombre</small>
+              <input type="text" name="name" [(ngModel)]="newMenu.name" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-12">
+              <small class="text-secondary">Ruta / URL</small>
+              <input type="text" name="url" [(ngModel)]="newMenu.url" class="form-control form-control-sm">
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" name="isParent" [(ngModel)]="newMenu.isParent" type="checkbox" id="isParent">
+                <label class="form-check-label" for="isParent">
+                  ¿Es padre?
+                </label>
+              </div>
+            </div>
+            <ng-container *ngIf="newMenu.isParent">
+              <div class="col-12">
+                <small class="text-secondary">Identificador</small>
+                <input type="text" name="identifier" [(ngModel)]="newMenu.identifier" class="form-control form-control-sm">
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!newMenu.isParent">
+              <div class="col-12">
+                <small class="text-secondary">Menu Padre</small>
+                <select name="parent" [(ngModel)]="newMenu.parent" class="form-select">
+                  <option [ngValue]="undefined">--SELECCIONE--</option>
+                  <option *ngFor="let i of menuIdentifiers" [ngValue]="i._id">{{i.name | uppercase}}</option>
+                </select>
+              </div>
+            </ng-container>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" name="status" [(ngModel)]="newMenu.status" type="checkbox" id="status">
+                <label class="form-check-label" for="status">
+                  Menú Activo
+                </label>
+              </div>
+            </div>
+            <div class="col-12 mt-3 text-center">
+              <button class="btn btn-primary" [disabled]="menuForm.invalid" (click)="saveMenu()">
+                <i class="fa fa-save me-2"></i>{{newMenu.editing ? 'Guardar Cambios' : 'Crear'}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

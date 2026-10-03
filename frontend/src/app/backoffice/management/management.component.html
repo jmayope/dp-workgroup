@@ -1,0 +1,704 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-12 mb-3 text-primary-color">
+            <i class="bi bi-gear me-1"></i>Gestión de Colecciones del APlicativo
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Redes de Salud
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control text-uppercase"
+                                placeholder="BUSCAR POR TEXTO" aria-label="text" name="text"
+                                [(ngModel)]="filter.healthNetwork.text" aria-describedby="basic-addon1">
+                            <button class="btn btn-primary" *ngIf="filter.healthNetwork.text"
+                                (click)="search('healthNetwork')" type="button"
+                                id="button-addon2">Buscar</button>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-light btn-sm text-primary-color"
+                                (click)="toggleHealthNetwork()"><i class="bi bi-plus me-1"></i>Agregar
+                                Red de Salud</button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let p of results.healthNetworks">
+                            <div class="row">
+                                <div class="col-10">
+                                    <strong>{{p.name | uppercase}}</strong> <br>
+                                    <small>{{p.description | uppercase}}</small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleHealthNetwork(p)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle" (click)="deleteItem(p, 'healthNetwork')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Institución de Prestación de Servicios
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control text-uppercase"
+                                placeholder="BUSCAR POR TEXTO" aria-label="text" name="text"
+                                [(ngModel)]="filter.serviceDeliveryInstitution.text" aria-describedby="basic-addon1">
+                            <button class="btn btn-primary" *ngIf="filter.serviceDeliveryInstitution.text"
+                                (click)="search('serviceDeliveryInstitution')" type="button"
+                                id="button-addon2">Buscar</button>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-light btn-sm text-primary-color"
+                                (click)="toggleServiceDeliveryInstitution()"><i class="bi bi-plus me-1"></i>Agregar
+                                Institución de Prestación de Servicio</button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let p of results.serviceDeliveryInstitutions">
+                            <div class="row">
+                                <div class="col-10">
+                                    <strong>{{p.name | uppercase}}</strong> <br>
+                                    <small>{{p.description | uppercase}}</small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleServiceDeliveryInstitution(p)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle" (click)="deleteItem(p, 'serviceDeliveryInstitution')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Perfiles
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control text-uppercase"
+                                placeholder="BUSCAR POR TEXTO" aria-label="text" name="text"
+                                [(ngModel)]="filter.profile.text" aria-describedby="basic-addon1">
+                            <button class="btn btn-primary" *ngIf="filter.profile.text"
+                                (click)="search('profile')" type="button"
+                                id="button-addon2">Buscar</button>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-light btn-sm text-primary-color"
+                                (click)="toggleProfile()"><i class="bi bi-plus me-1"></i>Agregar
+                                Perfil</button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let p of results.profiles">
+                            <div class="row">
+                                <div class="col-10">
+                                    <strong>{{p.name | uppercase}}</strong> <br>
+                                    <small>{{p.description | uppercase}}</small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleProfile(p)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle" (click)="deleteItem(p, 'profile')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Etapa de Crecimiento
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control text-uppercase"
+                                placeholder="BUSCAR POR TEXTO" aria-label="text" name="text"
+                                [(ngModel)]="filter.growthStage.text" aria-describedby="basic-addon1">
+                            <button class="btn btn-primary" *ngIf="filter.growthStage.text"
+                                (click)="search('growthStage')" type="button"
+                                id="button-addon2">Buscar</button>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-light btn-sm text-primary-color"
+                                (click)="toggleGrowthStage()"><i class="bi bi-plus me-1"></i>Agregar
+                                Etapa de Crecimiento</button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let p of results.growthStages">
+                            <div class="row">
+                                <div class="col-10">
+                                    <strong>{{p.name | uppercase}}</strong> <br>
+                                    <small>{{p.description | uppercase}}</small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleGrowthStage(p)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle" (click)="deleteItem(p, 'growthStage')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-center" *ngIf="!results.growthStages.length">
+                            <i class="bi bi-x-lg"></i><br>
+                            No se encontraron registros
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Especialidades
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-sm btn-light text-primary-color"
+                                (click)="toggleSpecialty()">
+                                <i class="bi bi-plus me-1"></i>Agregar Especialidad
+                            </button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let s of results.specialties">
+                            <div class="row">
+                                <div class="col-9">
+                                    <strong>{{s.name | uppercase}}</strong> <br>
+                                    <small>{{s.description | uppercase}}</small>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <button class="btn btn-sm btn-success me-2 rounded-circle" (click)="toggleSpecialtyConfig(s)">
+                                        <i class="bi bi-sliders2"></i>
+                                    </button>
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleSpecialty(s)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle" (click)="deleteItem(s, 'specialty')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Tipos de Listas
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">
+                            <button class="btn btn-sm btn-light text-primary-color"
+                                (click)="toggleTypeList()">
+                                <i class="bi bi-plus me-1"></i>Agregar Tipo de Lista
+                            </button>
+                        </li>
+                        <li class="list-group-item" *ngFor="let s of results.typeLists">
+                            <div class="row">
+                                <div class="col-4">
+                                    <strong>{{s.name | uppercase}}</strong> <br>
+                                    <small>{{s.description | uppercase}}</small>
+                                </div>
+                                <div class="col-2">
+                                    <small class="badge bg-success" *ngIf="s.additionalFields && s.additionalFields.isDefaultValue">
+                                        POR DEFECTO
+                                    </small>
+                                </div>
+                                <div class="col-2">
+                                    <span class="badge bg-primary">{{s.type}}</span>
+                                </div>
+                                <div class="col-2"> </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleTypeList(s)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger rounded-circle">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #healthNetworkModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newHealthNetwork">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newHealthNetwork.editing">Nueva Red de Salud</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newHealthNetwork.editing">Edita Red de Salud</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleHealthNetwork()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="name">Nombre de la Red</label>
+                            <input type="text" name="name" [(ngModel)]="newHealthNetwork.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newHealthNetwork.description"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newHealthNetwork.editing, 'btn-success': newHealthNetwork.editing}"
+                            (click)="saveHealthNetwork()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #typeListModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newTypeList">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newTypeList.editing">Nuevo Tipo de Lista</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newTypeList.editing">Edita Tipo de Lista</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleTypeList()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="type">Tipo</label>
+                            <input list="categories" [(ngModel)]="newTypeList.type" class="form-control">
+                            <!-- <input type="text" name="type" [(ngModel)]="newTypeList.type" class="form-control"> -->
+                            <datalist id="categories">
+                                <option *ngFor="let c of categories" value="{{c.name}}"></option>
+                            </datalist>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="card" *ngIf="!newTypeList.editing" (click)="toggleSelfGeneratingCode()">
+                                <div class="card-body p-1" [ngClass]="{'text-success': newTypeList.additionalFields.selfGeneratingCode, 'text-secondary': !newTypeList.additionalFields.selfGeneratingCode}">
+                                    <div class="row">
+                                        <div class="col-2 text-center">
+                                            <i class="bi" [ngClass]="{'bi-toggle-on': newTypeList.additionalFields.selfGeneratingCode, 'bi-toggle-off': !newTypeList.additionalFields.selfGeneratingCode}"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            Código autogenerable?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!newTypeList.additionalFields.selfGeneratingCode || newTypeList.editing">
+                            <label for="code">Codigo</label>
+                            <input type="text" name="code" [(ngModel)]="newTypeList.code" [disabled]="newTypeList.editing" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nombre del Item</label>
+                            <input type="text" name="name" [(ngModel)]="newTypeList.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newTypeList.description"
+                                class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="card" (click)="toggleHasValueToCalculate()">
+                                <div class="card-body p-1" [ngClass]="{'text-success': newTypeList.additionalFields.hasValueToCalculate, 'text-secondary': !newTypeList.additionalFields.hasValueToCalculate}">
+                                    <div class="row">
+                                        <div class="col-2 text-center">
+                                            <i class="bi" [ngClass]="{'bi-toggle-on': newTypeList.additionalFields.hasValueToCalculate, 'bi-toggle-off': !newTypeList.additionalFields.hasValueToCalculate}"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            Tendra Valor para cálculo
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2" *ngIf="newTypeList.type">
+                            <div class="card" (click)="toggleIsDefaultValue()">
+                                <div class="card-body p-1" [ngClass]="{'text-success': newTypeList.additionalFields.isDefaultValue, 'text-secondary': !newTypeList.additionalFields.isDefaultValue}">
+                                    <div class="row">
+                                        <div class="col-2 text-center">
+                                            <i class="bi" [ngClass]="{'bi-toggle-on': newTypeList.additionalFields.isDefaultValue, 'bi-toggle-off': !newTypeList.additionalFields.isDefaultValue}"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            Es valor por defecto
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="newTypeList.additionalFields.hasValueToCalculate">
+                            <label for="valueToCalculate">Valor para Cálculo</label>
+                            <input type="number" name="valueToCalculate" [(ngModel)]="newTypeList.valueToCalculate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newTypeList.editing, 'btn-success': newTypeList.editing}"
+                            (click)="saveTypeList()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #serviceDeliveryInstitutionModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newServiceDeliveryInstitution">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newServiceDeliveryInstitution.editing">Nueva Institución</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newServiceDeliveryInstitution.editing">Edita Institución</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleServiceDeliveryInstitution()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="name">Nombre de la Institución</label>
+                            <input type="text" name="name" [(ngModel)]="newServiceDeliveryInstitution.name" class="form-control text-uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newServiceDeliveryInstitution.description"
+                                class="form-control text-uppercase"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newServiceDeliveryInstitution.editing, 'btn-success': newServiceDeliveryInstitution.editing}"
+                            (click)="saveServiceDeliveryInstitution()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #profileModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newProfile">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newProfile.editing">Nuevo Perfil</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newProfile.editing">Edita Perfil</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleProfile()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="name">Nombre de Perfil</label>
+                            <input type="text" name="name" [(ngModel)]="newProfile.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newProfile.description"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newProfile.editing, 'btn-success': newProfile.editing}"
+                            (click)="saveProfile()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #growthStageModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newGrowthStage">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newGrowthStage.editing">Nueva Etapa de Crecimiento</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newGrowthStage.editing">Edita Etapa de Crecimiento</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleGrowthStage()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="name">Etapa de Crecimiento</label>
+                            <input type="text" name="name" [(ngModel)]="newGrowthStage.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newGrowthStage.description"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newGrowthStage.editing, 'btn-success': newGrowthStage.editing}"
+                            (click)="saveGrowthStage()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" bsModal #specialtyModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngIf="newSpecialty">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="!newSpecialty.editing">Nuevo Especialidad</h4>
+                <h4 id="dialog-static-name" class="modal-title pull-left" *ngIf="newSpecialty.editing">Edita Especialidad</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleSpecialty()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label for="name">Nombre de Especialidad</label>
+                            <input type="text" name="name" [(ngModel)]="newSpecialty.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" [(ngModel)]="newSpecialty.description"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-sm"
+                            [ngClass]="{'bg-primary-color text-white': !newSpecialty.editing, 'btn-success': newSpecialty.editing}"
+                            (click)="saveSpecialty()">
+                            <i class="bi-bi-save me-1"></i>Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #specialtyControlModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-nm" *ngIf="specialtySelected">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left">Configuración de Especialidad</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleSpecialtyConfig()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <tabset>
+                    <tab heading="Procesos">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="list-group" *ngIf="specialtySelected.specialtyProcesses">
+                                    <li class="list-group-item" *ngFor="let c of specialtySelected.specialtyProcesses">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <strong>
+                                                    {{c.name | uppercase}}
+                                                </strong>
+                                                <br>
+                                                <small>{{c.description | uppercase}}</small>
+                                            </div>
+                                            <div class="col-3 text-end">
+                                                <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleSpecialtyProcess(c)">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger rounded-circle" (click)="toggleSpecialtyProcess(c, true)">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="newSpecialtyProcess">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="name">Nombre del Proceso</label>
+                                                <input type="text" name="name" [(ngModel)]="newSpecialtyProcess.name" class="form-control">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="description">Descripción</label>
+                                                <textarea name="description" [(ngModel)]="newSpecialtyProcess.description" class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-12 text-center mt-3">
+                                                <button class="btn btn-sm btn-light text-danger me-5" (click)="toggleSpecialtyProcess()">
+                                                    <i class="bi bi-x-lg me-1"></i>Cancelar
+                                                </button>
+                                                <button class="btn btn-sm bg-primary-color text-white ml-5" (click)="saveSpecialtyProcess()">
+                                                    <i class="bi bi-save me-1"></i>Grabar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item text-center" *ngIf="!specialtySelected.specialtyProcesses.length && !newSpecialtyProcess" >
+                                        <i class="bi bi-x-lg"></i><br>
+                                        No se encontraron procesos registrados
+                                    </li>
+                                    <li class="list-group-item text-center" *ngIf="!newSpecialtyProcess">
+                                        <button class="btn btn-sm btn-light text-primary-color" (click)="toggleSpecialtyProcess()">
+                                            <i class="bi bi-plus me-1"></i>Agregar Proceso
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Controles" id="tab1">
+                        <div class="row">
+                            <div class="col-12" *ngIf="!results.growthStages.length">
+                                <i class="bi bi-info-circle-fill me-1"></i><br>
+                                Es necesario crear <code>Etapas de Crecimiento</code>, para registrar un <code>Control</code>.
+                            </div>
+                            <div class="col-12" *ngIf="results.growthStages.length">
+                                <ul class="list-group" *ngIf="specialtySelected.controls">
+                                    <li class="list-group-item" *ngFor="let c of specialtySelected.controls">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <strong>
+                                                    <span class="badge bg-success me-1">{{c.order}}</span>
+                                                    <span class="badge bg-primary me-1">{{c.growthStage.name | uppercase}}</span>
+                                                    {{c.name | uppercase}}
+                                                </strong>
+                                                <br>
+                                                <small>{{c.description | uppercase}}</small>
+                                            </div>
+                                            <div class="col-2 text-center">
+                                                {{c.minimumRange}} - {{c.maximumRange}}
+                                            </div>
+                                            <div class="col-3 text-end">
+                                                <button class="btn btn-sm bg-primary-color text-white me-2 rounded-circle" (click)="toggleSpecialtyControl(c)">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger rounded-circle" (click)="toggleSpecialtyControl(c, true)">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="newSpecialtyControl">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="growthStage">Etapa de Crecimiento</label>
+                                                <select name="growthStage" [(ngModel)]="newSpecialtyControl.growthStage" class="form-control">
+                                                    <option [ngValue]="undefined">--SELECCIONE--</option>
+                                                    <option *ngFor="let g of results.growthStages" [ngValue]="g._id">{{g.name | uppercase}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <label for="order">Orden</label>
+                                                <input type="number" name="order" [disabled]="newSpecialtyControl.editing" [min]="newSpecialtyControl.minimumOrder" [(ngModel)]="newSpecialtyControl.order" class="form-control">
+                                            </div>
+                                            <div class="col-9">
+                                                <label for="name">Nombre de Control</label>
+                                                <input type="text" name="name" [(ngModel)]="newSpecialtyControl.name" class="form-control">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="description">Descripción</label>
+                                                <textarea name="description" [(ngModel)]="newSpecialtyControl.description" class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="minimumRange">Rango mínimo</label>
+                                                <input type="number" name="minimumRange" [(ngModel)]="newSpecialtyControl.minimumRange" class="form-control">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="maximumRange">Rango máximo</label>
+                                                <input type="number" name="maximumRange" [(ngModel)]="newSpecialtyControl.maximumRange" class="form-control">
+                                            </div>
+                                            <div class="col-12 text-center mt-3">
+                                                <button class="btn btn-sm btn-light text-danger me-5" (click)="toggleSpecialtyControl()">
+                                                    <i class="bi bi-x-lg me-1"></i>Cancelar
+                                                </button>
+                                                <button class="btn btn-sm bg-primary-color text-white ml-5" (click)="saveSpecialtyControl()">
+                                                    <i class="bi bi-save me-1"></i>Grabar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item text-center" *ngIf="!specialtySelected.controls.length && !newSpecialtyControl" >
+                                        <i class="bi bi-x-lg"></i><br>
+                                        No se encontraron controles registrados
+                                    </li>
+                                    <li class="list-group-item text-center" *ngIf="!newSpecialtyControl">
+                                        <button class="btn btn-sm btn-light text-primary-color" (click)="toggleSpecialtyControl()">
+                                            <i class="bi bi-plus me-1"></i>Agregar Control
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

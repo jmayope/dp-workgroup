@@ -1,0 +1,26 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12 mb-3 text-primary-color">
+      <i class="bi bi-arrow-repeat me-1"></i>
+      Migración de Información por medio de un archivo XLSX
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8">
+              <label for="fileToMigrate">Archivo a Migrar</label>
+              <input type="file" name="fileToMigrate" [(ngModel)]="fileToMigrate" id="fileToMigrate"
+                class="form-control">
+            </div>
+            <div class="col-4">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="!fileToMigrate || migrating" (click)="uploadFile()">
+                <i class="bi bi-upload me-1"></i>Subir archivo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

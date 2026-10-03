@@ -1,0 +1,1253 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-12 mb-3 text-primary-color">
+      <i class="bi bi-sliders me-1"></i>
+      Configuración
+      <span *ngIf="mainItemSelected">&nbsp;/&nbsp;{{mainItemSelected.name}}</span>
+      <span *ngIf="optionSelected">&nbsp;/&nbsp;{{optionSelected.name}}</span>
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <ng-container *ngIf="!optionSelected">
+              <div class="col-4">
+                <div class="btn-group me-2" role="group" aria-label="Second group">
+                  <button type="button" class="btn" [ngClass]="{'bg-light-info-color': mainItemSelected && mainItemSelected._id !== m._id, 'bg-primary-color text-white': mainItemSelected && mainItemSelected._id === m._id}" *ngFor="let m of mainTabs" (click)="toggleMenu(m)">{{m.name}}</button>
+                </div>
+              </div>
+              <div class="col-4">
+              </div>
+              <div class="col-4"></div>
+            </ng-container>
+            <div class="col-12" *ngIf="mainItemSelected">
+              <div class="row" *ngIf="!optionSelected">
+                <div class="col-12 mb-3">
+                  <strong>{{mainItemSelected.titleSection}}</strong>
+                </div>
+                <div class="col-6 mb-3" *ngFor="let o of mainItemSelected.options">
+                  <div class="card hand" style="box-shadow: 0px 1px 1px 1px #cacaca;" (click)="toggleOption(o)">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-2 text-center">
+                          <button class="btn btn-lg bg-light-info-color rounded-circle">
+                            <i class="{{o.icon}} font-lg"></i>
+                          </button>
+                        </div>
+                        <div class="col-7">
+                          <strong>{{o.name}}</strong><br>
+                          <small class="text-info-color">{{o.description}}</small>
+                        </div>
+                        <div class="col-3 text-end text-primary-color pt-2">
+                          <i class="bi bi-chevron-right font-lg"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="optionSelected">
+                <div class="col-12 m-0 p-0 pb-3" style="border-bottom: 1px solid #cacaca;">
+                  <div class="row">
+                    <div class="col-5">
+                      <i class="bi bi-chevron-left font-lg ms-3 me-3 hand" (click)="toggleOption(null, true)"></i>
+                      <strong>{{optionSelected.name}}</strong>
+                    </div>
+                    <div class="col-5">
+                      <div class="input-group" *ngIf="optionSelected._id !=='role_and_permission'">
+                        <span class="input-group-text" id="basic-addon1">Establecimiento de Salud</span>
+                        <select name="serviceDeliveryInstitution" [(ngModel)]="filters.serviceDeliveryInstitution" [disabled]="!filters.editable" (change)="getDataByServiceDeliveryInstitution()" class="form-select form-select-sm" (change)="selectEstablishment()">
+                          <option [ngValue]="undefined">--SELECCIONE--</option>
+                          <option *ngFor="let s of serviceDeliveryInstitutions" [ngValue]="s._id">{{s.name | uppercase}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-2 text-end pe-3">
+                      <button class="btn btn-sm bg-primary-color text-white" [disabled]="!filters.serviceDeliveryInstitution" *ngIf="!optionSelected.canSaveInBulk && optionSelected._id === 'areas_and_services'" (click)="toggleAreaModal()">
+                        <i class="bi bi-plus me-1"></i>Nueva Área
+                      </button>
+                      <!-- <button class="btn btn-sm bg-primary-color text-white" *ngIf="!optionSelected.canSaveInBulk && optionSelected._id === 'user_management'" (click)="toggleMedicalStaffModal()">
+                        <i class="bi bi-plus me-1"></i>Nuevo Usuario
+                      </button> -->
+                      <button class="btn btn-sm bg-primary-color text-white" [disabled]="!establishment" *ngIf="optionSelected.canSaveInBulk && establishment" (click)="saveEstablishment()">
+                        <i class="bi bi-floppy me-1"></i>Guardar Cambios
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                      <!-- Información General -->
+                      <div class="row" *ngIf="optionSelected._id === 'establishment_info' && establishment">
+                        <!-- Tabs de Navegación -->
+                        <div class="col-12">
+                          <div class="btn-group btn-group-sm me-2" style="width: 100%;" role="group" aria-label="Second group">
+                            <button type="button" class="btn" [ngClass]="{'bg-light-color': sectionSelected && sectionSelected._id !== s._id, 'bg-primary-color text-white': sectionSelected && sectionSelected._id === s._id}" *ngFor="let s of optionSelected.sections" (click)="toggleSection(s)">{{s.name}}</button>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <form #establishmentForm="ngForm">
+                                <div class="row" *ngIf="sectionSelected._id === 'main'">
+                                  <div class="col-12">
+                                    <strong class="font-lg">
+                                      <i class="bi bi-building me-1"></i>Información General
+                                    </strong>
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Nombre del Establecimiento</small>
+                                    <input type="text" class="form-control form-control-sm text-uppercase" name="name" [(ngModel)]="establishment.name">
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Código</small>
+                                    <input type="text" class="form-control form-control-sm text-uppercase" name="code" [(ngModel)]="establishment.code">
+                                  </div>
+                                  <div class="col-4 mt-2">
+                                    <small>Tipo de Establecimiento</small>
+                                    <select class="form-select form-select-sm" name="typeInstitution" [(ngModel)]="establishment.typeInstitution">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let e of establishmentTypes" [ngValue]="e._id">{{e.name | uppercase}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-4 mt-2">
+                                    <small>Categoria</small>
+                                    <select class="form-select form-select-sm" name="category" [(ngModel)]="establishment.category">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let c of establishmentCategories" [ngValue]="c._id">{{c.name | uppercase}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-4 mt-2">
+                                    <small>RUC</small>
+                                    <input type="text" class="form-control form-control-sm" maxlength="11" name="ruc" [(ngModel)]="establishment.ruc">
+                                  </div>
+                                  <div class="col-12 mt-2">
+                                    <div class="row">
+                                      <div class="col-8 pt-1">
+                                        <small>Director / Jefe de Establecimiento</small>
+                                      </div>
+                                      <div class="col-4 text-end">
+                                        <button class="btn btn-sm btn-light text-primary-color" (click)="toggleAssignManager()">
+                                          <i class="bi bi-check2-circle me-1"></i>Asignar nuevo
+                                        </button>
+                                      </div>
+                                      <div class="col-12 mt-2">
+                                        <small *ngIf="!establishment.currentEstablishmentManager" class="text-info-color"><i class="bi bi-x-lg me-1"></i>No se tiene ningun Director / Jefe de Establecimiento</small>
+                                        <ul class="list-group" *ngIf="establishment.currentEstablishmentManager">
+                                          <li class="list-group-item">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <span class="badge bg-primary-color me-2">{{establishment.currentEstablishmentManager.code}}</span>{{establishment.currentEstablishmentManager.firstName}}</div>
+                                              <div class="col-3">{{establishment.currentEstablishmentManager.profession}}</div>
+                                              <div class="col-2">{{establishment.currentEstablishmentManager.startDate | date:'dd/MM/yyyy'}}</div>
+                                              <div class="col-2">
+                                                <span *ngIf="!establishment.currentEstablishmentManager.finishDate">
+                                                  Hasta la actualidad
+                                                </span>
+                                                <span *ngIf="establishment.currentEstablishmentManager.finishDate">
+                                                  {{establishment.currentEstablishmentManager.finishDate | date:'dd/MM/yyyy'}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row" *ngIf="sectionSelected._id === 'location'">
+                                  <div class="col-12 font-lg mb-3">
+                                    <i class="bi bi-geo-alt me-1"></i>Ubicación y Contacto
+                                  </div>
+                                  <div class="col-12">
+                                    <small>Dirección</small>
+                                    <input type="text" name="address" [(ngModel)]="establishment.address" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-4">
+                                    <small>Departamento</small>
+                                    <select name="department" [disabled]="!departments" [(ngModel)]="establishment.department" (change)="selectDepartment()" class="form-select form-select-sm">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let d of departments" [ngValue]="d.codigo_ubigeo">{{d.nombre_ubigeo | uppercase}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-4">
+                                    <small>Provincia</small>
+                                    <select name="province" [disabled]="!establishment.department || !provinces.length" (change)="selectProvince()" [(ngModel)]="establishment.province" class="form-select form-select-sm">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let p of provinces" [ngValue]="p.codigo_ubigeo">{{p.nombre_ubigeo | uppercase}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-4">
+                                    <small>Distrito</small>
+                                    <select name="district" [disabled]="!establishment.province || !districts.length" (change)="selectDistrict()" [(ngModel)]="establishment.district" class="form-select form-select-sm">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let d of districts" [ngValue]="d.codigo_ubigeo">{{d.nombre_ubigeo | uppercase}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-4">
+                                    <small>Ubigeo</small>
+                                    <input type="text" name="ubigeo" [disabled]="true" value="{{establishment.ubigeo || '-'}}" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-8">
+                                    <small>Referencia</small>
+                                    <input type="text" name="reference" [(ngModel)]="establishment.reference" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Telefono Fijo</small>
+                                    <input type="text" name="phone" [(ngModel)]="establishment.phone" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Celular</small>
+                                    <input type="text" name="cellphone" [(ngModel)]="establishment.cellphone" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Correo Electrónico</small>
+                                    <input type="text" name="email" [(ngModel)]="establishment.email" class="form-control form-control-sm">
+                                  </div>
+                                  <div class="col-6">
+                                    <small>Sitio Web</small>
+                                    <input type="text" name="website" [(ngModel)]="establishment.website" class="form-control form-control-sm">
+                                  </div>
+                                </div>
+                                <div class="row" *ngIf="sectionSelected._id === 'schedule'">
+                                  <div class="col-7 font-lg mb-3">
+                                    <i class="bi bi-clock me-1"></i>Horarios de Atención
+                                  </div>
+                                  <div class="col-5 text-end mb-3">
+                                    <span class="hand" (click)="toggleAllOpenDay()">
+                                      <i class="bi font-xl me-1 mt-1" [ngClass]="{'bi-toggle-off text-secondary': !establishment.openAllDay, 'bi-toggle-on text-primary': establishment.openAllDay}"></i>
+                                      <span>Atiende las 24 horas</span>
+                                    </span>
+                                  </div>
+                                  <div class="col-12 mt-3">
+                                    <ul class="list-group">
+                                      <li class="list-group-item" *ngFor="let d of days; let _i = index">
+                                        <div class="row">
+                                          <div class="col-1 hand" (click)="toggleAvailableDay(d)">
+                                            <i class="bi font-xl me-1 text-secondary" [ngClass]="{'bi-toggle-off ': !d.available, 'bi-toggle-on': d.available, 'text-primary': d.available && !establishment.openAllDay, 'text-secondary': d.available && establishment.openAllDay}"></i>
+                                          </div>
+                                          <div class="col-5 pt-1">{{d.name | titlecase}}</div>
+                                          <div class="col-3">
+                                            <div class="input-group input-group-sm">
+                                              <span class="input-group-text" id="basic-addon1">Inicio</span>
+                                              <input type="time" name="open-day-start-{{_i}}" [disabled]="!d.available || establishment.openAllDay" [(ngModel)]="d.startHour" class="form-control form-control-sm">
+                                            </div>
+                                          </div>
+                                          <div class="col-3">
+                                            <div class="input-group input-group-sm">
+                                              <span class="input-group-text" id="basic-addon1">final</span>
+                                              <input type="time" name="open-day-finish-{{_i}}" [disabled]="!d.available || !d.startHour || establishment.openAllDay" [min]="d.startHour" [(ngModel)]="d.finishHour" class="form-control form-control-sm">
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="row" *ngIf="sectionSelected._id === 'service'">
+                                  <div class="col-12">
+                                    <strong class="font-lg">Servicios Disponibles</strong>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="row">
+                                      <div class="col-4" *ngFor="let a of availableServices">
+                                        <span class="hand" (click)="toggleAvailableService(a)">
+                                          <i class="bi me-1 font-lg" [ngClass]="{'bi-toggle-on text-primary': a.selected, 'bi-toggle-off text-secondary': !a.selected}"></i>{{a.name | titlecase}}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <hr>
+                                  </div>
+                                  <div class="col-12">
+                                    <strong class="font-lg">Logo del Establecimiento</strong>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="row">
+                                      <div class="col-2 ps-4">
+                                        <div class="text-center" style="width: 100px; height: 100px; border: 1px dashed #cacaca; border-radius: 10px; padding-top: 25px;">
+                                          <i class="bi bi-camera text-secondary font-xxl"></i>
+                                        </div>
+                                      </div>
+                                      <div class="col-10 pt-3">
+                                        <button class="btn btn-light btn-lg">
+                                          <i class="bi bi-camera me-1"></i>Subir Logo
+                                        </button> <br>
+                                        <span class="text-secondary mt-2">Formato recomendado: PNG o JPG, máximo 2MB.</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="optionSelected._id === 'areas_and_services'">
+                        <ng-container *ngIf="filters.serviceDeliveryInstitution">
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-8">
+                                    <span class="text-secondary">Total Áreas</span> <br>
+                                    <strong class="text-dark font-xxl">
+                                      {{totals.areas}}
+                                    </strong>
+                                  </div>
+                                  <div class="col-4 text-end pt-3 text-dark">
+                                    <i class="bi bi-geo-alt font-xl"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-8">
+                                    <span class="text-secondary">Áreas Activas</span> <br>
+                                    <strong class="text-success font-xxl">
+                                      {{totals.activeAreas}}
+                                    </strong>
+                                  </div>
+                                  <div class="col-4 text-end pt-3 text-success">
+                                    <i class="bi bi-people font-xl"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-8">
+                                    <span class="text-secondary">Capacidad Total</span> <br>
+                                    <strong class="text-primary-color font-xxl">
+                                      {{totals.capacity}}
+                                    </strong>
+                                  </div>
+                                  <div class="col-4 text-end pt-3 text-primary-color">
+                                    <i class="bi bi-clock font-xl"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-8">
+                                    <span class="text-secondary">Áreas Inactivas</span> <br>
+                                    <strong class="text-danger font-xxl">
+                                      {{totals.inactiveAreas}}
+                                    </strong>
+                                  </div>
+                                  <div class="col-4 text-end pt-3 text-danger">
+                                    <i class="bi bi-geo-alt font-xl"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 mt-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-12">
+                                    <strong class="font-lg">Lista de Áreas</strong>
+                                  </div>
+                                  <div class="text-center col-12 mt-2" *ngIf="!areas.length">
+                                    <i class="bi bi-x-lg font-lg"></i><br>
+                                    No se registraron areas.
+                                  </div>
+                                  <div class="col-12 mt-2" *ngIf="areas.length">
+                                    <ul class="list-group font-nm">
+                                      <li class="list-group-item p-2">
+                                        <div class="row">
+                                          <div class="col-4 font-semi-bold text-secondary">
+                                            Área / Tipo
+                                          </div>
+                                          <div class="col-2 font-semi-bold text-secondary">
+                                            Responsable
+                                          </div>
+                                          <div class="col-2 font-semi-bold text-secondary">
+                                            Ubicación
+                                          </div>
+                                          <div class="col font-semi-bold text-secondary">
+                                            Horario
+                                          </div>
+                                          <div class="col-1 font-semi-bold text-secondary">
+                                            Capacidad
+                                          </div>
+                                          <div class="col-1 font-semi-bold text-secondary">
+                                            Estado
+                                          </div>
+                                          <div class="col font-semi-bold text-secondary text-end">
+                                            Acciones
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="list-group-item p-2" *ngFor="let a of areas">
+                                        <div class="row">
+                                          <div class="col-4">
+                                            {{a.name | uppercase}} - <strong class="text-light-color">{{a.code | uppercase}}</strong> <br>
+                                            {{a.areaType.name | uppercase}}
+                                          </div>
+                                          <div class="col-2">
+                                            <span class="text-secondary" *ngIf="!a.responsible">
+                                              &lt;No se asigno responsable&gt;
+                                            </span>
+                                            <span *ngIf="a.responsible">
+                                              {{a.responsible.firstName | titlecase}} {{a.responsible.lastName | uppercase}}
+                                            </span>
+                                          </div>
+                                          <div class="col-2">
+                                            {{a.location | uppercase}}
+                                          </div>
+                                          <div class="col">
+                                            {{a.startHour | date:'HH:mm'}} - {{a.finishHour | date:'HH:mm'}}
+                                          </div>
+                                          <div class="col-1">
+                                            {{a.capacity || 0}}&nbsp;<i class="bi bi-person-standing-dress"></i>
+                                          </div>
+                                          <div class="col-1">
+                                            {{a.status.name | uppercase}}
+                                          </div>
+                                          <div class="col text-end">
+                                            <button class="btn btn-sm btn-light rounded-circle text-primary-color me-2" (click)="toggleAreaModal(a)">
+                                              <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-light rounded-circle text-danger">
+                                              <i class="bi bi-trash"></i>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-12" *ngIf="optionSelected._id === 'user_management'">
+                      <div class="row">
+                        <!-- FILTROS -->
+                        <div class="col-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                                    <input type="text" name="text" [(ngModel)]="filters.text" class="form-control" placeholder="BUSCAR POR NOMBRE" aria-label="BUSCAR POR NOMBRE" aria-describedby="basic-addon1">
+                                  </div>
+                                </div>
+                                <div class="col-2">
+                                  <select name="role" [(ngModel)]="filters.role" class="form-select form-select-sm">
+                                    <option [ngValue]="undefined">Todos los roles</option>
+                                    <option *ngFor="let p of profiles" [ngValue]="p._id">{{p.name | uppercase}}</option>
+                                  </select>
+                                </div>
+                                <div class="col-2">
+                                  <select name="status" [(ngModel)]="filters.status" class="form-select form-select-sm">
+                                    <option [ngValue]="undefined">Todos los estados</option>
+                                    <option [ngValue]="true">ACTIVOS</option>
+                                    <option [ngValue]="false">INACTIVOS</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-7">
+                                  <strong class="font-lg">Usuarios del Sistema</strong>
+                                </div>
+                                <div class="col-5 text-end">
+                                  <button class="btn btn-sm bg-primary-color text-white" (click)="toggleUser()">
+                                    <i class="bi bi-plus me-1"></i>Agregar
+                                  </button>
+                                </div>
+                                <div class="col-12 mt-3">
+                                  <ul class="list-group font-nm">
+                                    <li class="list-group-item font-semi-bold text-secondary">
+                                      <div class="row">
+                                        <div class="col-2">
+                                          Usuario
+                                        </div>
+                                        <div class="col-3">
+                                          Email
+                                        </div>
+                                        <div class="col">
+                                          Roles
+                                        </div>
+                                        <div class="col-2">
+                                          Estado
+                                        </div>
+                                        <div class="col-2 text-end">
+                                          Acciones
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li class="list-group-item" *ngFor="let u of users | filter:filters.text | filter:filters.role | filter:filters.status">
+                                      <div class="row">
+                                        <div class="col-2">
+                                          {{u.username}}
+                                        </div>
+                                        <div class="col-3">
+                                          {{u.email}}
+                                        </div>
+                                        <div class="col">
+                                          <ng-container *ngIf="u.profiles.length">
+                                            <small class="badge bg-light text-dark border-primary me-2" *ngFor="let p of u.profiles">
+                                              {{p.shortName | titlecase}}
+                                            </small>
+                                          </ng-container>
+                                          <ng-container *ngIf="!u.profiles.length">
+                                            <span class="text-secondary">
+                                              --Sin perfiles asignados--
+                                            </span>
+                                          </ng-container>
+                                        </div>
+                                        <div class="col-2">
+                                          {{u.status ? "Activo" : "Inactivo"}}
+                                        </div>
+                                        <div class="col-2 text-end">
+                                          <button class="btn btn-sm btn-light text-success me-2" (click)="toggleItem(userProfileModal, 'user-profile', u)">
+                                            <i class="bi bi-sliders"></i>
+                                          </button>
+                                          <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleItem(userInfoModal, 'user', u)">
+                                            <i class="bi bi-pencil"></i>
+                                          </button>
+                                          <button class="btn btn-sm btn-light text-danger">
+                                            <i class="bi bi-trash"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12" *ngIf="optionSelected._id === 'role_and_permission'">
+                      <div class="row">
+                        <div class="col-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <span class="text-secondary">Total Perfiles</span> <br>
+                                  <strong class="text-dark font-xxl">
+                                    {{totals.profiles}}
+                                  </strong>
+                                </div>
+                                <div class="col-4 text-end pt-3 text-dark">
+                                  <i class="bi bi-geo-alt font-xl"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <span class="text-secondary">Perfiles Activos</span> <br>
+                                  <strong class="text-success font-xxl">
+                                    {{totals.activeProfiles}}
+                                  </strong>
+                                </div>
+                                <div class="col-4 text-end pt-3 text-success">
+                                  <i class="bi bi-people font-xl"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <span class="text-secondary">Usuarios Asignados</span> <br>
+                                  <strong class="text-primary-color font-xxl">
+                                    {{totals.assignUsers}}
+                                  </strong>
+                                </div>
+                                <div class="col-4 text-end pt-3 text-primary-color">
+                                  <i class="bi bi-clock font-xl"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <span class="text-secondary">Menus Disponibles</span> <br>
+                                  <strong class="text-danger font-xxl">
+                                    {{totals.availableMenus}}
+                                  </strong>
+                                </div>
+                                <div class="col-4 text-end pt-3 text-danger">
+                                  <i class="bi bi-geo-alt font-xl"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <div class="card mb-3">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-8">
+                                  <strong class="font-lg">Lista de Especialidades</strong>
+                                </div>
+                                <div class="col-4 text-end">
+                                  <button class="btn btn-sm bg-primary-color text-white" (click)="toggleItem(specialtyModal, 'specialty')">
+                                    <i class="bi bi-plus me-1"></i>Nueva Especialidad
+                                  </button>
+                                </div>
+                                <ng-container *ngIf="!specialties.length">
+                                  <div class="col-12 mt-2 text-center">
+                                    <i class="bi bi-times text-danger bi-2x"></i><br>
+                                    No se tienen registros
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="specialties.length">
+                                  <div class="col-12 mt-2 ">
+                                    <ul class="list-group font-nm font-semi-bold">
+                                      <li class="list-group-item text-secondary">
+                                        <div class="row">
+                                          <div class="col-3 pt-1">
+                                            Nombre
+                                          </div>
+                                          <div class="col-7 pt-1">
+                                            Descripción
+                                          </div>
+                                          <div class="col-2 text-end">
+                                            Acciones
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="list-group-item" *ngFor="let s of specialties">
+                                        <div class="row">
+                                          <div class="col-3 pt-1">
+                                            {{s.name | uppercase}}
+                                          </div>
+                                          <div class="col-7 pt-1">
+                                            <span class="text-secondary">{{s.description | uppercase}}</span>
+                                          </div>
+                                          <div class="col-2 text-end">
+                                            <button class="btn btn-sm btn-light text-primary-color m-2" (click)="toggleItem(specialtyModal, 'specialty', s)">
+                                              <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-light text-danger">
+                                              <i class="bi bi-trash"></i>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-12">
+                                  <div class="row">
+                                    <div class="col-8 pt-1">
+                                      <strong class="font-lg">Lista de Perfiles</strong>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                      <button class="btn btn-sm bg-primary-color text-white" (click)="toggleItem(profileModal, 'profile')">
+                                        <i class="bi bi-add me-1"></i>Nuevo Perfil
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <ng-container *ngIf="!profiles.length">
+                                  <div class="col-12 mt-2 text-center">
+                                    <i class="bi bi-x-lg text-danger"></i><br>
+                                    No se encontraron registros
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="profiles.length">
+                                  <div class="col-12 mt-2">
+                                    <ul class="list-group font-nm font-semi-bold">
+                                      <li class="list-group-item text-secondary">
+                                        <div class="row">
+                                          <div class="col-3">
+                                            Prefil
+                                          </div>
+                                          <div class="col-3">
+                                            Descripción
+                                          </div>
+                                          <div class="col-2">
+                                            Especialidad
+                                          </div>
+                                          <div class="col-2">
+                                            Estado
+                                          </div>
+                                          <div class="col-2 text-end">
+                                            Acciones
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="list-group-item" *ngFor="let p of profiles">
+                                        <div class="row">
+                                          <div class="col-3">
+                                            <span class="badge bg-primary-color text-white">{{p.abbr}}</span>
+                                            {{p.name | uppercase}}
+                                          </div>
+                                          <div class="col-3">
+                                            <span class="text-secondary">
+                                              {{p.description | uppercase}}
+                                            </span>
+                                          </div>
+                                          <div class="col-2">
+                                            <span *ngIf="p.specialty">
+                                              {{p.specialty.name | uppercase}}
+                                            </span>
+                                          </div>
+                                          <div class="col-2">
+                                            <span>{{p.status ? 'Activo' : 'Inactivo'}}</span>
+                                          </div>
+                                          <div class="col-2 text-end">
+                                            <button class="btn btn btn-sm btn-light text-primary-color me-2" (click)="toggleItem(profileModal, 'profile', p)">
+                                              <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn btn-sm btn-light text-danger">
+                                              <i class="bi bi-trash"></i>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #userModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg" *ngIf="newUser">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Agregar Usuarios</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleUser()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #userForm="ngForm">
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text" id="basic-addon1">Personal Médico</span>
+                <input name="medicalStaffToSearch" [(ngModel)]="newUser.medicalStaffFound"
+                  [typeahead]="medicalStaffWithoutAccount"
+                  (typeaheadOnSelect)="selectMedicalStaffToAccount($event)"
+                  typeaheadOptionField="name"
+                  placeholder="BUSCA PERSONAL"
+                  class="form-control form-control-sm text-uppercase">
+                <button class="btn bg-primary-color text-white" *ngIf="newUser.medicalStaff" (click)="addUser()">
+                  <i class="bi bi-plus me-1"></i>Agregar
+                </button>
+              </div>
+            </div>
+            <!-- <div class="col-12 mt-3 text-center" *ngIf="newUser.medicalStaff">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="userForm.invalid" (click)="saveUser()">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #userInfoModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg" *ngIf="newUser">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Editar Información</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleItem(userInfoModal, 'user-info')">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #userForm="ngForm">
+          <div class="row">
+            <div class="col-6">
+              <small>Nombres</small>
+              <input type="text" name="firstName" [(ngModel)]="newUser.firstName" class="form-control form-control-sm">
+            </div>
+            <div class="col-6">
+              <small>Apellidos</small>
+              <input type="text" name="lastName" [(ngModel)]="newUser.lastName" class="form-control form-control-sm">
+            </div>
+            <div class="col-12">
+              <small>Profesión</small>
+              <input type="text" name="profession" [(ngModel)]="newUser.profession" class="form-control form-control-sm">
+            </div>
+            <div class="col-12">
+              <small>Condición de Trabajo</small>
+              <input type="text" name="workingCondition" [(ngModel)]="newUser.workingCondition" class="form-control form-control-sm">
+            </div>
+            <div class="col-12">
+              <small>Correo Electrónico</small>
+              <input type="text" name="email" [(ngModel)]="newUser.email" disabled class="form-control form-control-sm">
+            </div>
+            <div class="col-12">
+              <small>Establecimientos de Salud</small>
+              <div class="row">
+                <div class="col-6" *ngFor="let sdi of serviceDeliveryInstitutions; let sdi_i = index">
+                  <div class="card mb-2">
+                    <div class="card-header">
+                      <div class="form-check">
+                        <input class="form-check-input" name="serviceDeliveryInstitution-{{sdi_i}}" [(ngModel)]="sdi.selected" type="checkbox" value="" id="sdi-{{sdi_i}}">
+                        <label class="form-check-label" for="sdi-{{sdi_i}}">
+                          {{sdi.description | uppercase}}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="card-body" *ngIf="sdi.selected">
+                      <div class="row">
+                        <div class="col-6">
+                          <small>Fecha Inicio</small>
+                          <input type="date" name="startDate-{{sdi_i}}" [(ngModel)]="sdi.startDate" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-6">
+                          <small>Fecha Fin</small>
+                          <input type="date" [min]="sdi.startDate" [disabled]="!sdi.startDate" name="finishDate-{{sdi_i}}" [(ngModel)]="sdi.finishDate" class="form-control form-control-sm" required>
+                        </div>
+                        <ng-container *ngIf="sdi.areas">
+                          <div class="col-12" *ngIf="!sdi.areas.length">
+                            <i class="bi bi-x-lg me-1"></i>Sin areas registradas
+                          </div>
+                          <div class="col-12" *ngIf="sdi.areas.length">
+                            <small>Area a que pertenece</small>
+                              <ul class="list-group">
+                                <li class="list-group-item" [ngClass]="{'list-group-item-success': a.selected}" (click)="toggleSelect(a)" *ngFor="let a of sdi.areas">
+                                  <div class="row">
+                                    <div class="col-9">
+                                      <small>
+                                        {{a.name | uppercase}}
+                                      </small>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                      <i class="bi bi-check" *ngIf="a.selected"></i>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-6 mb-2" *ngFor="let he of serviceDeliveryInstitutions; let he_i = index">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="form-check">
+                        <input class="form-check-input" name="serviceDeliveryInstitution-{{he_i}}" [(ngModel)]="he.selected" type="checkbox" value="" id="he-{{he_i}}">
+                        <label class="form-check-label" for="he-{{he_i}}" *ngIf="he.serviceDeliveryInstitutionObject">
+                          {{he.serviceDeliveryInstitutionObject.description | uppercase}}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="card-body" *ngIf="he.selected">
+                      <div class="row">
+                        <div class="col-6">
+                          <small>Fecha Inicio</small>
+                          <input type="date" name="startDate-{{he_i}}" [(ngModel)]="he.startDate" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-6">
+                          <small>Fecha Fin</small>
+                          <input type="date" [min]="he.startDate" [disabled]="!he.startDate" name="finishDate-{{he_i}}" [(ngModel)]="he.finishDate" class="form-control form-control-sm" required>
+                        </div>
+                        <ng-container *ngIf="he.serviceDeliveryInstitutionObject">
+                          <ng-container *ngIf="he.serviceDeliveryInstitutionObject.areas">
+                            <div class="col-12 text-center" *ngIf="!he.serviceDeliveryInstitutionObject.areas.length">
+                              <i class="bi bi-x-lg me-1"></i>No tienes areas registradas
+                            </div>
+                            <div class="col-12" *ngIf="he.serviceDeliveryInstitutionObject.areas.length">
+                              <small>Area a que pertenece</small>
+                              <ul class="list-group">
+                                <li class="list-group-item" [ngClass]="{'list-group-item-success': a.selected}" (click)="toggleSelect(a)" *ngFor="let a of he.serviceDeliveryInstitutionObject.areas">
+                                  <div class="row">
+                                    <div class="col-9">
+                                      <small>
+                                        {{a.name | uppercase}}
+                                      </small>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                      <i class="bi bi-check" *ngIf="a.selected"></i>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="col-12" *ngIf="newUser.editing">
+              <small>Estado</small>
+              <select name="status" [(ngModel)]="newUser.status" class="form-select form-select-sm">
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+              </select>
+            </div>
+            <div class="col-12 mt-3 text-center">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="userForm.invalid" (click)="saveItem(userInfoModal, 'user-info')">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #userProfileModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg" *ngIf="userSelected">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Configuración de Usuarios</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleItem(userProfileModal, 'user-profile')">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #userProfileForm="ngForm">
+          <div class="row">
+            <ng-container *ngIf="!userSelected.profiles.length">
+              <div class="col-12 text-center">
+                <i class="bi bi-x-lg text-danger"></i><br>
+                No se tienen perfiles registrados <br>
+                <button class="btn btn-sm btn-light text-primary-color" (click)="toggleProfile(userSelected)">
+                  <i class="bi bi-save me-1"></i>Agregar perfil
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="userSelected.profiles.length">
+              <div class="col-12">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let p of userSelected.profiles; let p_i = index">
+                    <div class="row">
+                      <div class="col-10">
+                        <small>Perfil</small>
+                        <select name="profile-{{p_i}}" [(ngModel)]="p._id" (change)="verifyProfile(userSelected, p)" class="form-select form-select-sm" required>
+                          <option [ngValue]="undefined">--SELECCIONE--</option>
+                          <option *ngFor="let pr of profiles" [ngValue]="pr._id">{{pr.name | uppercase}}</option>
+                        </select>
+                      </div>
+                      <div class="col-2 pt-1 text-end">
+                        <button class="btn btn-lg btn-light text-danger" (click)="toggleProfile(userSelected, p)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item text-center">
+                    <button class="btn btn-sm btn-light text-primary-color" [disabled]="userProfileForm.invalid" (click)="toggleProfile(userSelected)">
+                      <i class="bi bi-save me-1"></i>Agregar perfil
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center">
+        <button class="btn btn-sm btn-light text-primary-color" [disabled]="userProfileForm.invalid" (click)="saveItem(userProfileModal, 'user-profile')">
+          <i class="bi bi-save me-1"></i>Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #specialtyModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-sm" *ngIf="newSpecialty">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">{{newSpecialty.editing ? 'Editando' : 'Nueva'}} Especialidad</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleItem(specialtyModal, 'specialty')">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #specialtyForm="ngForm">
+          <div class="row">
+            <div class="col-12">
+              <small>Nombre</small>
+              <input type="text" name="name" [(ngModel)]="newSpecialty.name" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-12">
+              <small>Descripción</small>
+              <textarea name="description" [(ngModel)]="newSpecialty.description" class="form-control form-control-sm no-resize" required></textarea>
+            </div>
+            <div class="col-12 mt-3 text-center">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="specialtyForm.invalid" (click)="saveItem(specialtyModal, 'specialty')">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #profileModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-sm" *ngIf="newProfile">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">{{newProfile.editing ? 'Editando' : 'Nuevo'}} Perfil</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleItem(profileModal, 'profile')">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #profileForm="ngForm">
+          <div class="row">
+            <div class="col-12">
+              <small>Nombre</small>
+              <input type="text" name="name" [(ngModel)]="newProfile.name" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-12">
+              <small>Nombre Corto</small>
+              <input type="text" name="shortName" [(ngModel)]="newProfile.shortName" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-12">
+              <small>Descripción</small>
+              <textarea name="description" [(ngModel)]="newProfile.description" class="form-control form-control-sm no-resize" required></textarea>
+            </div>
+            <div class="col-12">
+              <small>Especialidad</small>
+              <select name="specialty" [(ngModel)]="newProfile.specialty" class="form-select form-select-sm">
+                <option [ngValue]="undefined">--SELECCIONE--</option>
+                <option *ngFor="let s of specialties" [ngValue]="s._id">{{s.name | uppercase}}</option>
+              </select>
+            </div>
+            <div class="col-12" *ngIf="newProfile.editing">
+              <small>Estado</small>
+              <select name="status" [(ngModel)]="newProfile.status" class="form-select form-select-sm">
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+              </select>
+            </div>
+            <div class="col-12 mt-3 text-center">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="profileForm.invalid" (click)="saveItem(profileModal, 'profile')">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #establishmentManagerModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg" *ngIf="establishment">
+    <div class="modal-content" *ngIf="establishment.establishmentManagers" >
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Encargados del Establecimiento</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleAssignManager()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #establishgmentManagerForm="ngForm">
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text" id="basic-addon1">Personal Médico</span>
+                <input name="medicalStaffToSearch" [(ngModel)]="establishment.medicalStaff"
+                  [typeahead]="medicalStaffs"
+                  (typeaheadOnSelect)="selectMedicalStaffToManager($event)"
+                  typeaheadOptionField="name"
+                  placeholder="BUSCA PERSONAL"
+                  class="form-control form-control-sm text-uppercase">
+              </div>
+            </div>
+            <div class="col-12 mt-3" *ngIf="establishment.establishmentManagers.length">
+              <div class="row">
+                <div class="col-12 text-end">
+                  <small class="font-xs">
+                    <i class="bi bi-circle-fill text-success me-1"></i>Encargado actual
+                  </small>
+                </div>
+                <div class="col-12">
+                  <ul class="list-group">
+                    <li class="list-group-item p-1" *ngFor="let e of establishment.establishmentManagers; let _i = index">
+                      <div class="row">
+                        <div class="col-5">
+                          <div class="row">
+                            <div class="col-11" style="line-height: 90%;">
+                              <small class="font-xs">
+                                {{e.code}} - {{e.firstName | uppercase}} <br>
+                                <strong class="text-primary-color">{{e.profession}}</strong>
+                              </small>
+                            </div>
+                            <div class="col-1 pt-1 text-end hand" (click)="toggleSetManager(e)">
+                              <i class="bi font-lg" [ngClass]="{'bi-circle text-secondary': !e.isCurrent, 'bi-circle-fill text-success': e.isCurrent}"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <input type="date" name="e.startDate-{{_i}}" [(ngModel)]="e.startDate" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-3">
+                          <input type="date" name="e.finishDate-{{_i}}" [disabled]="!e.startDate" [min]="e.startDate" [(ngModel)]="e.finishDate" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-1 text-end">
+                          <button class="btn btn-sm btn-light text-danger" *ngIf="e.isNew" (click)="deleteManager(_i)">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3 text-center" *ngIf="establishment.establishmentManagers.length">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="establishgmentManagerForm.invalid" (click)="saveEstablishment(true)">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #areaModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-nm" *ngIf="newArea">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">
+          <span *ngIf="!newArea.editing">Crear&nbsp;</span>
+          <span *ngIf="newArea.editing">Editar&nbsp;</span>
+          Área
+        </h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleAreaModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #areaForm="ngForm">
+          <div class="row">
+            <div class="col-6">
+              <small>Nombre del Área</small>
+              <input type="text" name="name" [(ngModel)]="newArea.name" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-6">
+              <small>Código</small>
+              <input type="text" name="code" [(ngModel)]="newArea.code" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-6">
+              <small>Tipo de Área</small>
+              <select name="areaType" [(ngModel)]="newArea.areaType" class="form-select form-select-sm" required>
+                <option [ngValue]="undefined">--SELECCIONE--</option>
+                <option *ngFor="let a of areaTypes" [ngValue]="a._id">{{a.name | uppercase}}</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <small>Capacidad (pacientes/dia)</small>
+              <input type="number" name="capacity" [(ngModel)]="newArea.capacity" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-12">
+              <small>Descripción</small>
+              <textarea name="description" [(ngModel)]="newArea.description" class="form-control form-control-sm"></textarea>
+            </div>
+            <div class="col-12">
+              <small>Responsable</small>
+              <select name="responsible" [(ngModel)]="newArea.responsible" class="form-select form-select-sm">
+                <option [ngValue]="undefined">--SELECCIONE--</option>
+                <option *ngFor="let m of medicalStaffsOfService" [ngValue]="m._id">{{m.firstName | titlecase}} {{m.lastName | uppercase}}</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <small>Ubicación</small>
+              <input type="text" name="location" [(ngModel)]="newArea.location" class="form-control form-control-sm">
+            </div>
+            <div class="col-6">
+              <small>Horario Inicio</small>
+              <input type="time" name="startHour" [(ngModel)]="newArea.startHour" class="form-control form-control-sm">
+            </div>
+            <div class="col-6">
+              <small>Horario Fin</small>
+              <input type="time" [min]="newArea.startHour" [disabled]="!newArea.startHour" name="finishHour" [(ngModel)]="newArea.finishHour" class="form-control form-control-sm">
+            </div>
+            
+            <div class="col-12 mt-3 text-center">
+              <button class="btn btn-sm bg-primary-color text-white" [disabled]="areaForm.invalid" (click)="saveArea()">
+                <i class="bi bi-floppy me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

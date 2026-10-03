@@ -1,0 +1,225 @@
+<div class="row">
+  <div class="col-8">
+    <span class="font-lg">Administración de Campañas</span>
+  </div>
+  <div class="col-4 text-end">
+    <button class="btn btn-sm bg-primary-color text-white" (click)="toggleCampaign()">
+      <i class="bi bi-plus me-1"></i>Nueva
+    </button>
+  </div>
+  <div class="col-12 mt-2">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3">
+            <select name="campaignType" [(ngModel)]="filter.campaignType" class="form-select form-select-sm">
+              <option [ngValue]="undefined">--TODOS LOS TIPOS--</option>
+              <option *ngFor="let c of campaignTypes" [ngValue]="c._id">{{c.name | uppercase}}</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select name="campaignStatus" [(ngModel)]="filter.campaignStatus" class="form-select form-select-sm">
+              <option [ngValue]="undefined">--TODOS LOS ESTADOS--</option>
+              <option *ngFor="let s of campaignStatus" [ngValue]="s._id">{{s.name | uppercase}}</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <input type="text" name="byText" [(ngModel)]="filter.byText" class="form-control form-control-sm">
+          </div>
+          <div class="col-3">
+            <button class="btn btn-sm bg-primary-color text-white">
+              <i class="bi bi-search me-1"></i>Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 pt-2">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let c of campaigns">
+        <div class="row">
+          <div class="col-4">
+            <strong>{{c.name | uppercase}} </strong>
+            <br>
+            {{c.startDate | date:'dd/MM/yyyy'}} a {{c.finishDate | date:'dd/MM/yyyy'}}
+          </div>
+          <div class="col-2 pt-2">
+            <span class="badge bg-success">
+              {{c.campaignType.name | uppercase}}
+            </span>
+          </div>
+          <div class="col-2">
+            <span class="badge bg-primary-color text-white"><i class="bi bi-people me-1"></i>{{c.personal.length}}&nbsp;colaboradores</span> <br>
+            <span class="badge bg-success"><i class="bi bi-capsule me-1"></i>{{c.resources.length}}&nbsp;articulos</span>
+          </div>
+          <div class="col-2 pt-2 text-end">
+            <small>
+              <i class="bi me-1" [ngClass]="{'bi-hand-thumbs-up text-primary-color': c.status, 'bi-hand-thumbs-down text-danger': !c.status}"></i>{{c.status ? 'Activo' : 'Inactivo'}}
+            </small>
+          </div>
+          <div class="col-2 text-end pt-2">
+            <!-- <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleCampaign(c)">
+              <i class="bi bi-pencil"></i>
+            </button> -->
+            <button class="btn btn-sm btn-light text-danger" (click)="toggleDeleteCampaign(c)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #campaignModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" *ngIf="newCampaign">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">{{newCampaign.editing ? 'Edita': 'Nueva'}} Campaña</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleCampaign()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #campaignForm="ngForm">
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" [(ngModel)]="newCampaign.name" class="form-control form-control-sm text-uppercase" required>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="campaignType">Tipo</label>
+                <select name="campaignType" [(ngModel)]="newCampaign.campaignType" class="form-select form-select-sm" required>
+                  <option [ngValue]="undefined">--SELECCIONE--</option>
+                  <option *ngFor="let c of campaignTypes" [ngValue]="c._id">{{c.name | uppercase}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="startDate">Inicio</label>
+                <input type="date" name="startDate" [(ngModel)]="newCampaign.startDate" class="form-control form-control-sm" required>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="finishDate">Fin</label>
+                <input type="date" [min]="newCampaign.startDate" [disabled]="!newCampaign.startDate" name="finishDate" [(ngModel)]="newCampaign.finishDate" class="form-control form-control-sm" required>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="finishDate">Estado de la Campaña</label>
+                <select name="campaignStatus" [(ngModel)]="newCampaign.campaignStatus" class="form-select form-select-sm" required>
+                  <option [ngValue]="undefined">--SELECCIONE--</option>
+                  <option *ngFor="let c of campaignStatus" [ngValue]="c._id">{{c.name | uppercase}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-check">
+                <input class="form-check-input" name="usageExternalForm" type="checkbox" [(ngModel)]="newCampaign.usageExternalForm" id="checkDefault">
+                <label class="form-check-label" for="checkDefault">
+                  Formulario Externo
+                </label>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="form-group" *ngIf="newCampaign.usageExternalForm">
+                <label for="urlExternalForm">Url de Formulario Externo</label>
+                <input type="text" name="urlExternalForm" [(ngModel)]="newCampaign.urlExternalForm" class="form-control form-control-sm" required>
+              </div>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+              <div class="card">
+                <div class="card-header">
+                  Recursos
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" *ngFor="let r of newCampaign.resources; let r_i = index">
+                    <div class="row">
+                      <div class="col-8">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="basic-addon1">Vacuna</span>
+                          <select name="article-{{r_i}}" (change)="validateQuantityOfProduct(r)" [(ngModel)]="r.article" class="form-select form-select-sm" required>
+                            <option [ngValue]="undefined">--SELECCIONE--</option>
+                            <option *ngFor="let a of r.articlesFiltereds" [ngValue]="a._id">{{a.product.name | uppercase}}</option>
+                          </select>
+                          <span class="input-group-text" id="basic-addon1" *ngIf="r.article">Disponible: {{r.quantityMax}}</span>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="basic-addon1">Solicitaré:</span>
+                          <input type="number" [min]="1" [max]="r.quantityMax" [disabled]="!r.article" name="quantity-{{r_i}}" [(ngModel)]="r.quantity" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-1 text-end">
+                        <button class="btn btn-sm btn-light text-danger" (click)="toggleItem('resources', r)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item text-center">
+                    <button class="btn btn-sm btn-light text-primary-color" (click)="toggleItem('resources')">
+                      <i class="bi bi-plus me-1"></i>Agregar Recurso
+                    </button>
+                  </li>
+                </ul>  
+              </div>
+            </div>
+            <div class="col-12 mb-2">
+              <div class="card">
+                <div class="card-header">
+                  Personal
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" *ngFor="let p of newCampaign.personal; let p_i = index">
+                    <div class="row">
+                      <div class="col-8">
+                        <select name="medicalStaff-{{p_i}}" [(ngModel)]="p.medicalStaff" class="form-select form-select-sm" required>
+                          <option [ngValue]="undefined">--SELECCIONE PERSONAL MEDICO--</option>
+                          <option *ngFor="let m of p.medicalStaffs" [ngValue]="m._id">{{m.lastName | uppercase}} - {{m.firstName}} | {{m.profession | uppercase}}</option>
+                        </select>
+                      </div>
+                      <div class="col-3 text-end">
+                        <button class="btn btn-sm" [ngClass]="{'bg-primary-color text-white': p.isResponsible, 'btn-light text-primary-color': !p.isResponsible}" (click)="toggleResponsible(p)">
+                          Responsable
+                        </button>
+                      </div>
+                      <div class="col-1 text-end">
+                        <button class="btn btn-sm btn-light text-danger" (click)="toggleItem('personal',p)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item text-center">
+                    <button class="btn btn-sm btn-light text-primary-color" (click)="toggleItem('personal')">
+                      <i class="bi bi-plus me-1"></i>Agregar Personal
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-sm"
+                [ngClass]="{'bg-primary-color text-white': !newCampaign.editing, 'btn-success': newCampaign.editing}"
+                (click)="saveCampaign()"
+                [disabled]="campaignForm.invalid"
+                >
+                <i class="bi-bi-save me-1"></i>Guardar cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

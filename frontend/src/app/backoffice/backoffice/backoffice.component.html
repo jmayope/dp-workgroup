@@ -1,0 +1,58 @@
+<div class="fadeIn container-fluid">
+  <div class="row">
+    <div class="col-2 m-0 p-0">
+      <div class="card bg-primary-color text-white" style="min-height: 100vh; border-radius: 0;">
+        <div class="row">
+          <div class="col-12 p-4">
+            <h2>{{appName}}</h2>
+            <small>{{slug}}</small>
+          </div>
+          <div class="col-12 ps-4 pe-4">
+            <ul class="list-group text-white" style="border: 0; border-radius: 0;" *ngFor="let m of menu">
+              <caption class="text-white">{{m.menu.name | uppercase}}</caption>
+              <ng-container *ngFor="let i of m.children">
+
+                <a [routerLink]="i.menu.url" class="text-white" style="text-decoration: none;">
+                <li class="list-group-item bg-primary-color text-white" [ngClass]="{'list-group-item-selected': itemSelected && itemSelected._id === i.menu._id}" (click)="selectMenuItem(i.menu)" style="border: 0;">
+                    <i class="{{i.menu.icon}}"></i>
+                    {{i.menu.name | titlecase}}
+                  </li>
+                </a>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-10">
+      <nav class="navbar bg-primary-color text-white" style="margin-left: -13px; padding-left: -10px; margin-right: -12px;">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white">
+            <img src="/imgs/logo.png" alt="Logo" width="180" height="30" class="d-inline-block align-text-top">
+          </a>
+          <form class="d-flex" role="search">
+            <div class="btn-group" dropdown>
+              <i class="bi bi-person-circle font-lg me-2"></i>
+              <span class="pe-5 hand" style="line-height: 110%;" dropdownToggle>
+                {{'@'+userLoged.username}} <br>
+                <small class="mt-1">
+                  {{userLoged.currentProfile.name}}
+                </small>
+              </span>
+              <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-split">
+                <li role="menuitem" *ngIf="userLoged.profiles.length > 1" [routerLink]="['/autenticacion/seleccionar-perfil']"><a class="dropdown-item">Cambiar de Perfil</a></li>
+                <li role="menuitem"><a class="dropdown-item">Configuración de Perfil</a></li>
+              </ul>
+            </div>
+            <i class="bi bi-door-open hand font-lg text-white" (click)="logout()"></i>
+          </form>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col-12 mt-3" style="max-height: 100vh !important; overflow: auto;">
+          <router-outlet />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

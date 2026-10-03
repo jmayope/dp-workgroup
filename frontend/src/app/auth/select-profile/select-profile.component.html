@@ -1,0 +1,41 @@
+<div class="fadeIn">
+  <div class="row pt-5" *ngIf="userLoged">
+    <div class="col-4"></div>
+    <div class="col-4 pt-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 text-center">
+              <h2>Seleccione su rol</h2>
+            </div>
+            <div class="col-12 text-secondary">
+              <p>Elija un rol con el que desea ingresar al sistema.</p>
+            </div>
+            <div class="col-12 mb-2" *ngFor="let p of userLoged.profiles">
+              <ul class="list-group">
+                <li class="list-group-item hand" [ngClass]="{'bg-primary text-white': profileSelected && profileSelected._id === p._id}" (click)="selectProfile(p)">
+                  <div class="row">
+                    <div class="col-2">
+                      <!-- <i class="bi bi-building"></i> -->
+                      <img src="/imgs/profile.png" width="50" height="50" alt="">
+                    </div>
+                    <div class="col-9">
+                      <small><strong>{{p.name | uppercase}}</strong></small><br>
+                      <small>{{p.description | titlecase}}</small>
+                    </div>
+                    <div class="col-1"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 mt-3 text-center" *ngIf="profileSelected">
+              <button class="btn btn-primary btn-lg" (click)="nextToHome()">
+                <i class="bi bi-arrow-right me-1"></i>Continuar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
