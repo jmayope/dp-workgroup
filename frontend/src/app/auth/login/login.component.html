@@ -1,185 +1,219 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 mt-5">
-            <div class="card">
-                <div class="row g-0">
-                    <!-- Imagen/Info lado izquierdo -->
-                    <div class="col-md-5 d-none d-md-block">
-                        <div class="welcome-image text-center">
-                            <div class="app-logo">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h2 class="mb-4">¡Bienvenido!</h2>
-                            <p class="mb-4">Accede a tu cuenta para disfrutar de todos nuestros servicios exclusivos.</p>
-                            <p>¿No tienes una cuenta? <br>Regístrate en segundos.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Formulario lado derecho -->
-                    <div class="col-md-7">
-                        <div class="card-body p-4 p-lg-5">
-                            <!-- Pestañas de navegación -->
-                            <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation" *ngFor="let t of tabs">
-                                    <button class="nav-link" [ngClass]="{'active': tabSelected && tabSelected.id === t.id}" (click)="toggleTab(t)" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">{{t.name}}</button>
-                                </li>
-                                <!-- <li class="nav-item" role="presentation">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 mt-5">
+      <div class="card">
+        <div class="row g-0">
+          <!-- Imagen/Info lado izquierdo -->
+          <div class="col-md-5 d-none d-md-block">
+            <div class="welcome-image text-center">
+              <div class="app-logo">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h2 class="mb-4">¡Bienvenido!</h2>
+              <p class="mb-4">Accede a tu cuenta para disfrutar de todos nuestros servicios exclusivos.</p>
+              <p>¿No tienes una cuenta? <br>Regístrate en segundos.</p>
+            </div>
+          </div>
+
+          <!-- Formulario lado derecho -->
+          <div class="col-md-7">
+            <div class="card-body p-4 p-lg-5">
+              <!-- Pestañas de navegación -->
+              <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation" *ngFor="let t of tabs">
+                  <button class="nav-link" [ngClass]="{'active': tabSelected && tabSelected.id === t.id}"
+                    (click)="toggleTab(t)" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
+                    type="button" role="tab" aria-controls="pills-login" aria-selected="true">{{t.name}}</button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Registrarse</button>
                                 </li> -->
-                            </ul>
-                            
-                            <!-- Contenido de las pestañas -->
-                            <div class="tab-content" id="pills-tabContent">
-                                <!-- Formulario de inicio de sesión -->
-                                <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 1}" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                                    <h4 class="mb-4">Iniciar Sesión</h4>
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Nombre de Usuario</label>
-                                            <input type="email" class="form-control" name="username" [(ngModel)]="credentials.username" id="username" placeholder="jdoe" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="loginPassword" class="form-label">Contraseña</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" *ngIf="showPassword" name="password" [(ngModel)]="credentials.password" id="loginPassword" placeholder="Contraseña" required>
-                                                <input type="password" class="form-control" *ngIf="!showPassword" name="password" [(ngModel)]="credentials.password" id="loginPassword" placeholder="******" required>
-                                                <button class="btn btn-outline-secondary" (click)="showPassword = !showPassword" type="button" id="togglePassword">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Recordarme</label>
-                                            <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
-                                        </div>
-                                        <div class="d-grid gap-2 mb-4">
-                                            <button type="submit" class="btn btn-primary" (click)="login()">Iniciar Sesión</button>
-                                        </div>
-                                    </form>
-                                    
-                                    <!-- Inicio de sesión con redes sociales -->
-                                    <div class="text-center mb-3">
-                                        <p>o inicia sesión con:</p>
-                                        <div class="social-login">
-                                            <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
-                                            <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Enlace para registrarse (móvil) -->
-                                    <div class="text-center d-md-none">
-                                        <p>¿No tienes una cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
-                                    </div>
-                                </div>
-                                
-                                <!-- Formulario de registro -->
-                                <div class="tab-pane fade"  [ngClass]="{'show active': tabSelected && tabSelected.id === 2}" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
-                                    <h4 class="mb-4">Crear Cuenta</h4>
-                                    <form #registerForm="ngForm">
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label for="registerFirstName" class="form-label">Nombre</label>
-                                                <input type="text" class="form-control" name="firstName" id="registerFirstName" [(ngModel)]="newUser.firstName" placeholder="Tu nombre" required>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="registerLastName" class="form-label">Apellido</label>
-                                                <input type="text" class="form-control" name="lastName" id="registerLastName" [(ngModel)]="newUser.lastName" placeholder="Tu apellido" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="registerEmail" class="form-label">Correo electrónico</label>
-                                            <input type="email" class="form-control" id="registerEmail" name="email" [(ngModel)]="newUser.email" placeholder="correo@ejemplo.com" required>
-                                        </div>
-                                        
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" name="acceptTerms" [(ngModel)]="newUser.acceptTerms" id="termsCheck" required>
-                                            <label class="form-check-label" for="termsCheck">
-                                                Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">términos y condiciones</a>
-                                            </label>
-                                        </div>
-                                        <div class="d-grid gap-2 mb-4">
-                                            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || registering" (click)="register()">Crear Cuenta</button>
-                                        </div>
-                                    </form>
-                                    
-                                    <!-- Inicio de sesión con redes sociales -->
-                                    <div class="text-center mb-3">
-                                        <p>o regístrate con:</p>
-                                        <div class="social-login">
-                                            <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
-                                            <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Enlace para iniciar sesión (móvil) -->
-                                    <div class="text-center d-md-none">
-                                        <p>¿Ya tienes una cuenta? <a href="#" id="switchToLogin">Inicia sesión</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </ul>
+
+              <!-- Contenido de las pestañas -->
+              <div class="tab-content" id="pills-tabContent">
+                <!-- Formulario de inicio de sesión -->
+                <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 1}"
+                  id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+                  <h4 class="mb-4">Iniciar Sesión</h4>
+                  <form>
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Nombre de Usuario</label>
+                      <input type="email" class="form-control" name="username" [(ngModel)]="credentials.username"
+                        id="username" placeholder="jdoe" required>
                     </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">Contraseña</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" *ngIf="showPassword" name="password"
+                          [(ngModel)]="credentials.password" id="loginPassword" placeholder="Contraseña" required>
+                        <input type="password" class="form-control" *ngIf="!showPassword" name="password"
+                          [(ngModel)]="credentials.password" id="loginPassword" placeholder="******" required>
+                        <button class="btn btn-outline-secondary" (click)="showPassword = !showPassword" type="button"
+                          id="togglePassword">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Recordarme</label>
+                      <a href="#" class="float-end" data-bs-toggle="modal"
+                        data-bs-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="d-grid gap-2 mb-4">
+                      <button type="submit" class="btn btn-primary" (click)="login()">Iniciar Sesión</button>
+                    </div>
+                  </form>
+
+                  <!-- Inicio de sesión con redes sociales -->
+                  <div class="text-center mb-3">
+                    <p>o inicia sesión con:</p>
+                    <div class="social-login">
+                      <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
+                      <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
+                    </div>
+                  </div>
+
+                  <!-- Enlace para registrarse (móvil) -->
+                  <div class="text-center d-md-none">
+                    <p>¿No tienes una cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
+                  </div>
                 </div>
+
+                <!-- Formulario de registro -->
+                <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 2}"
+                  id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+                  <h4 class="mb-4">Crear Cuenta</h4>
+                  <form #registerForm="ngForm">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <small>Documento de Identidad</small>
+                        <div class="input-group">
+                          <input type="text" name="code" maxlength="8" placeholder="99999999" minlength="8" [(ngModel)]="newUser.code" class="form-control">
+                          <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="newUser.code">
+                            <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-md-6"></div>
+                      <div class="col-md-6 mb-3">
+                        <label for="registerFirstName" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" name="firstName" disabled id="registerFirstName"
+                          [(ngModel)]="newUser.firstName" placeholder="Tu nombre" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="registerLastName" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" name="lastName" disabled id="registerLastName"
+                          [(ngModel)]="newUser.lastName" placeholder="Tu apellido" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="registerEmail" class="form-label">Correo electrónico</label>
+                      <input type="email" class="form-control" id="registerEmail" name="email"
+                        [(ngModel)]="newUser.email" placeholder="correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" name="acceptTerms"
+                        [(ngModel)]="newUser.acceptTerms" id="termsCheck" required>
+                      <label class="form-check-label" for="termsCheck">
+                        Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">términos y
+                          condiciones</a>
+                      </label>
+                    </div>
+                    <div class="d-grid gap-2 mb-4">
+                      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || registering"
+                        (click)="register()">Crear Cuenta</button>
+                    </div>
+                  </form>
+
+                  <!-- Inicio de sesión con redes sociales -->
+                  <div class="text-center mb-3">
+                    <p>o regístrate con:</p>
+                    <div class="social-login">
+                      <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
+                      <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
+                    </div>
+                  </div>
+
+                  <!-- Enlace para iniciar sesión (móvil) -->
+                  <div class="text-center d-md-none">
+                    <p>¿Ya tienes una cuenta? <a href="#" id="switchToLogin">Inicia sesión</a></p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal para recuperar contraseña -->
-<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="forgotPasswordModalLabel">Recuperar contraseña</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Introduce tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
-                <form>
-                    <div class="mb-3">
-                        <label for="recoveryEmail" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="recoveryEmail" placeholder="correo@ejemplo.com" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Enviar instrucciones</button>
-            </div>
-        </div>
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgotPasswordModalLabel">Recuperar contraseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Introduce tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
+        <form>
+          <div class="mb-3">
+            <label for="recoveryEmail" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="recoveryEmail" placeholder="correo@ejemplo.com" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Enviar instrucciones</button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal para términos y condiciones -->
 <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5>1. Aceptación de los Términos</h5>
-                <p>Al registrarse y utilizar nuestra aplicación, usted acepta estar sujeto a estos Términos y Condiciones y a nuestra Política de Privacidad.</p>
-                
-                <h5>2. Registro de Cuenta</h5>
-                <p>Para utilizar ciertas funciones de la aplicación, debe registrarse y proporcionar información precisa y completa. Usted es responsable de mantener la confidencialidad de su contraseña y cuenta.</p>
-                
-                <h5>3. Privacidad</h5>
-                <p>Su privacidad es importante para nosotros. Consulte nuestra Política de Privacidad para comprender cómo recopilamos, usamos y divulgamos información sobre usted.</p>
-                
-                <h5>4. Propiedad Intelectual</h5>
-                <p>Todos los derechos de propiedad intelectual relacionados con la aplicación son propiedad de nuestra empresa o de nuestros licenciantes.</p>
-                
-                <h5>5. Modificaciones</h5>
-                <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
-            </div>
-        </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>1. Aceptación de los Términos</h5>
+        <p>Al registrarse y utilizar nuestra aplicación, usted acepta estar sujeto a estos Términos y Condiciones y a
+          nuestra Política de Privacidad.</p>
+
+        <h5>2. Registro de Cuenta</h5>
+        <p>Para utilizar ciertas funciones de la aplicación, debe registrarse y proporcionar información precisa y
+          completa. Usted es responsable de mantener la confidencialidad de su contraseña y cuenta.</p>
+
+        <h5>3. Privacidad</h5>
+        <p>Su privacidad es importante para nosotros. Consulte nuestra Política de Privacidad para comprender cómo
+          recopilamos, usamos y divulgamos información sobre usted.</p>
+
+        <h5>4. Propiedad Intelectual</h5>
+        <p>Todos los derechos de propiedad intelectual relacionados con la aplicación son propiedad de nuestra empresa o
+          de nuestros licenciantes.</p>
+
+        <h5>5. Modificaciones</h5>
+        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en
+          vigor inmediatamente después de su publicación.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
     </div>
+  </div>
 </div>
 
 

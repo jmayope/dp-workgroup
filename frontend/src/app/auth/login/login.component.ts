@@ -5,7 +5,7 @@ import { MainService } from '../../services/main.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { generateRandomString } from '../../constants';
+import { generateRandomString, messageAlert } from '../../constants';
 
 @Component({
   selector: 'app-login',
@@ -110,6 +110,19 @@ export class LoginComponent implements OnInit{
     this.Router.navigate(['backoffice/tablero']);
   }  
 
+  async validateDocument() {
+    console.log(this.newUser);
+    let resultRENIEC: any = await firstValueFrom(this.Main.findDNI(this.newUser.code));
+    console.log(resultRENIEC);
+    console.log("Guardar información de la RENIEC, para futuras peticiones");
+    if (!resultRENIEC.success) {
+      messageAlert("Error de Conexión", "No se obtuvo la información necesaria", "error");
+      return;
+    }
+    this.newUser.firstName = resultRENIEC.nombres;
+    this.newUser.lastName = `${resultRENIEC.apellidoPaterno} ${resultRENIEC.apellidoMaterno}`
+  }
+
   async register() {
     console.log(this.newUser);
     if (this.newUser.password !== this.newUser.confirmPassword) {
@@ -127,6 +140,7 @@ export class LoginComponent implements OnInit{
     newUser.status = false;
     newUser.username = newUser.email;
     newUser.password = generateRandomString(8);
+    
     delete newUser.confirmPassword;
     delete newUser.acceptTerms;
     let body: any = {

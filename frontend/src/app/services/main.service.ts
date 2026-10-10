@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_URI, messageAlert, TOKEN_NAME } from '../constants';
+import { API_URI, API_URI_RENIEC, messageAlert, TOKEN_NAME, TOKEN_RENIEC } from '../constants';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class MainService {
   ) { }
 
   uri: string = API_URI;
+  uriRENIEC: string = API_URI_RENIEC;
 
   // SESSION
   setSession(user: any) {
@@ -31,6 +32,12 @@ export class MainService {
   destroySession() {
     sessionStorage.removeItem(TOKEN_NAME);
     return true;
+  }
+
+  // API RENIEC
+
+  findDNI(dni: string) {
+    return this.Http.get(`${this.uriRENIEC}/api/v1/dni/${dni}?token=${TOKEN_RENIEC}`);
   }
 
   // AUTHENTICATION
