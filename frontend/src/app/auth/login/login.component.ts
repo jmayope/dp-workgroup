@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit{
     { id: 1, name: "Iniciar Sesión"},
     { id: 2, name: "Registro"},
   ];
+  documentTypes: any[] = [
+    {_id: "DNI", name: "Documento Nacional de Identidad", maxLength: 8},
+    {_id: "RUC", name: "Registro Único de Contribuyente", maxLength: 11},
+  ];
   tabSelected: any;
   showPassword: boolean = false;
   newUser: any = {};
@@ -110,17 +114,49 @@ export class LoginComponent implements OnInit{
     this.Router.navigate(['backoffice/tablero']);
   }  
 
+  selectDocumentType() {
+    this.newUser.code = undefined;
+    let documentTypeSelected = this.documentTypes.find((dt: any) => dt._id === this.newUser.documentType);
+    if (documentTypeSelected) {
+      this.newUser.documentNumberLength = documentTypeSelected.maxLength;
+    }
+    console.log(this.newUser);
+  }
+
+  resetSearch() {
+    this.newUser.searched = false;
+    this.newUser.code = undefined;
+    this.newUser.firstName = undefined;
+    this.newUser.lastName = undefined;
+  }
+
   async validateDocument() {
     console.log(this.newUser);
-    let resultRENIEC: any = await firstValueFrom(this.Main.findDNI(this.newUser.code));
-    console.log(resultRENIEC);
-    console.log("Guardar información de la RENIEC, para futuras peticiones");
+    let medicalStaffExistsResult: any = await firstValueFrom(this.Main.getMedicalStaff({where: {code: this.newUser.code}}));
+    console.log(medicalStaffExistsResult);
+    if (medicalStaffExistsResult.length) {
+      messageAlert("Validación", "Este DNI ya esta siendo usado por otro usuario.", "warning");
+      return;
+    } 
+    let resultRENIEC: any;
+    switch (this.newUser.documentType) {
+      case "DNI":
+        resultRENIEC = await firstValueFrom(this.Main.findDNI(this.newUser.code));
+        break;
+      case "RUC":
+        resultRENIEC = await firstValueFrom(this.Main.findRUC(this.newUser.code));
+        break;
+      default:
+        break;
+    }
+    
     if (!resultRENIEC.success) {
-      messageAlert("Error de Conexión", "No se obtuvo la información necesaria", "error");
+      messageAlert("Error de Conexión", resultRENIEC.message, "error");
       return;
     }
     this.newUser.firstName = resultRENIEC.nombres;
     this.newUser.lastName = `${resultRENIEC.apellidoPaterno} ${resultRENIEC.apellidoMaterno}`
+    this.newUser.searched = true;
   }
 
   async register() {

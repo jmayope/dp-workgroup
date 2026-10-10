@@ -87,16 +87,25 @@
                   <h4 class="mb-4">Crear Cuenta</h4>
                   <form #registerForm="ngForm">
                     <div class="row">
-                      <div class="col-md-6 mb-3">
-                        <small>Documento de Identidad</small>
+                      <div class="col-md-7 mb-3">
+                        <small>Tipo de Documento</small>
+                        <select name="documentType" [(ngModel)]="newUser.documentType" (change)="selectDocumentType()" class="form-select">
+                          <option [ngValue]="undefined">--SELECCIONE TIPO--</option>
+                          <option *ngFor="let dt of documentTypes" [ngValue]="dt._id">{{dt.name | uppercase}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <small>Número de Documento</small>
                         <div class="input-group">
-                          <input type="text" name="code" maxlength="8" placeholder="99999999" minlength="8" [(ngModel)]="newUser.code" class="form-control">
-                          <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="newUser.code">
+                          <input type="text" name="code" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="99999999" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
+                          <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="!newUser.searched && newUser.code && (newUser.code.length === newUser.documentNumberLength)">
                             <i class="fa fa-search"></i>
+                          </button>
+                          <button class="btn btn-light text-danger" (click)="resetSearch()" *ngIf="newUser.searched">
+                            <i class="fa fa-times"></i>
                           </button>
                         </div>
                       </div>
-                      <div class="col-md-6"></div>
                       <div class="col-md-6 mb-3">
                         <label for="registerFirstName" class="form-label">Nombres</label>
                         <input type="text" class="form-control" name="firstName" disabled id="registerFirstName"

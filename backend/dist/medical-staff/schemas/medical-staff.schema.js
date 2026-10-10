@@ -4,6 +4,7 @@ exports.MedicalStaff = void 0;
 const mongoose = require("mongoose");
 exports.MedicalStaff = new mongoose.Schema({
     code: { type: String, },
+    documentType: { type: String },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     username: { type: String },

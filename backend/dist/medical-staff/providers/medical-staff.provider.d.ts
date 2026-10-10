@@ -26,6 +26,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;
@@ -56,6 +57,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;
@@ -86,6 +88,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;
@@ -120,6 +123,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;
@@ -150,6 +154,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;
@@ -180,6 +185,7 @@ export declare const MedicalStaffProvider: {
         code?: string;
         phone?: string;
         email?: string;
+        documentType?: string;
         username?: string;
         password?: string;
         profession?: string;

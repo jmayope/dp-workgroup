@@ -40,6 +40,10 @@ export class MainService {
     return this.Http.get(`${this.uriRENIEC}/api/v1/dni/${dni}?token=${TOKEN_RENIEC}`);
   }
 
+  findRUC(ruc: string) {
+    return this.Http.get(`${this.uriRENIEC}/api/v1/ruc/${ruc}?token=${TOKEN_RENIEC}`);
+  }
+
   // AUTHENTICATION
   
   login(body: any) {

@@ -11,7 +11,7 @@ export class MedicalStaffController {
   create(@Body() body: any) {
     return this.medicalStaffService.create(body);
   }
-
+  @Public()
   @Post('where')
   findAll(@Body() body: any) {
     return this.medicalStaffService.findAll(body.where);

@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const MedicalStaff = new mongoose.Schema({
     code: { type: String, },
+    documentType: { type: String },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     username: { type: String },
