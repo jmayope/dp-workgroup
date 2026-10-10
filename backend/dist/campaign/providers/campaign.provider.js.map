@@ -1,0 +1,1 @@
+{"version":3,"file":"campaign.provider.js","sourceRoot":"","sources":["../../../src/campaign/providers/campaign.provider.ts"],"names":[],"mappings":";;;AACA,gEAAsD;AAEzC,QAAA,gBAAgB,GAAG;IAC5B;QACI,OAAO,EAAE,gBAAgB;QACzB,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,WAAW,EAAE,0BAAQ,CAAC;QAC/E,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

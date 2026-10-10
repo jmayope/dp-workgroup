@@ -1,0 +1,1 @@
+{"version":3,"file":"specialty-process.provider.js","sourceRoot":"","sources":["../../../src/specialty-process/providers/specialty-process.provider.ts"],"names":[],"mappings":";;;AACA,kFAAuE;AAE1D,QAAA,wBAAwB,GAAG;IACpC;QACI,OAAO,EAAE,yBAAyB;QAClC,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,oBAAoB,EAAE,2CAAgB,CAAC;QAChG,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

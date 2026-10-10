@@ -1,0 +1,1 @@
+{"version":3,"file":"area.provider.js","sourceRoot":"","sources":["../../../src/area/providers/area.provider.ts"],"names":[],"mappings":";;;AACA,wDAA8C;AAEjC,QAAA,YAAY,GAAG;IACxB;QACI,OAAO,EAAE,YAAY;QACrB,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,OAAO,EAAE,kBAAI,CAAC;QACvE,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

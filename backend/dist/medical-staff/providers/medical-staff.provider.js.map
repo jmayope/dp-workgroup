@@ -1,0 +1,1 @@
+{"version":3,"file":"medical-staff.provider.js","sourceRoot":"","sources":["../../../src/medical-staff/providers/medical-staff.provider.ts"],"names":[],"mappings":";;;AACA,0EAA+D;AAElD,QAAA,oBAAoB,GAAG;IAChC;QACI,OAAO,EAAE,qBAAqB;QAC9B,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,eAAe,EAAE,mCAAY,CAAC;QACvF,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

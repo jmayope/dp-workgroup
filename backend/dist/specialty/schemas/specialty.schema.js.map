@@ -1,0 +1,1 @@
+{"version":3,"file":"specialty.schema.js","sourceRoot":"","sources":["../../../src/specialty/schemas/specialty.schema.ts"],"names":[],"mappings":";;;AAAA,qCAAqC;AAExB,QAAA,SAAS,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IACzC,IAAI,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAE;IACtC,WAAW,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE;CAChC,CAAC,CAAA"}

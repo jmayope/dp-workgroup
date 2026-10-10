@@ -1,0 +1,1 @@
+{"version":3,"file":"health-network.provider.js","sourceRoot":"","sources":["../../../src/health-network/providers/health-network.provider.ts"],"names":[],"mappings":";;;AACA,4EAAiE;AAEpD,QAAA,qBAAqB,GAAG;IACjC;QACI,OAAO,EAAE,sBAAsB;QAC/B,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,gBAAgB,EAAE,qCAAa,CAAC;QACzF,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}
