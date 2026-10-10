@@ -5,7 +5,7 @@ import { MainService } from '../../services/main.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { generateRandomString, messageAlert } from '../../constants';
+import { generateRandomString, handleAlphanumeric, handleLetter, handleNumber, messageAlert } from '../../constants';
 
 @Component({
   selector: 'app-login',
@@ -90,6 +90,12 @@ export class LoginComponent implements OnInit{
     if (result.profiles.length === 1) {
       result.currentProfile = result.profiles[0];
       this.Main.setSession(result);
+      console.log(result);
+      if (result.currentProfile.profile.shortName === 'admin') {
+        this.Main.setSession(result);
+        this.Router.navigate(['backoffice/tablero']);
+        return;
+      }
       if (result.healthEstablisments.length === 1) {
         result.currentHealthEstablishment = result.healthEstablisments[0];
         this.Main.setSession(result);
@@ -123,11 +129,24 @@ export class LoginComponent implements OnInit{
     console.log(this.newUser);
   }
 
+  onlyAlphanumeric(event: any) {
+    handleAlphanumeric(event);
+  }
+
+  onlyLetter(event: any) {
+    handleLetter(event);
+  }
+
+  onlyNumber(event: any) {
+    handleNumber(event);
+  }
+
   resetSearch() {
     this.newUser.searched = false;
     this.newUser.code = undefined;
     this.newUser.firstName = undefined;
     this.newUser.lastName = undefined;
+    this.newUser.email = undefined;
   }
 
   async validateDocument() {

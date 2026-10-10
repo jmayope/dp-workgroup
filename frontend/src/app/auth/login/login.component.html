@@ -39,7 +39,7 @@
                   <form>
                     <div class="mb-3">
                       <label for="username" class="form-label">Nombre de Usuario</label>
-                      <input type="email" class="form-control" name="username" [(ngModel)]="credentials.username"
+                      <input type="email" class="form-control" name="username" (keydown)="onlyAlphanumeric($event)" [(ngModel)]="credentials.username"
                         id="username" placeholder="jdoe" required>
                     </div>
                     <div class="mb-3">
@@ -97,7 +97,7 @@
                       <div class="col-md-5 mb-3">
                         <small>Número de Documento</small>
                         <div class="input-group">
-                          <input type="text" name="code" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="99999999" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
+                          <input type="text" name="code" (keydown)="onlyNumber($event)" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="99999999" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
                           <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="!newUser.searched && newUser.code && (newUser.code.length === newUser.documentNumberLength)">
                             <i class="fa fa-search"></i>
                           </button>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="registerEmail" class="form-label">Correo electrónico</label>
-                      <input type="email" class="form-control" id="registerEmail" name="email"
+                      <input type="email" class="form-control" (keydown)="onlyAlphanumeric($event)" id="registerEmail" name="email"
                         [(ngModel)]="newUser.email" placeholder="correo@ejemplo.com" required>
                     </div>
 

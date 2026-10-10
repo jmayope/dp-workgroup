@@ -20,7 +20,12 @@ export const MedicalStaff = new mongoose.Schema({
     workingCondition: { type: String },
     ups: { type: String },
     status: { type: Boolean, default: true },
-    profiles: [{type: mongoose.Schema.Types.ObjectId, ref: 'profiles'}],
+    profiles: [
+        {
+            profile: {type: mongoose.Schema.Types.ObjectId, ref: 'profiles'},
+            serviceDeliveryInstitution: {type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions'}
+        }
+    ],
     phone: { type: String },
     email: { type: String },
 })

@@ -60,3 +60,66 @@ export const GENDERS = [
   {_id: 'O', name: 'Otro - No especificado' },
 ];
   
+  
+export function handleAlphanumeric(event: KeyboardEvent) {
+  const allowedKeys = [
+    'Backspace',
+    'Delete',
+    'Tab',
+    'ArrowLeft',
+    'ArrowRight',
+    'Home',
+    'End'
+  ];
+
+  if (
+    allowedKeys.includes(event.key) ||
+    /^[a-zA-Z0-9._%+\-@]$/.test(event.key)
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+}
+
+export function handleLetter(event: KeyboardEvent) {
+  const allowedKeys = [
+    'Backspace',
+    'Delete',
+    'Tab',
+    'ArrowLeft',
+    'ArrowRight',
+    'Home',
+    'End'
+  ];
+
+  if (
+    allowedKeys.includes(event.key) ||
+    /^[a-zA-Z ]$/.test(event.key)
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+}
+
+export function handleNumber(event: KeyboardEvent) {
+  const allowedKeys = [
+    'Backspace',
+    'Delete',
+    'Tab',
+    'ArrowLeft',
+    'ArrowRight',
+    'Home',
+    'End'
+  ];
+
+  if (
+    allowedKeys.includes(event.key) ||
+    /^[0-9]$/.test(event.key)
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+}

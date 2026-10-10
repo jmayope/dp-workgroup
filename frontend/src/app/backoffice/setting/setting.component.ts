@@ -245,7 +245,7 @@ export class SettingComponent implements OnInit {
   async getInitialData() {
     this.userLoged = await this.Main.getSession();
     console.log(this.userLoged);
-    if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.shortName !== "Administrador") {
+    if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.profile.shortName !== "admin") {
       Swal.fire({
         text: 'No tienes un Establecimiento asignado. No puedes continuar',
         icon: 'warning'
@@ -253,7 +253,7 @@ export class SettingComponent implements OnInit {
       this.Router.navigate(['/backoffice/tablero']);
       return;
     } else {
-      if (this.userLoged.currentProfile.shortName !== "Administrador") {
+      if (this.userLoged.currentProfile.profile.shortName !== "admin") {
         // this.establishment = {
         //   establishmentManagers: [],
         //   availableServices: []
@@ -266,13 +266,16 @@ export class SettingComponent implements OnInit {
         this.filters.serviceDeliveryInstitution = this.establishment.serviceDeliveryInstitution._id;
         this.filters.editable = false;
         this.selectEstablishment()
+      } else {
+        this.filters.editable = true;
       }
     }
   }
 
   async getServiceDeliveryInstitutions() {
     let result: any = await this.Main.getServiceDeliveryInstitutions({}).toPromise();
-    this.allServiceDeliveryInstitutions = JSON.parse(JSON.stringify(result));
+    console.log(result);
+    this.allServiceDeliveryInstitutions = structuredClone(result);
     this.serviceDeliveryInstitutions = result;
     this.getAreas();
 

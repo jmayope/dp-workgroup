@@ -23,7 +23,7 @@ let AuthService = class AuthService {
     }
     async login(username, password) {
         let result = await this.MedicalStaff.findOne({ username: username, password: password })
-            .populate({ path: 'profiles', populate: { path: 'specialty', model: 'specialties' } })
+            .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties' }, { path: 'profile', model: 'profiles' }] })
             .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions' });
         if (!result) {
             return null;

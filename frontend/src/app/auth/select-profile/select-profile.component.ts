@@ -35,7 +35,7 @@ export class SelectProfileComponent implements OnInit {
     let result: any = await this.Main.getMedicalStaff({where: {_id: this.userLoged._id }}).toPromise();
     console.log(result);
     if (result.length) {
-      this.userLoged = result[0];
+      // this.userLoged = result[0];
       console.log(this.userLoged);
       this.loading = false;
     } else {

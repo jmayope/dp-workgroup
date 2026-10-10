@@ -12,7 +12,7 @@ export class AuthService {
   
   async login(username: string, password: string): Promise<any> {
     let result: any = await this.MedicalStaff.findOne({username: username, password: password})
-      .populate({ path: 'profiles', populate: { path: 'specialty', model: 'specialties'}})
+      .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties'}, {path: 'profile', model: 'profiles'}]})
       .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions'})
       ;
     if (!result) {
