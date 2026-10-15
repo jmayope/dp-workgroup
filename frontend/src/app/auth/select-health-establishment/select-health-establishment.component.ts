@@ -33,8 +33,15 @@ export class SelectHealthEstablishmentComponent implements OnInit {
 
   saveCurrentHealth() {
     this.userLoged.currentHealthEstablishment = this.healthEstablishmentSelected;
-    this.Main.setSession(this.userLoged);
-    this.Router.navigate(['backoffice/tablero']);
+    let profilesOfHealthEstablishment: any = this.userLoged.profiles.filter((p: any) => p.serviceDeliveryInstitution === this.userLoged.currentHealthEstablishment.serviceDeliveryInstitution._id);
+    if (profilesOfHealthEstablishment.length === 1) {
+      this.userLoged.currentProfile = profilesOfHealthEstablishment[0];
+      this.Main.setSession(this.userLoged);
+      this.Router.navigate(['backoffice/tablero']);
+    } else {
+      this.Main.setSession(this.userLoged);
+      this.Router.navigate(['backoffice/seleccionar-perfil']);
+    }
   }
 
 }

@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit{
   }
 
   onlyAlphanumeric(event: any) {
-    handleAlphanumeric(event);
+      handleAlphanumeric(event);
   }
 
   onlyLetter(event: any) {

@@ -58,6 +58,9 @@ export class SelectProfileComponent implements OnInit {
     console.log(this.userLoged);
     // return;
     let userSaved = await this.Main.setSession(this.userLoged);
+    let healthEstablismentOfProfile = this.userLoged.healthEstablisments.filter((h: any) => h.serviceDeliveryInstitution._id === this.userLoged.currentProfile.serviceDeliveryInstitution);
+    console.log(healthEstablismentOfProfile);
+    return;
     if (!this.userLoged.healthEstablisments.length) {
       this.Router.navigate(['backoffice/tablero']);
     } else if (this.userLoged.healthEstablisments.length === 1) {

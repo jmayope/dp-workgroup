@@ -2,6 +2,7 @@ import { Connection } from 'mongoose';
 export declare const ProfileMenuProvider: {
     provide: string;
     useFactory: (connection: Connection) => import("mongoose").Model<{
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -11,8 +12,8 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     }, {}, {}, {}, import("mongoose").Document<unknown, {}, {
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -22,8 +23,8 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     }> & {
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -33,12 +34,12 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     } & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
     }, import("mongoose").Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -48,8 +49,8 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     }, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -59,8 +60,8 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     }>> & import("mongoose").FlatRecord<{
+        profile?: import("mongoose").Types.ObjectId;
         menu?: {
             prototype?: import("mongoose").Types.ObjectId;
             cacheHexString?: unknown;
@@ -70,7 +71,6 @@ export declare const ProfileMenuProvider: {
             createFromBase64?: {};
             isValid?: {};
         };
-        profile?: import("mongoose").Types.ObjectId;
     }> & {
         _id: import("mongoose").Types.ObjectId;
     } & {

@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 export declare const ProfileMenu: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
+    profile?: mongoose.Types.ObjectId;
     menu?: {
         prototype?: mongoose.Types.ObjectId;
         cacheHexString?: unknown;
@@ -9,8 +10,8 @@ export declare const ProfileMenu: mongoose.Schema<any, mongoose.Model<any, any, 
         createFromBase64?: {};
         isValid?: {};
     };
-    profile?: mongoose.Types.ObjectId;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
+    profile?: mongoose.Types.ObjectId;
     menu?: {
         prototype?: mongoose.Types.ObjectId;
         cacheHexString?: unknown;
@@ -20,8 +21,8 @@ export declare const ProfileMenu: mongoose.Schema<any, mongoose.Model<any, any, 
         createFromBase64?: {};
         isValid?: {};
     };
-    profile?: mongoose.Types.ObjectId;
 }>> & mongoose.FlatRecord<{
+    profile?: mongoose.Types.ObjectId;
     menu?: {
         prototype?: mongoose.Types.ObjectId;
         cacheHexString?: unknown;
@@ -31,7 +32,6 @@ export declare const ProfileMenu: mongoose.Schema<any, mongoose.Model<any, any, 
         createFromBase64?: {};
         isValid?: {};
     };
-    profile?: mongoose.Types.ObjectId;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
