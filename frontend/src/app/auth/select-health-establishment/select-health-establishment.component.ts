@@ -40,7 +40,7 @@ export class SelectHealthEstablishmentComponent implements OnInit {
       this.Router.navigate(['backoffice/tablero']);
     } else {
       this.Main.setSession(this.userLoged);
-      this.Router.navigate(['backoffice/seleccionar-perfil']);
+      this.Router.navigate(['autenticacion/seleccionar-perfil']);
     }
   }
 

@@ -515,7 +515,7 @@
                                         <div class="col">
                                           <ng-container *ngIf="u.profiles.length">
                                             <small class="badge bg-light text-dark border-primary me-2" *ngFor="let p of u.profiles">
-                                              {{p.shortName | titlecase}}
+                                              {{p.profile.shortName | titlecase}}
                                             </small>
                                           </ng-container>
                                           <ng-container *ngIf="!u.profiles.length">
@@ -702,43 +702,51 @@
                                     <ul class="list-group font-nm font-semi-bold">
                                       <li class="list-group-item text-secondary">
                                         <div class="row">
-                                          <div class="col-3">
-                                            Prefil
+                                          <div class="col-9">
+                                            <div class="row">
+                                              <div class="col-4">
+                                                Prefil
+                                              </div>
+                                              <div class="col-4">
+                                                Descripción
+                                              </div>
+                                              <div class="col-3">
+                                                Especialidad
+                                              </div>
+                                              <div class="col-1">
+                                                Estado
+                                              </div>
+                                            </div>
                                           </div>
-                                          <div class="col-3">
-                                            Descripción
-                                          </div>
-                                          <div class="col-2">
-                                            Especialidad
-                                          </div>
-                                          <div class="col-2">
-                                            Estado
-                                          </div>
-                                          <div class="col-2 text-end">
+                                          <div class="col-3 text-end">
                                             Acciones
                                           </div>
                                         </div>
                                       </li>
                                       <li class="list-group-item" *ngFor="let p of profiles">
                                         <div class="row">
-                                          <div class="col-3">
-                                            <span class="badge bg-primary-color text-white">{{p.abbr}}</span>
-                                            {{p.name | uppercase}}
+                                          <div class="col-9">
+                                            <div class="row">
+                                              <div class="col-4">
+                                                <span class="badge bg-primary-color text-white">{{p.abbr}}</span>
+                                                {{p.name | uppercase}}
+                                              </div>
+                                              <div class="col-4">
+                                                <span class="text-secondary">
+                                                  {{p.description | uppercase}}
+                                                </span>
+                                              </div>
+                                              <div class="col-3">
+                                                <span *ngIf="p.specialty">
+                                                  {{p.specialty.name | uppercase}}
+                                                </span>
+                                              </div>
+                                              <div class="col-1">
+                                                <span>{{p.status ? 'Activo' : 'Inactivo'}}</span>
+                                              </div>
+                                            </div>
                                           </div>
-                                          <div class="col-3">
-                                            <span class="text-secondary">
-                                              {{p.description | uppercase}}
-                                            </span>
-                                          </div>
-                                          <div class="col-2">
-                                            <span *ngIf="p.specialty">
-                                              {{p.specialty.name | uppercase}}
-                                            </span>
-                                          </div>
-                                          <div class="col-2">
-                                            <span>{{p.status ? 'Activo' : 'Inactivo'}}</span>
-                                          </div>
-                                          <div class="col-2 text-end">
+                                          <div class="col-3 text-end">
                                             <button class="btn btn btn-sm btn-light text-primary-color me-2" (click)="toggleItem(profileModal, 'profile', p)">
                                               <i class="bi bi-pencil"></i>
                                             </button>
@@ -971,26 +979,20 @@
       <div class="modal-body">
         <form #userProfileForm="ngForm">
           <div class="row">
-            <ng-container *ngIf="!userSelected.profiles.length">
+            <ng-container *ngIf="!userSelected.profiles.length && !newUserProfile">
               <div class="col-12 text-center">
                 <i class="bi bi-x-lg text-danger"></i><br>
                 No se tienen perfiles registrados <br>
-                <button class="btn btn-sm btn-light text-primary-color" (click)="toggleProfile(userSelected)">
-                  <i class="bi bi-save me-1"></i>Agregar perfil
-                </button>
               </div>
             </ng-container>
-            <ng-container *ngIf="userSelected.profiles.length">
-              <div class="col-12">
-                <ul class="list-group">
+            <div class="col-12">
+              <ul class="list-group">
+                <ng-container *ngIf="userSelected.profiles.length">
                   <li class="list-group-item" *ngFor="let p of userSelected.profiles; let p_i = index">
                     <div class="row">
                       <div class="col-10">
-                        <small>Perfil</small>
-                        <select name="profile-{{p_i}}" [(ngModel)]="p._id" (change)="verifyProfile(userSelected, p)" class="form-select form-select-sm" required>
-                          <option [ngValue]="undefined">--SELECCIONE--</option>
-                          <option *ngFor="let pr of profiles" [ngValue]="pr._id">{{pr.name | uppercase}}</option>
-                        </select>
+                        <small class="text-secondary">Perfil</small> <br>
+                        <span>{{p.profile.name | uppercase}}</span> <small>({{p.profile.shortName | uppercase}})</small> <br>
                       </div>
                       <div class="col-2 pt-1 text-end">
                         <button class="btn btn-lg btn-light text-danger" (click)="toggleProfile(userSelected, p)">
@@ -999,22 +1001,41 @@
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item text-center">
-                    <button class="btn btn-sm btn-light text-primary-color" [disabled]="userProfileForm.invalid" (click)="toggleProfile(userSelected)">
-                      <i class="bi bi-save me-1"></i>Agregar perfil
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </ng-container>
+                </ng-container>
+                <li class="list-group-item" *ngIf="newUserProfile">
+                  <div class="row">
+                    <div class="col-9">
+                      <small class="text-secondary">Perfil</small>
+                      <select name="profile" [(ngModel)]="newUserProfile.profile" class="form-select">
+                        <option [ngValue]="undefined">--SELECCIONE PERFIL--</option>
+                        <option *ngFor="let p of profiles" [ngValue]="p._id">{{p.name | uppercase}}</option>
+                      </select>
+                    </div>
+                    <div class="col-3 text-end pt-2">
+                      <button class="btn btn-lg rounded-circle btn-light text-primary me-2" [disabled]="!newUserProfile.profile" (click)="saveUserProfile()">
+                        <i class="bi bi-check"></i>
+                      </button>
+                      <button class="btn btn-lg rounded-circle btn-light text-danger" (click)="cancelNewUserProfile()">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 text-center mt-3" *ngIf="!newUserProfile">
+              <button class="btn btn-sm btn-light text-primary-color" [disabled]="userProfileForm.invalid" (click)="toggleProfile(userSelected)">
+                <i class="bi bi-save me-1"></i>Agregar perfil
+              </button>
+            </div>
           </div>
         </form>
       </div>
-      <div class="modal-footer text-center">
+      <!-- <div class="modal-footer text-center">
         <button class="btn btn-sm btn-light text-primary-color" [disabled]="userProfileForm.invalid" (click)="saveItem(userProfileModal, 'user-profile')">
           <i class="bi bi-save me-1"></i>Guardar Cambios
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -25,7 +25,8 @@ exports.MedicalStaff = new mongoose.Schema({
     profiles: [
         {
             profile: { type: mongoose.Schema.Types.ObjectId, ref: 'profiles' },
-            serviceDeliveryInstitution: { type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions' }
+            serviceDeliveryInstitution: { type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions' },
+            status: { type: Boolean, default: true }
         }
     ],
     phone: { type: String },

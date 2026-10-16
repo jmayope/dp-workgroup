@@ -13,7 +13,7 @@ export class MedicalStaffService {
 
   async findAll(where: any) {
     let result: any = await this.MedicalStaff.find(where)
-    .populate({ path: 'profiles', populate: { path: 'specialty', model: 'specialties'}})
+    .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties'}, {path: 'profile', model: 'profiles'}, {path: 'serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions'}]})
     .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions'})
     ;
     return result;
@@ -21,6 +21,9 @@ export class MedicalStaffService {
 
   async findOne(id: any) {
     let result: any = await this.MedicalStaff.findOne({_id: id})
+    .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties'}, {path: 'profile', model: 'profiles'}, {path: 'serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions'}]})
+    .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions'})
+    ;
     return result;
   }
 

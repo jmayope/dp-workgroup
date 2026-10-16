@@ -11,7 +11,7 @@
             <div class="col-12 text-secondary">
               <p>Elija un rol con el que desea ingresar al sistema.</p>
             </div>
-            <div class="col-12 mb-2" *ngFor="let p of userLoged.profiles">
+            <div class="col-12 mb-2" *ngFor="let p of userLoged.profilesOfHealthEstablishment">
               <ul class="list-group">
                 <li class="list-group-item hand" [ngClass]="{'bg-primary text-white': profileSelected && profileSelected._id === p._id}" (click)="selectProfile(p)">
                   <div class="row">

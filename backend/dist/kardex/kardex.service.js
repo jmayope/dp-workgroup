@@ -23,12 +23,14 @@ let KardexService = class KardexService {
     async create(body) {
         for (let index = 0; index < body.news.length; index++) {
             let n = body.news[index];
-            let resultMaster = await this.KardexMaster.findOneAndUpdate({ product: n.product }, {
+            let resultMaster = await this.KardexMaster.findOneAndUpdate({ product: n.product, serviceDeliveryInstitution: n.serviceDeliveryInstitution }, {
                 $inc: { availableStock: (n.valueToCalculate ? n.valueToCalculate : 1) * n.quantity },
                 $setOnInsert: { product: n.product }
             }, { upsert: true, new: true });
             n.nextQuantity = resultMaster.availableStock;
             n.previousQuantity = resultMaster.availableStock - n.quantity;
+            console.log(resultMaster);
+            n.kardexMaster = resultMaster._id;
         }
         let result = await this.Kardex.insertMany(body.news);
         return result;

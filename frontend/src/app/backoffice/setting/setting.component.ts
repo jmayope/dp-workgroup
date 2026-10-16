@@ -9,6 +9,7 @@ import { DAYS, DOMAIN, generateRandomString, messageAlert, parseDate, parseDateT
 import { Router } from '@angular/router';
 import moment from 'moment';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -80,6 +81,7 @@ export class SettingComponent implements OnInit {
   newUser: any;
   newSpecialty: any;
   newProfile: any;
+  newUserProfile: any;
   ngOnInit(): void {
     this.getInitialData();
     this.getServiceDeliveryInstitutions();
@@ -474,6 +476,7 @@ export class SettingComponent implements OnInit {
   }
 
   async selectEstablishment() {
+    this.users = [];
     let result: any = await this.Main.getServiceDeliveryInstitutionByID(this.filters.serviceDeliveryInstitution).toPromise();
     this.establishment = result;
     this.establishment.editing = true;
@@ -756,10 +759,12 @@ export class SettingComponent implements OnInit {
         }
         break;
       case 'user-profile':
-        body = JSON.parse(JSON.stringify(this.userSelected));
-        delete body.id;
-        delete body._id;
-        result = await this.Main.updateMedicalStaff(this.userSelected._id, {updated: body}).toPromise();
+        console.log(this.userSelected);
+        console.log(this.newUserProfile);
+        // body = JSON.parse(JSON.stringify(this.userSelected));
+        // delete body.id;
+        // delete body._id;
+        // result = await this.Main.updateMedicalStaff(this.userSelected._id, {updated: body}).toPromise();
         break;
       case 'user-info':
         console.log(this.newUser);
@@ -811,8 +816,12 @@ export class SettingComponent implements OnInit {
     if (item) {
       parent.profiles.splice(parent.profiles.indexOf(item), 1);
     } else {
-      parent.profiles.push({});
+      this.newUserProfile = {
+        profile: undefined,
+        serviceDeliveryInstitution: this.filters.serviceDeliveryInstitution
+      };
     }
+    console.log(this.newUserProfile);
   }
 
   verifyProfile(parent: any, itemToVerify: any) {
@@ -847,6 +856,30 @@ export class SettingComponent implements OnInit {
       areaFound.collaboratorsInArea.splice(areaFound.collaboratorsInArea.indexOf(this.newUser._id), 1);
     }
     console.log(areaFound);
+  }
+
+  async cancelNewUserProfile() {
+    this.newUserProfile = undefined;
+  }
+
+  async saveUserProfile() {
+    console.log(this.userSelected);
+    console.log(this.newUserProfile);
+    let newUserProfile = structuredClone(this.newUserProfile);
+    newUserProfile.status = true;
+    let userSelected = structuredClone(this.userSelected);
+    userSelected.profiles.push(newUserProfile);
+    let body: any = JSON.parse(JSON.stringify(userSelected));
+    delete body.id;
+    delete body._id;
+    let result: any = await firstValueFrom(this.Main.updateMedicalStaff(this.userSelected._id, {updated: body}));
+    console.log(result);
+    let resultUpdated: any = await firstValueFrom(this.Main.findOneMedicalStaff(this.userSelected._id));
+    console.log(resultUpdated);
+    this.userSelected = resultUpdated;
+    this.newUserProfile = undefined;
+    this.getUsers();
+    this.selectEstablishment();
   }
 
 }

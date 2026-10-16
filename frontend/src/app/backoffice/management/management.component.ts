@@ -721,4 +721,5 @@ export class ManagementComponent implements OnInit {
     }
     // this.newTypeList.valueToCalculate = undefined;
   }
+
 }

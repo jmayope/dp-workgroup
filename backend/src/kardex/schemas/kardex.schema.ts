@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const Kardex = new mongoose.Schema({
   product: { type: mongoose.Schema.ObjectId, ref: 'products', required: true },
+  kardexMaster: { type: mongoose.Schema.ObjectId, ref: 'kardexmasters'},
   inputType: { type: mongoose.Schema.ObjectId, ref: 'typeLists', required: true },
   previousQuantity: {type: Number},
   quantity: { type: Number },

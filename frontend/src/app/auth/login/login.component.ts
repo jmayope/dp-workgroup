@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit{
       this.Main.setSession(result);
       this.Router.navigate(['backoffice/tablero']);
     } else {
-      if (result.healthEstablisments == 1) {
+      if (result.healthEstablisments.length == 1) {
         result.currentHealthEstablishment = result.healthEstablisments[0];
         let profilesOfHealthEstablishment = result.profiles.filter((p: any) => p.serviceDeliveryInstitution === result.currentHealthEstablishment.serviceDeliveryInstitution._id);
         if (profilesOfHealthEstablishment.length === 1) {
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit{
           this.Router.navigate(['backoffice/tablero']);
         } else {
           this.Main.setSession(result);
-          this.Router.navigate(['backoffice/seleccionar-perfil']);
+          this.Router.navigate(['autenticacion/seleccionar-perfil']);
         }
       } else {
         this.Main.setSession(result);

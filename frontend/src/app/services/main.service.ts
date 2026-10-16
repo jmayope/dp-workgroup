@@ -421,6 +421,10 @@ export class MainService {
     return this.Http.post(`${this.uri}/medical-staff/where`, body);
   }
 
+  findOneMedicalStaff(id: string) {
+    return this.Http.get(`${this.uri}/medical-staff/${id}`);
+  }
+
   setMedicalStaff(body: any) {
     return this.Http.post(`${this.uri}/medical-staff`, body);
   }

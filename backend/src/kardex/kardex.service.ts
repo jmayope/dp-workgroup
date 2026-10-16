@@ -11,7 +11,7 @@ export class KardexService {
     for (let index = 0; index < body.news.length; index++) {
       let n = body.news[index];
       let resultMaster: any = await this.KardexMaster.findOneAndUpdate(
-        { product: n.product }, 
+        { product: n.product, serviceDeliveryInstitution: n.serviceDeliveryInstitution }, 
         { 
           $inc: {availableStock: (n.valueToCalculate ? n.valueToCalculate : 1 ) * n.quantity },
           $setOnInsert: { product: n.product }
@@ -19,6 +19,8 @@ export class KardexService {
         { upsert: true, new: true });
         n.nextQuantity = resultMaster.availableStock;
         n.previousQuantity = resultMaster.availableStock - n.quantity;
+        console.log(resultMaster);
+        n.kardexMaster = resultMaster._id;
     }
     let result: any = await this.Kardex.insertMany(body.news);
     return result;

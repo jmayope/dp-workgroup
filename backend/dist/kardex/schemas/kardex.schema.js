@@ -4,6 +4,7 @@ exports.Kardex = void 0;
 const mongoose = require("mongoose");
 exports.Kardex = new mongoose.Schema({
     product: { type: mongoose.Schema.ObjectId, ref: 'products', required: true },
+    kardexMaster: { type: mongoose.Schema.ObjectId, ref: 'kardexmasters' },
     inputType: { type: mongoose.Schema.ObjectId, ref: 'typeLists', required: true },
     previousQuantity: { type: Number },
     quantity: { type: Number },

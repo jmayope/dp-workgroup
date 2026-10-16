@@ -47,8 +47,10 @@ export class InventoryComponent implements OnInit {
   inputTypeFound: any;
   totals: any = {}
   recordStates: any[] = [];
-
+  userLoged: any;
   ngOnInit(): void {
+    this.userLoged = this.Main.getSession();
+    console.log(this.userLoged);
     this.getInputTypes();
     this.getVaccines();
     this.getTotalProducts();
@@ -189,6 +191,8 @@ export class InventoryComponent implements OnInit {
       } else {
         this.newItem.status = this.recordStates.find((r: any) => r.additionalFields.isDefaultValue)._id;
       }
+      this.newItem.serviceDeliveryInstitution = this.userLoged.currentHealthEstablishment.serviceDeliveryInstitution._id;
+      console.log(this.newItem);
       this.itemModal?.show();
     }
   }
@@ -238,6 +242,7 @@ export class InventoryComponent implements OnInit {
           result = await this.Main.updateKardex(this.newItem._id, {updated: this.newItem}).toPromise();
         } else {
           this.newItem.status = this.recordStates.find((r: any) => r.additionalFields.isDefaultValue)._id;
+          this.newItem.createBy = this.userLoged._id;
           result = await this.Main.setKardex({news: [this.newItem]}).toPromise();
         }
         if (!result) {

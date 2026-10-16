@@ -33,10 +33,12 @@ export class SelectProfileComponent implements OnInit {
   async getUserData() {
     this.userLoged = await this.Main.getSession();
     let result: any = await this.Main.getMedicalStaff({where: {_id: this.userLoged._id }}).toPromise();
+
     console.log(result);
     if (result.length) {
       // this.userLoged = result[0];
       console.log(this.userLoged);
+      this.userLoged.profilesOfHealthEstablishment = this.userLoged.profiles.filter((p: any) => p.serviceDeliveryInstitution === this.userLoged.currentHealthEstablishment.serviceDeliveryInstitution._id);
       this.loading = false;
     } else {
       Swal.fire({
@@ -56,20 +58,10 @@ export class SelectProfileComponent implements OnInit {
     this.userLoged.currentProfile = this.profileSelected;
     this.userLoged.token = await this.Main.getToken();
     console.log(this.userLoged);
-    // return;
     let userSaved = await this.Main.setSession(this.userLoged);
     let healthEstablismentOfProfile = this.userLoged.healthEstablisments.filter((h: any) => h.serviceDeliveryInstitution._id === this.userLoged.currentProfile.serviceDeliveryInstitution);
     console.log(healthEstablismentOfProfile);
-    return;
-    if (!this.userLoged.healthEstablisments.length) {
-      this.Router.navigate(['backoffice/tablero']);
-    } else if (this.userLoged.healthEstablisments.length === 1) {
-      this.userLoged.currentHealthEstablishment = this.userLoged.healthEstablisments[0];
-      this.Main.setSession(this.userLoged);
-      this.Router.navigate(['backoffice/tablero']);
-    } else {
-      this.Router.navigate(['autenticacion/seleccionar-establecimiento']);
-    }
+    this.Router.navigate(['backoffice/tablero']);
   }
 
 }

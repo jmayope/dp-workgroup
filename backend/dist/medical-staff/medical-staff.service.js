@@ -25,12 +25,14 @@ let MedicalStaffService = class MedicalStaffService {
     }
     async findAll(where) {
         let result = await this.MedicalStaff.find(where)
-            .populate({ path: 'profiles', populate: { path: 'specialty', model: 'specialties' } })
+            .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties' }, { path: 'profile', model: 'profiles' }, { path: 'serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions' }] })
             .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions' });
         return result;
     }
     async findOne(id) {
-        let result = await this.MedicalStaff.findOne({ _id: id });
+        let result = await this.MedicalStaff.findOne({ _id: id })
+            .populate({ path: 'profiles', populate: [{ path: 'specialty', model: 'specialties' }, { path: 'profile', model: 'profiles' }, { path: 'serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions' }] })
+            .populate({ path: 'healthEstablisments.serviceDeliveryInstitution', model: 'serviceDeliveryInstitutions' });
         return result;
     }
     async update(id, updated) {
