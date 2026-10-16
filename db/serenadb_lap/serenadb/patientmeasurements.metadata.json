@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"2c698b5b399e478e9e79792dd0a4fc0a","collectionName":"patientmeasurements","type":"collection"}
