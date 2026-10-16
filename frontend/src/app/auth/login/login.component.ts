@@ -87,27 +87,27 @@ export class LoginComponent implements OnInit{
       });
       return;
     }
-    if (result.profiles.length === 1) {
-      result.currentProfile = result.profiles[0];
+    result.isAdmin = result.profiles.map((p: any) => p.profile.name.toLowerCase()).includes("administrador");
+    // COMENTARIO
+    if (result.isAdmin) {
       this.Main.setSession(result);
-      console.log(result);
-      if (result.currentProfile.profile.shortName === 'admin') {
-        this.Main.setSession(result);
-        this.Router.navigate(['backoffice/tablero']);
-        return;
-      }
-      if (result.healthEstablisments.length === 1) {
+      this.Router.navigate(['backoffice/tablero']);
+    } else {
+      if (result.healthEstablisments == 1) {
         result.currentHealthEstablishment = result.healthEstablisments[0];
-        this.Main.setSession(result);
-        this.Router.navigate(['backoffice/tablero']);
+        let profilesOfHealthEstablishment = result.profiles.filter((p: any) => p.serviceDeliveryInstitution === result.currentHealthEstablishment.serviceDeliveryInstitution._id);
+        if (profilesOfHealthEstablishment.length === 1) {
+          result.currentProfile = profilesOfHealthEstablishment[0];
+          this.Main.setSession(result);
+          this.Router.navigate(['backoffice/tablero']);
+        } else {
+          this.Main.setSession(result);
+          this.Router.navigate(['backoffice/seleccionar-perfil']);
+        }
       } else {
+        this.Main.setSession(result);
         this.Router.navigate(['autenticacion/seleccionar-establecimiento']);
       }
-    } else {
-      this.userLoged = result;
-      this.userLoged.hasProfiles = this.userLoged.profiles.length > 1;
-      this.Main.setSession(this.userLoged);
-      this.Router.navigate(['autenticacion/seleccionar-perfil']);
     }
   }
   
