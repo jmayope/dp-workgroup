@@ -6,6 +6,40 @@ export const API_URI = 'http://localhost:3000/api';
 export const API_URI_RENIEC = 'https://dniruc.apisperu.com';
 export const TOKEN_RENIEC = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImpvcmdlbWF5by5wZUBnbWFpbC5jb20iLCJqdGkiOiJhNmVlMWNhMDNlMGViZWY0In0.lddwmw4av0lcR-LNVdQPd0atCXPLNH4sprbe8SlhqXI';
 
+export const SUPABASE_URL = "https://mvxkmaqhfxxfnxrxmqvr.supabase.co/rest/v1/";
+export const SUPABASE_API_KEY = "sb_publishable_vkT5u5R7-cPAcNDTKqtt6w_rkmZ5Z50";
+
+export const COLLECTIONS = {
+  SPECIALTIES: 'specialties',
+  PROFILES: 'profiles',
+  MENUS: 'menus',
+  PROFILE_MENUS: 'profile_menus',
+  TYPE_LISTS: 'type_lists',
+  HEALTH_NETWORKS: 'health_networks',
+  SERVICE_DELIVERY_INSTITUTIONS: 'service_delivery_institutions',
+  MEDICAL_STAFF: 'medical_staff',
+  MEDICAL_STAFF_ESTABLISHMENTS: 'medical_staff_establishments',
+  MEDICAL_STAFF_PROFILES: 'medical_staff_profiles',
+  PATIENTS: 'patients',
+  MEDICAL_HISTORIES: 'medical_histories',
+  HISTORY_DETAIL: 'history_detail',
+  VACCINES: 'vaccines',
+  GROWTH_STAGES: 'growth_stages',
+  GROWTH_STAGE_VACCINES: 'growth_stage_vaccines',
+  DOSES: 'doses',
+  ANTHROPOMETRIC_MEASUREMENTS: 'anthropometric_measurements',
+  PATIENT_MEASUREMENTS: 'patient_measurements',
+  SPECIALTY_CONTROLS: 'specialty_controls',
+  SPECIALTY_PROCESSES: 'specialty_processes',
+  PRODUCTS: 'products',
+  KARDEX_MASTERS: 'kardex_masters',
+  KARDEX: 'kardex',
+  AREAS: 'areas',
+  AREA_COLLABORATORS: 'area_collaborators',
+  CAMPAIGNS: 'campaigns',
+  CAMPAIGN_MOVEMENTS: 'campaign_movements'
+};
+
 export const TOKEN_NAME = 'serenaToken';
 export const APP_NAME = 'HistoricApp';
 export const DOMAIN = "psminsa.bio.pe";

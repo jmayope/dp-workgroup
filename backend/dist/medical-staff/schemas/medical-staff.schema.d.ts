@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     firstName: string;
+    status: boolean;
     lastName: string;
     changedPassword: boolean;
     healthEstablisments: mongoose.Types.DocumentArray<{
@@ -19,7 +20,6 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
-    status: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
@@ -34,16 +34,17 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         profile?: mongoose.Types.ObjectId;
     }>;
     code?: string;
+    phone?: string;
+    email?: string;
     documentType?: string;
     username?: string;
     password?: string;
     profession?: string;
     workingCondition?: string;
     ups?: string;
-    phone?: string;
-    email?: string;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     firstName: string;
+    status: boolean;
     lastName: string;
     changedPassword: boolean;
     healthEstablisments: mongoose.Types.DocumentArray<{
@@ -62,7 +63,6 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
-    status: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
@@ -77,16 +77,17 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         profile?: mongoose.Types.ObjectId;
     }>;
     code?: string;
+    phone?: string;
+    email?: string;
     documentType?: string;
     username?: string;
     password?: string;
     profession?: string;
     workingCondition?: string;
     ups?: string;
-    phone?: string;
-    email?: string;
 }>> & mongoose.FlatRecord<{
     firstName: string;
+    status: boolean;
     lastName: string;
     changedPassword: boolean;
     healthEstablisments: mongoose.Types.DocumentArray<{
@@ -105,7 +106,6 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
-    status: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
@@ -120,14 +120,14 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         profile?: mongoose.Types.ObjectId;
     }>;
     code?: string;
+    phone?: string;
+    email?: string;
     documentType?: string;
     username?: string;
     password?: string;
     profession?: string;
     workingCondition?: string;
     ups?: string;
-    phone?: string;
-    email?: string;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

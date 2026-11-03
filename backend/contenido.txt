@@ -1,0 +1,333 @@
+===== ./src/growth-stage/schemas/growth-stage.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const GrowthStage = new mongoose.Schema({
+    name: { type: String, required: true },
+    description: { type: String },
+    vaccines: [{type: mongoose.Schema.Types.ObjectId, ref: 'vaccines'}],
+    status: { type: Boolean, default: true }
+});
+
+GrowthStage.index({name: 'text', description: 'text'});
+===== ./src/menu/schemas/menu.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Menu = new mongoose.Schema({
+  identifier: { type: String, },
+  name: { type: String, required: true },
+  icon: { type: String, },
+  status: { type: Boolean, default: true },
+  url: { type: String, },
+  parent: { type: mongoose.Schema.Types.ObjectId, ref: 'menus' },
+});
+===== ./src/profile-menu/schemas/profile-menu.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const ProfileMenu = new mongoose.Schema({
+  menu: { type: mongoose.Types.ObjectId, ref: 'menus' },
+  profile: { type: mongoose.Schema.Types.ObjectId, ref: 'profiles' }
+})
+===== ./src/health-network/schemas/health-network.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const HealthNetwork = new mongoose.Schema({
+    name: { type: String, required: true },
+    abbr: { type: String, },
+    description: { type: String },
+    status: { type: Boolean, default: true }
+})
+===== ./src/specialty/schemas/specialty.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Specialty = new mongoose.Schema({
+    name: { type: String, required: true },
+    description: { type: String }
+})
+===== ./src/anthropometric-measurement/schemas/anthropometric-measurement.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const AnthropometricMeasurement = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  measurementUnit: { type: String},
+  category: { type: String },
+  status: { type: Boolean, default: true }
+});
+
+===== ./src/patient-measurement/schemas/patient-measurement.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const PatientMeasurement = new mongoose.Schema({
+    growthStage: { type: mongoose.Schema.Types.ObjectId, ref: 'growthstages' },
+    anthropometricMeasurement: { type: mongoose.Schema.Types.ObjectId, ref: 'anthropometricmeasurements' },
+    values: { type: Object },
+    status: { type: Boolean, default: true },
+    obs: { type: String },
+    createAt: { type: Date, default: Date.now }
+});
+===== ./src/dose/schemas/dose.schema.ts =====
+import * as mongoose from "mongoose"
+
+export const Dose = new mongoose.Schema({
+  vaccine: { type: mongoose.Types.ObjectId, ref: 'typelists' },
+  number: { type: Number },
+  name: { type: String },
+  growthStage: { type: mongoose.Types.ObjectId, ref: 'growthstages' },
+  description: { type: String },
+  status: { type: Boolean, default: true },
+  createAt: { type: Date, default: Date.now }
+})
+
+===== ./src/kardex/schemas/kardex.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Kardex = new mongoose.Schema({
+  product: { type: mongoose.Schema.ObjectId, ref: 'products', required: true },
+  kardexMaster: { type: mongoose.Schema.ObjectId, ref: 'kardexmasters'},
+  inputType: { type: mongoose.Schema.ObjectId, ref: 'typeLists', required: true },
+  previousQuantity: {type: Number},
+  quantity: { type: Number },
+  nextQuantity: { type: Number },
+  reason: { type: String },
+  assignedTo: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+  status: { type: mongoose.Schema.ObjectId, ref: 'typeLists' },
+  createAt: { type: Date, default: Date.now },
+  createBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+  updateAt: { type: Date},
+  updateBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+})
+
+Kardex.index({"product.code": "text", "product.name": "text", reason: "text"})
+===== ./src/medical-history/schemas/medical-history.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const MedicalHistory = new mongoose.Schema({
+    code: { type: String, },
+    creationDate: { type: Date, default: Date.now },
+    details: [],
+    observation: { type: String },
+    patient: { type: mongoose.Schema.Types.ObjectId, ref: 'patients', required: true },
+    status: { type: Boolean, default: true }
+})
+===== ./src/type-list/schemas/type-list.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const TypeList = new mongoose.Schema({
+  type: { type: String, required: true },
+  code: { type: String, required: true },
+  name: { type: String },
+  description: { type: String },
+  valueToCalculate: { type: Number },
+  additionalFields: { type: Object },
+  status: { type: Boolean, default: true }
+})
+===== ./src/service-delivery-institution/schemas/service-delivery-institution.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const ServiceDeliveryInstitution = new mongoose.Schema({
+    name: { type: String, required: true },
+    code: { type: String, },
+    typeInstitution: { type: mongoose.Schema.ObjectId, ref: "typelists"},
+    category: { type: mongoose.Schema.ObjectId, ref: "typelists" },
+    ruc: { type: String },
+    establishmentManagers: [],
+    description: { type: String },
+    openAllDay: { type: Boolean, default: false },
+    openingHours: [],
+    address: { type: String },
+    reference: { type: String },
+    department: { type: String },
+    province: { type: String },
+    district: { type: String },
+    ubigeo: { type: String },
+    phone: { type: String },
+    cellphone: { type: String },
+    email: {type: String },
+    website: { type: String },
+    logo: { type: String },
+    availableServices: [],
+    status: { type: Boolean, default: true }
+})
+===== ./src/patient/schemas/patient.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Patient = new mongoose.Schema({
+    code: {type: String },
+    firstName: { type: String, required: true },
+    paternalSurname: { type: String, required: true },
+    maternalSurname: { type: String, required: true },
+    dateOfBirth: { type: Date, required: true },
+    address: { type: String },
+    phone: { type: String },
+    email: { type: String },
+    healthNetwork: { type: mongoose.Schema.Types.ObjectId, ref: 'healthNetworks' },
+    serviceDeliveryInstitution: { type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions'},
+    gender: { type: String, enum: ['M', 'F', 'O'] },
+    bloodType: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],},
+    status: { type: Boolean, default: true }
+});
+
+Patient.index({code: 'text', firstName: 'text', paternalSurname: 'text', maternalSurname: 'text'})
+===== ./src/medical-staff/schemas/medical-staff.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const MedicalStaff = new mongoose.Schema({
+    code: { type: String, },
+    documentType: { type: String },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    username: { type: String },
+    password: { type: String },
+    changedPassword: { type: Boolean, default: false },
+    profession: { type: String },
+    healthEstablisments: [
+        {   
+            serviceDeliveryInstitution: { type: mongoose.Schema.ObjectId, ref: 'serviceDeliveryInstitutions'},
+            startDate: { type: Date, default: Date.now },
+            finishDate: { type: Date },
+            createAt: { type: Date, default: Date.now}
+        }
+    ],
+    workingCondition: { type: String },
+    ups: { type: String },
+    status: { type: Boolean, default: true },
+    profiles: [
+        {
+            profile: {type: mongoose.Schema.Types.ObjectId, ref: 'profiles'},
+            serviceDeliveryInstitution: {type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions'},
+            status: { type: Boolean, default: true }
+        }
+    ],
+    phone: { type: String },
+    email: { type: String },
+})
+===== ./src/area/schemas/area.schema.ts =====
+import * as mongoose from "mongoose"
+
+
+export const Area = new mongoose.Schema({
+  serviceDeliveryInstitution: { type: mongoose.Types.ObjectId, ref: 'serviceDeliveryInstitutions'},
+  name: { type: String },
+  code: { type: String },
+  areaType: { type: mongoose.Types.ObjectId, ref: 'typelists' },
+  capacity: { type: Number },
+  description: { type: String },
+  responsible: { type: mongoose.Types.ObjectId, ref: 'medicalStaffs' },
+  collaboratorsInArea: [{type: mongoose.Types.ObjectId, ref: 'medicalStaffs'}],
+  location: { type: String },
+  startHour: { type: Date },
+  finishHour: { type: Date },
+  status: { type: mongoose.Types.ObjectId, ref: 'typelists' },
+  createAt: { type: Date, default: Date.now },
+  udpateAt: { type: Date}
+})
+
+===== ./src/campaign-movement/schemas/campaign-movement.schema.ts =====
+import * as mongoose from "mongoose"
+
+export const CampaignMovement = new mongoose.Schema({
+  campaign: { type: mongoose.Schema.Types.ObjectId, ref: 'campaigns' },
+  resource: {},
+  personal: {},
+  obs: { type: String },
+  movementStatus: { type: mongoose.Schema.Types.ObjectId, ref: 'typeLists' },
+  status: { type: Boolean, default: true },
+  createAt: { type: Date, default: Date.now }
+})
+
+===== ./src/kardex-master/schemas/kardex-master.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const KardexMaster = new mongoose.Schema({
+  product: { type: mongoose.Schema.ObjectId, ref: 'products', required: true },
+  serviceDeliveryInstitution: { type: mongoose.Schema.ObjectId, ref: 'serviceDeliveryInstitutions', },
+  availableStock: { type: Number },
+  createAt: { type: Date, default: Date.now},
+  createBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+  updateAt: { type: Date, default: Date.now },
+  updateBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'}
+})
+
+KardexMaster.index({"product.code": "text", "product.name": "text"})
+===== ./src/campaign/schemas/campaign.schema.ts =====
+import * as mongoose from "mongoose"
+
+
+export const Campaign = new mongoose.Schema({
+  serviceDeliveryInstitution: { type: mongoose.Schema.Types.ObjectId, ref: 'serviceDeliveryInstitutions' },
+  name: { type: String },
+  campaignType: { type: mongoose.Schema.Types.ObjectId, ref: 'typeLists' },
+  startDate: { type: Date },
+  finishDate: { type: Date },
+  usageExternalForm: { type: Boolean, default: false },
+  urlExternalForm: { type: String, },
+  resources: [],
+  personal: [],
+  campaignStatus: { type: mongoose.Schema.Types.ObjectId, ref: 'typeLists' },
+  status: { type: Boolean, default: true },
+  createAt: { type: Date, default: Date.now }
+})
+
+===== ./src/specialty-control/schemas/specialty-control.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const SpecialtyControl = new mongoose.Schema({
+    specialty: { type: mongoose.Schema.Types.ObjectId, ref: 'specialties' },
+    growthStage: { type: mongoose.Schema.Types.ObjectId, ref: 'growthstages' },
+    name: { type: String, required: true },
+    order: { type: Number, },
+    description: { type: String },
+    tag: { type: String },
+    minimumRange: { type: Number },
+    maximumRange: { type: Number },
+    status: { type: Boolean }
+})
+===== ./src/profile/schemas/profile.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Profile = new mongoose.Schema({
+  name: { type: String, required: true },
+  shortName: { type: String, },
+  description: { type: String },
+  specialty: { type: mongoose.Schema.Types.ObjectId, ref: 'specialties' },
+  status: { type: Boolean, default: true }
+})
+===== ./src/specialty-process/schemas/specialty-process.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const SpecialtyProcess = new mongoose.Schema({
+    specialty: { type: mongoose.Schema.Types.ObjectId, ref: 'specialties' },
+    name: { type: String, required: true },
+    description: { type: String, }
+})
+===== ./src/vaccine/schemas/vaccine.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Vaccine = new mongoose.Schema({
+    name: { type: String },
+    code: { type: String, unique: true},
+    description: { type: String},
+    status: { type: Boolean, default: true },
+    createdAt: { type: Date, default: Date.now },
+    createdBy: { type: mongoose.Types.ObjectId, ref: 'medicalstaffs'},
+    updatedAt: { type: Date },
+    updatedBy: { type: mongoose.Types.ObjectId, ref: 'medicalstaffs'},
+});
+===== ./src/product/schemas/product.schema.ts =====
+import * as mongoose from 'mongoose';
+
+export const Product = new mongoose.Schema({
+  category: { type: mongoose.Schema.ObjectId, ref: 'typeLists', required: true },
+  code: { type: String },
+  name: { type: String },
+  description: { type: String },
+  measurementUnit: { type: mongoose.Schema.ObjectId, ref: 'typeLists' },
+  minimumStock: { type: Number },
+  location: { type: String },
+  provider: { type: String },
+  status: { type: Boolean, default: true },
+  createAt: { type: Date, default: Date.now },
+  createBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+  updateAt: { type: Date},
+  updateBy: { type: mongoose.Schema.ObjectId, ref: 'medicalStaffs'},
+})

@@ -10,8 +10,17 @@
                 <i class="fas fa-rocket"></i>
               </div>
               <h2 class="mb-4">¡Bienvenido!</h2>
-              <p class="mb-4">Accede a tu cuenta para disfrutar de todos nuestros servicios exclusivos.</p>
-              <p>¿No tienes una cuenta? <br>Regístrate en segundos.</p>
+              <p class="mb-4" *ngIf="tabSelected && tabSelected.id === 1">Accede a tu cuenta para disfrutar de todos nuestros servicios exclusivos.</p>
+              <ng-container *ngIf="tabSelected && tabSelected.id === 2">
+                <p>¿No tienes una cuenta? <br>Regístrate en segundos.</p>
+                <br>
+                <p *ngIf="newUser.documentType==='DNI'">
+                  <strong>Si eres persona natural (con DNI)</strong>, será necesario que el administrador de Puesto de Salud <strong>TE ASOCIE</strong> a su Puesto de Salud.
+                </p>
+                <p *ngIf="newUser.documentType==='RUC'">
+                  <strong>Si eres persona jurídica (con RUC, ademas de Administrador)</strong>, será necesario que <strong>ASOCIE</strong> a otros usuarios (con DNI) a su Puesto de Salud.
+                </p>
+              </ng-container>
             </div>
           </div>
 
@@ -21,13 +30,10 @@
               <!-- Pestañas de navegación -->
               <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation" *ngFor="let t of tabs">
-                  <button class="nav-link" [ngClass]="{'active': tabSelected && tabSelected.id === t.id}"
+                  <button class="nav-link" [disabled]="isForgotPassword" [ngClass]="{'active': tabSelected && tabSelected.id === t.id}"
                     (click)="toggleTab(t)" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
                     type="button" role="tab" aria-controls="pills-login" aria-selected="true">{{t.name}}</button>
                 </li>
-                <!-- <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Registrarse</button>
-                                </li> -->
               </ul>
 
               <!-- Contenido de las pestañas -->
@@ -35,8 +41,8 @@
                 <!-- Formulario de inicio de sesión -->
                 <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 1}"
                   id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                  <h4 class="mb-4">Iniciar Sesión</h4>
-                  <form>
+                  <h4 class="mb-4">{{isForgotPassword ? 'Recuperar Contraseña' : 'Iniciar Sesión'}}</h4>
+                  <form *ngIf="!isForgotPassword">
                     <div class="mb-3">
                       <label for="username" class="form-label">Nombre de Usuario</label>
                       <input type="email" class="form-control" name="username" (keydown)="onlyAlphanumeric($event)" [(ngModel)]="credentials.username"
@@ -58,27 +64,37 @@
                     <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Recordarme</label>
-                      <a href="#" class="float-end" data-bs-toggle="modal"
+                      <a (click)="toggleForgotPassword()" class="float-end hand" data-bs-toggle="modal"
                         data-bs-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
                     </div>
                     <div class="d-grid gap-2 mb-4">
                       <button type="submit" class="btn btn-primary" (click)="login()">Iniciar Sesión</button>
                     </div>
                   </form>
-
-                  <!-- Inicio de sesión con redes sociales -->
-                  <div class="text-center mb-3">
-                    <p>o inicia sesión con:</p>
-                    <div class="social-login">
-                      <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
-                      <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
+                  <form *ngIf="isForgotPassword">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" name="email" (keydown)="onlyAlphanumeric($event)" [(ngModel)]="forgotPassword.email"
+                        id="email" placeholder="jdoe" required>
                     </div>
-                  </div>
-
-                  <!-- Enlace para registrarse (móvil) -->
-                  <div class="text-center d-md-none">
-                    <p>¿No tienes una cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
-                  </div>
+                    <div class="d-grid gap-2 mb-4">
+                      <div class="row">
+                        <div class="col-3">
+                          <button class="btn btn-outline-primary" (click)="toggleForgotPassword()">Cancelar</button>
+                        </div>
+                        <div class="col-9">
+                          <button type="submit" class="btn btn-block btn-primary" [disabled]="recovering" (click)="recoverPassword()">
+                            <span *ngIf="!recovering">
+                              Recuperar Contraseña
+                            </span>
+                            <div class="spinner-border" role="status" *ngIf="recovering">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
 
                 <!-- Formulario de registro -->
@@ -97,7 +113,7 @@
                       <div class="col-md-5 mb-3">
                         <small>Número de Documento</small>
                         <div class="input-group">
-                          <input type="text" name="code" (keydown)="onlyNumber($event)" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="99999999" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
+                          <input type="text" name="code" (keydown)="onlyNumber($event)" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="{{newUser.documentType === 'DNI' ? '99XXXXXX' : '20XXXXXXXXX'}}" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
                           <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="!newUser.searched && newUser.code && (newUser.code.length === newUser.documentNumberLength)">
                             <i class="fa fa-search"></i>
                           </button>
@@ -106,19 +122,30 @@
                           </button>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-3">
-                        <label for="registerFirstName" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" name="firstName" disabled id="registerFirstName"
-                          [(ngModel)]="newUser.firstName" placeholder="Tu nombre" required>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label for="registerLastName" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" name="lastName" disabled id="registerLastName"
-                          [(ngModel)]="newUser.lastName" placeholder="Tu apellido" required>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        
-                      </div>
+                      <ng-container *ngIf="newUser.documentTyoe === 'DNI'">
+                        <div class="col-md-6 mb-3">
+                          <label for="registerFirstName" class="form-label">Nombres</label>
+                          <input type="text" class="form-control" name="firstName" disabled id="registerFirstName"
+                            [(ngModel)]="newUser.firstName" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="registerLastName" class="form-label">Apellidos</label>
+                          <input type="text" class="form-control" name="lastName" disabled id="registerLastName"
+                            [(ngModel)]="newUser.lastName" placeholder="Tu apellido" required>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="newUser.documentType === 'RUC'">
+                        <div class="col-md-12 mb-2">
+                          <label for="registerBusinessName" class="form-label">Razon Social</label>
+                          <input type="text" class="form-control" name="businessName" disabled id="registerBusinessName"
+                            [(ngModel)]="newUser.businessName" placeholder="Empresa SAC" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                          <label for="registerBusinessAddress" class="form-label">Dirección</label>
+                          <input type="text" class="form-control" name="businessAddress" disabled id="registerBusinessAddress"
+                            [(ngModel)]="newUser.businessAddress" placeholder="Avenida, Calle, Jiron, Prolongación, etc." required>
+                        </div>
+                      </ng-container>
                     </div>
                     <div class="mb-3">
                       <label for="registerEmail" class="form-label">Correo electrónico</label>
@@ -139,19 +166,9 @@
                         (click)="register()">Crear Cuenta</button>
                     </div>
                   </form>
-
-                  <!-- Inicio de sesión con redes sociales -->
-                  <div class="text-center mb-3">
-                    <p>o regístrate con:</p>
-                    <div class="social-login">
-                      <button class="btn btn-outline-primary"><i class="fab fa-google me-2"></i>Google</button>
-                      <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Facebook</button>
-                    </div>
-                  </div>
-
                   <!-- Enlace para iniciar sesión (móvil) -->
-                  <div class="text-center d-md-none">
-                    <p>¿Ya tienes una cuenta? <a href="#" id="switchToLogin">Inicia sesión</a></p>
+                  <div class="text-center">
+                    <p>¿Ya tienes una cuenta? <br> <a class="btn btn-outline-primary rounded-pill" (click)="toggleTab(tabByDefault)" id="switchToLogin">Inicia sesión</a></p>
                   </div>
                 </div>
               </div>

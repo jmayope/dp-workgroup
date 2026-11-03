@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MainService } from '../../services/main.service';
-import { APP_NAME, SLUG } from '../../constants';
+import { APP_NAME, COLLECTIONS, SLUG } from '../../constants';
 import Swal from 'sweetalert2';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { firstValueFrom } from 'rxjs';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-backoffice',
@@ -25,7 +27,8 @@ export class BackofficeComponent implements OnInit {
   constructor(
     private Router: Router,
     private ActivatedRoute: ActivatedRoute,
-    private Main: MainService
+    private Main: MainService,
+    private Supabase: SupabaseService
   ) {}
 
   userLoged: any;
@@ -34,6 +37,8 @@ export class BackofficeComponent implements OnInit {
   appName: string = APP_NAME;
   slug: string = SLUG;
   itemSelected: any;
+  isSupabase: boolean = true;
+  isNewEntity: boolean = false;
 
   ngOnInit(): void {
     console.log(this.ActivatedRoute.root.snapshot.data);
@@ -48,8 +53,22 @@ export class BackofficeComponent implements OnInit {
   }
 
   async getMenu() {
+    let genericMenu: any;
+    if (this.isSupabase) {
+      let resultGenericMenu = await firstValueFrom(this.Supabase.select(COLLECTIONS.MENUS));
+      resultGenericMenu.map((r: any) => {
+        r._id = r.id;
+      });
 
-    let genericMenu: any = await this.Main.getMenuGeneric().toPromise();
+      let headers = resultGenericMenu.filter((m: any) => !m.identifier );
+      headers.map((h: any) => {
+        h.children = resultGenericMenu.filter((r: any) => r.parent_id === h.id);
+      });
+      genericMenu = headers;
+      console.log(genericMenu);
+    } else {
+      genericMenu = await this.Main.getMenuGeneric().toPromise();
+    }
     console.log(genericMenu);
     genericMenu.reverse();
     let generic: any = {
@@ -59,20 +78,29 @@ export class BackofficeComponent implements OnInit {
         icon: 'bi bi-archive'
       }
     };
-    let body: any = {
-      profile: this.userLoged.currentProfile._id
+    let result: any;
+    if (this.isSupabase) {
+
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.PROFILE_MENUS, {filters: {profile_id: this.userLoged.currentProfile.profile_id}}));
+      console.log(result);
+
+    } else {
+      let body: any = {
+        profile: this.userLoged.currentProfile._id
+      }
+      result = await this.Main.getMenuByProfile(body, {grouped: true}).toPromise();
+      console.log(result);
+      this.menu = result;
+      
     }
-    let result: any = await this.Main.getMenuByProfile(body, {grouped: true}).toPromise();
-    console.log(result);
-    this.menu = result;
     this.menu.unshift(generic);
 
     let main: any = {
-      children: [{menu: {_id: 'dashboard', name: 'DASHBOARD', icon: 'bi bi-speedometer', url: '/backoffice/tablero'}, }],
-      menu: {"_id":"dashboard","name":"DASHBOARD","icon":"bi bi-speedometer","url":"/backoffice/tablero"}
+      children: [{menu: {id: 'dashboard', _id: 'dashboard', name: 'DASHBOARD', icon: 'bi bi-speedometer', url: '/backoffice/tablero'}, }],
+      menu: {"id":"dashboard", "_id":"dashboard","name":"DASHBOARD","icon":"bi bi-speedometer","url":"/backoffice/tablero"}
     };
     let itemInSession = JSON.parse(sessionStorage.getItem('itemSelected') || '{}');
-    if (itemInSession._id) {
+    if (itemInSession._id || itemInSession.id) {
       this.itemSelected = itemInSession;
     } else {
       this.itemSelected = main.menu;
