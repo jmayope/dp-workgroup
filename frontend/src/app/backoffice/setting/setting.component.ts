@@ -5,11 +5,12 @@ import { MainService } from '../../services/main.service';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import Swal from 'sweetalert2';
-import { DAYS, DOMAIN, generateRandomString, messageAlert, parseDate, parseDateToString, TOTAL_DAYS_IN_WEEK } from '../../constants';
+import { COLLECTIONS, DAYS, DOMAIN, generateRandomString, messageAlert, parseDate, parseDateToString, TOTAL_DAYS_IN_WEEK } from '../../constants';
 import { Router } from '@angular/router';
 import moment from 'moment';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { firstValueFrom } from 'rxjs';
+import { SupabaseService } from '../../services/supabase.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class SettingComponent implements OnInit {
   
   constructor(
     private Main: MainService,
-    private Router: Router
+    private Router: Router,
+    private Supabase: SupabaseService
   ) {
     
   }
@@ -82,16 +84,16 @@ export class SettingComponent implements OnInit {
   newSpecialty: any;
   newProfile: any;
   newUserProfile: any;
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userLoged = await this.Main.getSession();
     this.getInitialData();
     this.getServiceDeliveryInstitutions();
-    this.getEstablishmentTypes();
     this.getEstablishmentCategories();
-    this.getMedicalStaffs();
+    this.getEstablishmentTypes();
+    // this.getMedicalStaffs();
     this.getAvailableServices();
     this.getDepartments();
-    this.getStatusRecords();
-    this.getAreaTypes();
+    // this.getStatusRecords();
     this.getUsers();
     this.getProfiles();
     this.getSpecialties();
@@ -206,36 +208,71 @@ export class SettingComponent implements OnInit {
   }
 
   async getUsers() {
-    let result: any = await this.Main.getMedicalStaff({where: {username :{$exists: true}}}).toPromise();
+    let result: any;
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.MEDICAL_STAFF, {filters: {username: null}}));
+    } else {
+      result = await this.Main.getMedicalStaff({where: {username :{$exists: true}}}).toPromise();
+    }
     console.log(result);
     this.allUsers = result;
   }
 
   async getAreaTypes() {
-    let result: any = await this.Main.getTypeList({where: {type: 'AREA-TYPE'}}).toPromise();
+    let result: any;
+    let filters: any = {type: 'AREA-TYPE'};
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}))
+    } else {
+      result = await this.Main.getTypeList({where: filters}).toPromise();
+    }
     this.areaTypes = result;
+    this.getStatusRecords()
   }
 
   async getStatusRecords() {
-    let result: any = await this.Main.getTypeList({where: {type: 'RECORD-STATE'}}).toPromise();
+    let result: any;
+    let filters: any = {}
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}));
+    } else {
+      result = await this.Main.getTypeList({where: filters}).toPromise();
+    }
     this.statusRecords = result;
-    // this.getAreas();
+    this.getAreas();
   }
 
   async getAreas() {
-    let result: any = await this.Main.getAreas({});
-    this.areas = result;
-    this.totals.areas = this.areas.length;
-    this.totals.capacity = this.areas.reduce((m, i) => { return m + (i.capacity || 0)}, 0);
-    let statusRecordByDefault = this.statusRecords.find((s: any) => s.additionalFields.isDefaultValue);
-    this.totals.activeAreas = this.areas.filter((a: any) => a.status._id === statusRecordByDefault._id).length;
-    this.totals.inactiveAreas = this.areas.filter((a: any) => a.status._id !== statusRecordByDefault._id).length;
-    if (this.filters.serviceDeliveryInstitution) {
-      this.getDataByServiceDeliveryInstitution();
+    let result: any;
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.AREAS));
+      this.areas = result;
+      this.totals.areas = this.areas.length;
+      this.totals.capacity = this.areas.reduce((m, i) => { return m + (i.capacity || 0)}, 0);
+      let statusRecordByDefault = this.statusRecords.filter((s: any) => s.additional_fields).find((s: any) => s.additional_fields.isDefaultValue);
+      this.totals.activeAreas = this.areas.filter((a: any) => a.status.id === statusRecordByDefault.id).length;
+      this.totals.inactiveAreas = this.areas.filter((a: any) => a.status.id !== statusRecordByDefault.id).length;
+      if (this.filters.serviceDeliveryInstitution) {
+        this.getDataByServiceDeliveryInstitution();
+      }
+      this.allServiceDeliveryInstitutions.map((s: any) => {
+        s.areas = JSON.parse(JSON.stringify(this.areas.filter((a: any) => a.service_delivery_institution_id === s.id)));
+      })
+    } else {
+      result = await this.Main.getAreas({});
+      this.areas = result;
+      this.totals.areas = this.areas.length;
+      this.totals.capacity = this.areas.reduce((m, i) => { return m + (i.capacity || 0)}, 0);
+      let statusRecordByDefault = this.statusRecords.find((s: any) => s.additionalFields.isDefaultValue);
+      this.totals.activeAreas = this.areas.filter((a: any) => a.status._id === statusRecordByDefault._id).length;
+      this.totals.inactiveAreas = this.areas.filter((a: any) => a.status._id !== statusRecordByDefault._id).length;
+      if (this.filters.serviceDeliveryInstitution) {
+        this.getDataByServiceDeliveryInstitution();
+      }
+      this.allServiceDeliveryInstitutions.map((s: any) => {
+        s.areas = JSON.parse(JSON.stringify(this.areas.filter((a: any) => a.serviceDeliveryInstitution === s._id)));
+      })
     }
-    this.allServiceDeliveryInstitutions.map((s: any) => {
-      s.areas = JSON.parse(JSON.stringify(this.areas.filter((a: any) => a.serviceDeliveryInstitution === s._id)));
-    })
   }
 
   async getDepartments() {
@@ -245,41 +282,50 @@ export class SettingComponent implements OnInit {
   }
 
   async getInitialData() {
-    this.userLoged = await this.Main.getSession();
     console.log(this.userLoged);
-    if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.profile.shortName !== "admin") {
-      Swal.fire({
-        text: 'No tienes un Establecimiento asignado. No puedes continuar',
-        icon: 'warning'
-      });
-      this.Router.navigate(['/backoffice/tablero']);
-      return;
+    if (this.userLoged.usageSupabase) {
+
     } else {
-      if (this.userLoged.currentProfile.profile.shortName !== "admin") {
-        // this.establishment = {
-        //   establishmentManagers: [],
-        //   availableServices: []
-        // };
-        // this.currentEstablishmentManager = this.establishment.establishmentManagers.find((e: any) => e.isCurrent);
-        console.log("Aqui entre");
-        this.establishment = this.userLoged.currentHealthEstablishment || {};
-        console.log(this.establishment);
-        this.establishment.editing = true;
-        this.filters.serviceDeliveryInstitution = this.establishment.serviceDeliveryInstitution._id;
-        this.filters.editable = false;
-        this.selectEstablishment()
+      if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.profile.shortName !== "admin") {
+        Swal.fire({
+          text: 'No tienes un Establecimiento asignado. No puedes continuar',
+          icon: 'warning'
+        });
+        this.Router.navigate(['/backoffice/tablero']);
+        return;
       } else {
-        this.filters.editable = true;
+        if (this.userLoged.currentProfile.profile.shortName !== "admin") {
+          // this.establishment = {
+          //   establishmentManagers: [],
+          //   availableServices: []
+          // };
+          // this.currentEstablishmentManager = this.establishment.establishmentManagers.find((e: any) => e.isCurrent);
+          console.log("Aqui entre");
+          this.establishment = this.userLoged.currentHealthEstablishment || {};
+          console.log(this.establishment);
+          this.establishment.editing = true;
+          this.filters.serviceDeliveryInstitution = this.establishment.serviceDeliveryInstitution._id;
+          this.filters.editable = false;
+          this.selectEstablishment()
+        } else {
+          this.filters.editable = true;
+        }
       }
     }
   }
 
   async getServiceDeliveryInstitutions() {
-    let result: any = await this.Main.getServiceDeliveryInstitutions({}).toPromise();
+    let result: any;
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.SERVICE_DELIVERY_INSTITUTIONS));
+    } else {
+      result = await this.Main.getServiceDeliveryInstitutions({}).toPromise();
+
+    }
     console.log(result);
     this.allServiceDeliveryInstitutions = structuredClone(result);
     this.serviceDeliveryInstitutions = result;
-    this.getAreas();
+    this.getAreaTypes();
 
   }
 
@@ -834,13 +880,23 @@ export class SettingComponent implements OnInit {
 
   async getDataByServiceDeliveryInstitution() {
     if (this.filters.serviceDeliveryInstitution) {
-      console.log(this.filters.serviceDeliveryInstitution);
-      let resultAreas: any = await this.Main.getAreas({where: {serviceDeliveryInstitution: this.filters.serviceDeliveryInstitution}});
-      console.log(resultAreas);
-      this.areas = resultAreas;
-      console.log(this.medicalStaffs);
-      this.medicalStaffsOfService = this.medicalStaffs.filter((m: any) => m.healthEstablisments && m.healthEstablisments.map((h: any) => h.serviceDeliveryInstitution._id).includes(this.filters.serviceDeliveryInstitution));
-      console.log(this.medicalStaffsOfService);
+      if (this.userLoged.usageSupabase) {
+        console.log(this.filters.serviceDeliveryInstitution);
+        let resultAreas: any = await firstValueFrom(this.Supabase.select(COLLECTIONS.AREAS, {filters: {service_delivery_institution_id: this.filters.serviceDeliveryInstitution}}));
+        console.log(resultAreas);
+        this.areas = resultAreas;
+        console.log(this.medicalStaffs);
+        this.medicalStaffsOfService = this.medicalStaffs.filter((m: any) => m.healthEstablisments && m.healthEstablisments.map((h: any) => h.service_delivery_institution_id.id).includes(this.filters.serviceDeliveryInstitution));
+        console.log(this.medicalStaffsOfService);
+      } else {
+        console.log(this.filters.serviceDeliveryInstitution);
+        let resultAreas: any = await this.Main.getAreas({where: {serviceDeliveryInstitution: this.filters.serviceDeliveryInstitution}});
+        console.log(resultAreas);
+        this.areas = resultAreas;
+        console.log(this.medicalStaffs);
+        this.medicalStaffsOfService = this.medicalStaffs.filter((m: any) => m.healthEstablisments && m.healthEstablisments.map((h: any) => h.serviceDeliveryInstitution._id).includes(this.filters.serviceDeliveryInstitution));
+        console.log(this.medicalStaffsOfService);
+      }
     }
   }
 

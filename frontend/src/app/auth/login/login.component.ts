@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
 
   credentials: any = {}
   hasProfiles: boolean = false;
-  usageSupabase: boolean = true;
+  usageSupabase: boolean = false;
   userLoged: any;
   tabs: any[] = [
     { id: 1, name: "Iniciar Sesión"},
@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit{
       result.profiles.map((pm: any) => {
         pm.profile = resultProfiles.find((p: any) => p.id === pm.profile_id);
       });
+      result.usageSupabase = this.usageSupabase;
       result.changedPassword = result.changed_password;
       result.healthEstablisments = result.healthEstablisments || [];
     } else {

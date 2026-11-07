@@ -37,7 +37,6 @@ export class BackofficeComponent implements OnInit {
   appName: string = APP_NAME;
   slug: string = SLUG;
   itemSelected: any;
-  isSupabase: boolean = true;
   isNewEntity: boolean = false;
 
   ngOnInit(): void {
@@ -54,7 +53,7 @@ export class BackofficeComponent implements OnInit {
 
   async getMenu() {
     let genericMenu: any;
-    if (this.isSupabase) {
+    if (this.userLoged.usageSupabase) {
       let resultGenericMenu = await firstValueFrom(this.Supabase.select(COLLECTIONS.MENUS));
       resultGenericMenu.map((r: any) => {
         r._id = r.id;
@@ -79,7 +78,7 @@ export class BackofficeComponent implements OnInit {
       }
     };
     let result: any;
-    if (this.isSupabase) {
+    if (this.userLoged.usageSupabase) {
 
       result = await firstValueFrom(this.Supabase.select(COLLECTIONS.PROFILE_MENUS, {filters: {profile_id: this.userLoged.currentProfile.profile_id}}));
       console.log(result);
@@ -108,6 +107,15 @@ export class BackofficeComponent implements OnInit {
     }
     console.log(this.itemSelected);
     this.menu.unshift(main);
+    if (this.userLoged.usageSupabase) {
+      this.getAdditionalInfo();
+    }
+  }
+
+  async getAdditionalInfo() {
+    let result_medical_staff_stablishment: any = await firstValueFrom(this.Supabase.select(COLLECTIONS.MEDICAL_STAFF_ESTABLISHMENTS, {filters: {service_delivery_institution_id: this.userLoged.currentProfile.service_delivery_institution_id}}));
+    console.log(result_medical_staff_stablishment);
+    this.userLoged.has_medical_staff = result_medical_staff_stablishment.length > 0;
   }
 
   toggleMenuItem(item: any) {
