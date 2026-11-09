@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MainService } from '../../services/main.service';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
@@ -30,7 +30,8 @@ export class SettingComponent implements OnInit {
   constructor(
     private Main: MainService,
     private Router: Router,
-    private Supabase: SupabaseService
+    private Supabase: SupabaseService,
+    private ChangeDetector: ChangeDetectorRef
   ) {
     
   }
@@ -198,12 +199,22 @@ export class SettingComponent implements OnInit {
   }
 
   async getSpecialties() {
-    let result: any = await this.Main.getSpecialties({where: {}}).toPromise();
+    let result: any;
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.SPECIALTIES));
+    } else {
+      result = await this.Main.getSpecialties({where: {}}).toPromise();
+    }
     this.specialties = result;
   }
 
   async getProfiles() {
-    let result: any = await this.Main.getProfiles({where: {}}).toPromise();
+    let result: any;
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.PROFILES));
+    } else {
+      result = await this.Main.getProfiles({where: {}}).toPromise();
+    }
     this.profiles = result;
   }
 
@@ -232,7 +243,7 @@ export class SettingComponent implements OnInit {
 
   async getStatusRecords() {
     let result: any;
-    let filters: any = {}
+    let filters: any = {type: 'RECORD-STATE'};
     if (this.userLoged.usageSupabase) {
       result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}));
     } else {
@@ -284,7 +295,32 @@ export class SettingComponent implements OnInit {
   async getInitialData() {
     console.log(this.userLoged);
     if (this.userLoged.usageSupabase) {
-
+      console.log(this.userLoged);
+      if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.profile.short_name.toLowerCase() !== "administrador") {
+        Swal.fire({
+          text: 'No tienes un Establecimiento asignado. No puedes continuar',
+          icon: 'warning'
+        });
+        this.Router.navigate(['/backoffice/tablero']);
+        return;
+      } else {
+        if (this.userLoged.currentProfile.profile.short_name.toLowerCase() !== "administrador") {
+          // this.establishment = {
+          //   establishmentManagers: [],
+          //   availableServices: []
+          // };
+          // this.currentEstablishmentManager = this.establishment.establishmentManagers.find((e: any) => e.isCurrent);
+          console.log("Aqui entre");
+          this.establishment = this.userLoged.currentHealthEstablishment || {};
+          console.log(this.establishment);
+          this.establishment.editing = true;
+          this.filters.service_delivery_institution_id = this.establishment.serviceDeliveryInstitution.id;
+          this.filters.editable = false;
+          this.selectEstablishment()
+        } else {
+          this.filters.editable = true;
+        }
+      }
     } else {
       if (!this.userLoged.currentHealthEstablishment && this.userLoged.currentProfile.profile.shortName !== "admin") {
         Swal.fire({
@@ -330,17 +366,35 @@ export class SettingComponent implements OnInit {
   }
 
   async getAvailableServices() {
-    let result: any = await this.Main.getTypeList({where: { type: 'AVAILABLE-SERVICE'}}).toPromise();
+    let result: any;
+    let filters: any = {type: 'AVAILABLE-SERVICE'};
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}));
+    } else {
+      result = await this.Main.getTypeList({where: filters}).toPromise();
+    }
     this.availableServices = result;
   }
 
   async getEstablishmentTypes() {
-    let result: any = await this.Main.getTypeList({where: {type: "ESTABLISHMENT-TYPE"}}).toPromise();
+    let result: any;
+    let filters: any = {type: "ESTABLISHMENT-TYPE"};
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}));
+    } else {
+      result = await this.Main.getTypeList({where: filters}).toPromise();
+    }
     this.establishmentTypes = result;
   }
 
   async getEstablishmentCategories() {
-    let result: any = await this.Main.getTypeList({where: {type: "ESTABLISHMENT-CATEGORY"}}).toPromise();
+    let result: any;
+    let filters: any = {type: "ESTABLISHMENT-CATEGORY"};
+    if (this.userLoged.usageSupabase) {
+      result = await firstValueFrom(this.Supabase.select(COLLECTIONS.TYPE_LISTS, {filters: filters}));
+    } else {
+      result = await this.Main.getTypeList({where: filters}).toPromise();
+    }
     this.establishmentCategories = result;
   }
 
@@ -389,11 +443,13 @@ export class SettingComponent implements OnInit {
         break;  
       case "schedule":
         this.days.map((d: any) => {
-          let dayFound: any = this.establishment.openingHours.find((h: any) => h._id === d._id); 
-          if (dayFound) {
-            d.available = true;
-            d.startHour = dayFound.startHour;
-            d.finishHour = dayFound.finishHour;
+          if (this.establishment.openingHours) {
+            let dayFound: any = this.establishment.openingHours.find((h: any) => h._id === d._id); 
+            if (dayFound) {
+              d.available = true;
+              d.startHour = dayFound.startHour;
+              d.finishHour = dayFound.finishHour;
+            }
           }
         })
         
@@ -401,6 +457,7 @@ export class SettingComponent implements OnInit {
       default:
         break;
     }
+    this.ChangeDetector.detectChanges();
   }
 
   toggleUser() {
@@ -523,13 +580,27 @@ export class SettingComponent implements OnInit {
 
   async selectEstablishment() {
     this.users = [];
-    let result: any = await this.Main.getServiceDeliveryInstitutionByID(this.filters.serviceDeliveryInstitution).toPromise();
+    let result: any;
+    console.log(this.filters);
+    if (this.userLoged.usageSupabase) {
+      let results: any = await firstValueFrom(this.Supabase.select(COLLECTIONS.SERVICE_DELIVERY_INSTITUTIONS, {filters: {id: this.filters.service_delivery_institution_id}}));
+      if (!results.length) {
+        messageAlert("Error", "Hubo un error al obtener Servicios por ID", "error");
+        return;
+      }
+      result = results[0];
+      // console.log(this.establishment);
+    } else {
+      result = await this.Main.getServiceDeliveryInstitutionByID(this.filters.serviceDeliveryInstitution).toPromise();
+    }
     this.establishment = result;
     this.establishment.editing = true;
+    this.establishment.type_institution_id = this.establishment.type_institution_id || undefined;
+    this.establishment.category_id = this.establishment.category_id || undefined;
     this.establishment.establishmentManagers = this.establishment.establishmentManagers || [];
     this.establishment.availableServices = this.establishment.availableServices || [];
     this.establishment.currentEstablishmentManager = this.establishment.establishmentManagers.find((m: any) => m.isCurrent);
-    this.users = this.users.concat(this.allUsers.filter((u: any) => u.healthEstablisments.map((h: any) => h.serviceDeliveryInstitution._id).includes(this.filters.serviceDeliveryInstitution)));
+    this.users = this.users.concat(this.allUsers.filter((u: any) => u.healthEstablisments.map((h: any) => h.serviceDeliveryInstitution._id).includes(this.userLoged.usageSupabase ? this.filters.service_delivery_institution_id :this.filters.serviceDeliveryInstitution)));
     console.log(this.establishment);
     if (this.establishment.availableServices.length) {
       this.availableServices.map((a: any) => {
@@ -544,6 +615,7 @@ export class SettingComponent implements OnInit {
     if (this.establishment.department) {
       this.selectDepartment(true);
     }
+    this.ChangeDetector.detectChanges();
   }
 
   addUser() {
@@ -643,11 +715,35 @@ export class SettingComponent implements OnInit {
       if (choice.isConfirmed) {
         let result:any;
         if (!this.establishment.editing) {
-          result = await this.Main.setServiceDeliveryInstitution({news: [this.establishment]}).toPromise();
+          if (this.userLoged.usageSupabase) {
+            let data = structuredClone(this.establishment);
+            console.log(data);
+            data.available_services = data.available_services || '[]';
+            data.establishment_managers = data.establishment_managers || '[]';
+            delete data.availableServices;
+            delete data.establishmentManagers;
+            delete data.category;
+            delete data.editing;
+            return;
+            result = await firstValueFrom(this.Supabase.insert(COLLECTIONS.SERVICE_DELIVERY_INSTITUTIONS, data));
+          } else {
+            result = await this.Main.setServiceDeliveryInstitution({news: [this.establishment]}).toPromise();
+          }
         } else {
-          let body = JSON.parse(JSON.stringify(this.establishment));
-          delete body._id;
-          result = await this.Main.updateServiceDeliveryInstitution(this.establishment._id, {updated: body}).toPromise();
+          if (this.userLoged.usageSupabase) {
+            let data: any = structuredClone(this.establishment);
+            data.establishment_managers = data.establishment_managers || '[]';
+            data.available_services = data.available_services || '[]';
+            delete data.availableServices;
+            delete data.establishmentManagers;
+            delete data.category;
+            delete data.editing;
+            result = await firstValueFrom(this.Supabase.update(COLLECTIONS.SERVICE_DELIVERY_INSTITUTIONS, this.establishment.id, data));
+          } else {
+            let body = JSON.parse(JSON.stringify(this.establishment));
+            delete body._id;
+            result = await this.Main.updateServiceDeliveryInstitution(this.establishment._id, {updated: body}).toPromise();
+          }
         }
         if (!result) {
           Swal.fire({
