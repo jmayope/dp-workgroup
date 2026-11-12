@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
 
   credentials: any = {}
   hasProfiles: boolean = false;
-  usageSupabase: boolean = false;
+  usageSupabase: boolean = true;
   userLoged: any;
   tabs: any[] = [
     { id: 1, name: "Iniciar Sesión"},
