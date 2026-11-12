@@ -20,6 +20,7 @@ export const MedicalStaff = new mongoose.Schema({
     workingCondition: { type: String },
     ups: { type: String },
     status: { type: Boolean, default: true },
+    blocked: { type: Boolean, default: false},
     profiles: [
         {
             profile: {type: mongoose.Schema.Types.ObjectId, ref: 'profiles'},

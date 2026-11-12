@@ -5,7 +5,7 @@ import { MainService } from '../../services/main.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { COLLECTIONS, generateRandomString, handleAlphanumeric, handleLetter, handleNumber, messageAlert } from '../../constants';
+import { COLLECTIONS, generateRandomString, handleAlphanumeric, handleLetter, handleNumber, INTENT_MAX_PASSWORD, messageAlert } from '../../constants';
 import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit{
   recovering: boolean = false;
   forgotPassword: any = {};
   administratorProfile: any;
+  contadorIntentos: number = 0;
 
   ngOnInit() {
     this.tabSelected = this.tabs[0];
@@ -93,7 +94,25 @@ export class LoginComponent implements OnInit{
           text: 'Las credenciales son incorrectas',
           icon: 'error'
         });
-        this.credentials = {};
+        this.contadorIntentos++;
+        console.log("Contador de intentos ", this.contadorIntentos);
+        this.credentials.password = undefined;
+        if (this.contadorIntentos === INTENT_MAX_PASSWORD) {
+
+          let resultUserToBlocked: any = await firstValueFrom(this.Main.getMedicalStaff({where: {username: this.credentials.username}}));
+          if (!resultUserToBlocked.length) {
+            messageAlert("Error", "Credenciales invalidas", "error");
+            return;
+          }
+          let userToBlock: any = resultUserToBlocked[0];
+          let resultUserBlocked: any = await firstValueFrom(this.Main.updateMedicalStaff(userToBlock._id, {updated: {blocked: true}}));
+          // LOGICA DE ENVIO DE MENSAJE DE CORREO Y SMS
+          messageAlert("Cuidado", "El usuario ha sido bloqueado. Se enviaran instrucción de desbloqueo.", "warning");
+        }
+        return;
+      }
+      if (result.blocked) {
+        messageAlert("Validación", "El usuario está bloqueado. Por favor siga las instrucciones enviadas.", "warning");
         return;
       }
       this.userLoged = result;

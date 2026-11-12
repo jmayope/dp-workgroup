@@ -48,6 +48,7 @@ export const SLUG = 'Backoffice - Puestos de Salud';
 export const NUMBER_ROWS = [20,50,100,500];
 
 export const TOTAL_DAYS_IN_WEEK = 7;
+export const INTENT_MAX_PASSWORD = 3;
 export const DAYS = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"];
 
 export function buildPagination(total: number, rows: number) {

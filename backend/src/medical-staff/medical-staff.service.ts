@@ -28,8 +28,6 @@ export class MedicalStaffService {
   }
 
   async update(id: any, updated: any) {
-    console.log(id);
-    console.log(updated);
     let result: any = await this.MedicalStaff.updateOne({_id: id}, updated);
     return result;
   }

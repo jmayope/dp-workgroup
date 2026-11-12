@@ -21,7 +21,7 @@ export class MedicalStaffController {
   findOne(@Param('id') id: any) {
     return this.medicalStaffService.findOne(id);
   }
-
+  @Public()
   @Put(':id')
   update(@Param('id') id: any, @Body() body: any) {
     return this.medicalStaffService.update(id, body.updated);

@@ -20,6 +20,7 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
+    blocked: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
@@ -63,6 +64,7 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
+    blocked: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
@@ -106,6 +108,7 @@ export declare const MedicalStaff: mongoose.Schema<any, mongoose.Model<any, any,
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;
         finishDate?: NativeDate;
     }>;
+    blocked: boolean;
     profiles: mongoose.Types.DocumentArray<{
         status: boolean;
         serviceDeliveryInstitution?: mongoose.Types.ObjectId;

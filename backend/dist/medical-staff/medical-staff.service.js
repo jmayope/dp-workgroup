@@ -36,8 +36,6 @@ let MedicalStaffService = class MedicalStaffService {
         return result;
     }
     async update(id, updated) {
-        console.log(id);
-        console.log(updated);
         let result = await this.MedicalStaff.updateOne({ _id: id }, updated);
         return result;
     }

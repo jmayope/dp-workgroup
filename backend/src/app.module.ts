@@ -29,9 +29,41 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { CampaignModule } from './campaign/campaign.module';
 import { CampaignMovementModule } from './campaign-movement/campaign-movement.module';
+import { MailModule } from './mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PatientModule, MedicalStaffModule, MedicalHistoryModule, SpecialtyModule, SpecialtyProcessModule, DatabaseModule, SpecialtyControlModule, AuthModule, MenuModule, ProfileMenuModule, ProfileModule, GrowthStageModule, ServiceDeliveryInstitutionModule, HealthNetworkModule, AnthropometricMeasurementModule, PatientMeasurementModule, VaccineModule, DoseModule, KardexModule, TypeListModule, ProductModule, KardexMasterModule, AreaModule, CampaignModule, CampaignMovementModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    MailModule,
+    PatientModule, 
+    MedicalStaffModule, 
+    MedicalHistoryModule, 
+    SpecialtyModule, 
+    SpecialtyProcessModule, 
+    DatabaseModule, 
+    SpecialtyControlModule, 
+    AuthModule, 
+    MenuModule, 
+    ProfileMenuModule, 
+    ProfileModule, 
+    GrowthStageModule, 
+    ServiceDeliveryInstitutionModule, 
+    HealthNetworkModule, 
+    AnthropometricMeasurementModule, 
+    PatientMeasurementModule, 
+    VaccineModule, 
+    DoseModule, 
+    KardexModule, 
+    TypeListModule, 
+    ProductModule, 
+    KardexMasterModule, 
+    AreaModule, 
+    CampaignModule, 
+    CampaignMovementModule, 
+    MailModule],
   controllers: [AppController],
   providers: [
     AppService,

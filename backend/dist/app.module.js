@@ -38,12 +38,13 @@ const core_1 = require("@nestjs/core");
 const auth_guard_1 = require("./auth/auth.guard");
 const campaign_module_1 = require("./campaign/campaign.module");
 const campaign_movement_module_1 = require("./campaign-movement/campaign-movement.module");
+const mail_module_1 = require("./mail/mail.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [patient_module_1.PatientModule, medical_staff_module_1.MedicalStaffModule, medical_history_module_1.MedicalHistoryModule, specialty_module_1.SpecialtyModule, specialty_process_module_1.SpecialtyProcessModule, database_module_1.DatabaseModule, specialty_control_module_1.SpecialtyControlModule, auth_module_1.AuthModule, menu_module_1.MenuModule, profile_menu_module_1.ProfileMenuModule, profile_module_1.ProfileModule, growth_stage_module_1.GrowthStageModule, service_delivery_institution_module_1.ServiceDeliveryInstitutionModule, health_network_module_1.HealthNetworkModule, anthropometric_measurement_module_1.AnthropometricMeasurementModule, patient_measurement_module_1.PatientMeasurementModule, vaccine_module_1.VaccineModule, dose_module_1.DoseModule, kardex_module_1.KardexModule, type_list_module_1.TypeListModule, product_module_1.ProductModule, kardex_master_module_1.KardexMasterModule, area_module_1.AreaModule, campaign_module_1.CampaignModule, campaign_movement_module_1.CampaignMovementModule],
+        imports: [patient_module_1.PatientModule, medical_staff_module_1.MedicalStaffModule, medical_history_module_1.MedicalHistoryModule, specialty_module_1.SpecialtyModule, specialty_process_module_1.SpecialtyProcessModule, database_module_1.DatabaseModule, specialty_control_module_1.SpecialtyControlModule, auth_module_1.AuthModule, menu_module_1.MenuModule, profile_menu_module_1.ProfileMenuModule, profile_module_1.ProfileModule, growth_stage_module_1.GrowthStageModule, service_delivery_institution_module_1.ServiceDeliveryInstitutionModule, health_network_module_1.HealthNetworkModule, anthropometric_measurement_module_1.AnthropometricMeasurementModule, patient_measurement_module_1.PatientMeasurementModule, vaccine_module_1.VaccineModule, dose_module_1.DoseModule, kardex_module_1.KardexModule, type_list_module_1.TypeListModule, product_module_1.ProductModule, kardex_master_module_1.KardexMasterModule, area_module_1.AreaModule, campaign_module_1.CampaignModule, campaign_movement_module_1.CampaignMovementModule, mail_module_1.MailModule],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,

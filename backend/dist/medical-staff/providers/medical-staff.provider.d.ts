@@ -22,6 +22,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
@@ -65,6 +66,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
@@ -108,6 +110,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
@@ -155,6 +158,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
@@ -198,6 +202,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
@@ -241,6 +246,7 @@ export declare const MedicalStaffProvider: {
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
             finishDate?: NativeDate;
         }>;
+        blocked: boolean;
         profiles: import("mongoose").Types.DocumentArray<{
             status: boolean;
             serviceDeliveryInstitution?: import("mongoose").Types.ObjectId;
