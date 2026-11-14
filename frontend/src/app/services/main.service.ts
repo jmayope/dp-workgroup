@@ -25,6 +25,10 @@ export class MainService {
     return JSON.parse(sessionStorage.getItem(TOKEN_NAME) || '')
   }
 
+  sendSMS(number: string, message: string) { 
+    return this.Http.post(`${this.uri}/twilio/send-sms`, {to: number, message: message});
+  }
+
   getToken() {
     return JSON.parse(sessionStorage.getItem(TOKEN_NAME) || '{}').token;
   }

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
 
   credentials: any = {}
   hasProfiles: boolean = false;
-  usageSupabase: boolean = false;
+  usageSupabase: boolean = true;
   userLoged: any;
   tabs: any[] = [
     { id: 1, name: "Iniciar Sesión"},
@@ -48,6 +48,8 @@ export class LoginComponent implements OnInit{
   forgotPassword: any = {};
   administratorProfile: any;
   contadorIntentos: number = 0;
+  isUnlockAccount: boolean = false;
+  unlockCode: any = {};
 
   ngOnInit() {
     this.tabSelected = this.tabs[0];
@@ -62,6 +64,11 @@ export class LoginComponent implements OnInit{
       return;
     }
     this.administratorProfile = resultAdministratorProfile[0];
+  }
+
+  async sendMessage() {
+    let result_sms: any = await firstValueFrom(this.Main.sendSMS("+51913713735", "Mensaje de prueba"));
+    console.log(result_sms);
   }
 
   toggleTab(tab: any) {
@@ -105,7 +112,12 @@ export class LoginComponent implements OnInit{
             return;
           }
           let userToBlock: any = resultUserToBlocked[0];
-          let resultUserBlocked: any = await firstValueFrom(this.Main.updateMedicalStaff(userToBlock._id, {updated: {blocked: true}}));
+          let unlockCode = generateRandomString(8);
+          let resultUserBlocked: any = await firstValueFrom(this.Main.updateMedicalStaff(userToBlock._id, {updated: {blocked: true, unlockCode: unlockCode}}));
+          let phone = userToBlock.phone.startsWith('+51') ? '+51'+userToBlock.phone : userToBlock.phone;
+          let result_sms: any = await firstValueFrom(this.Main.sendSMS(phone || "+51913713735", `Este es tu código de desbloqueo de usuario: ${unlockCode}`));
+          console.log(result_sms);
+
           // LOGICA DE ENVIO DE MENSAJE DE CORREO Y SMS
           messageAlert("Cuidado", "El usuario ha sido bloqueado. Se enviaran instrucción de desbloqueo.", "warning");
         }
@@ -382,6 +394,26 @@ export class LoginComponent implements OnInit{
 
 
     // let resultRecovering: any = await firstValueFrom(this.Supabase.update(COLLECTIONS.MEDICAL_STAFF, ))
+  }
+
+  async registerUnlockAccount() {
+    let resultUserToBlocked: any = await firstValueFrom(this.Main.getMedicalStaff({where: {username: this.credentials.username, unlockCode: this.unlockCode}}));
+    if (!resultUserToBlocked.length) {
+      messageAlert("Error", "Credenciales invalidas", "error");
+      return;
+    }
+    let userToUnlock: any = resultUserToBlocked[0];
+    let resultUserBlocked: any = await firstValueFrom(this.Main.updateMedicalStaff(userToUnlock._id, {updated: {blocked: false, unlockCode: null}}));
+    if (!resultUserBlocked.length) {
+      messageAlert("Error", "Hubo un error al enviar el SMS", "error");
+      return;
+    }
+    messageAlert("Éxito", "Se desloqueó el usuario en mención.", "success");
+    this.isUnlockAccount = false;
+  }
+
+  toggleUnlockAccount() {
+    this.isUnlockAccount = !this.isUnlockAccount;
   }
 
 }

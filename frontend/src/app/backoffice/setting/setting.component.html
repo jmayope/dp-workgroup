@@ -56,7 +56,11 @@
                     <div class="col-5">
                       <div class="input-group" *ngIf="optionSelected._id !=='role_and_permission'">
                         <span class="input-group-text" id="basic-addon1">Establecimiento de Salud</span>
-                        <select name="serviceDeliveryInstitution" [(ngModel)]="filters.serviceDeliveryInstitution" [disabled]="!filters.editable" (change)="getDataByServiceDeliveryInstitution()" class="form-select form-select-sm" (change)="selectEstablishment()">
+                        <select *ngIf="userLoged.usageSupabase" name="service_delivery_institution_id" [(ngModel)]="filters.service_delivery_institution_id" [disabled]="!filters.editable" (change)="getDataByServiceDeliveryInstitution()" class="form-select form-select-sm" (change)="selectEstablishment()">
+                          <option [ngValue]="undefined">--SELECCIONE--</option>
+                          <option *ngFor="let s of serviceDeliveryInstitutions" [ngValue]="s.id">{{s.name | uppercase}}</option>
+                        </select>
+                        <select *ngIf="!userLoged.usageSupabase" name="serviceDeliveryInstitution" [(ngModel)]="filters.serviceDeliveryInstitution" [disabled]="!filters.editable" (change)="getDataByServiceDeliveryInstitution()" class="form-select form-select-sm" (change)="selectEstablishment()">
                           <option [ngValue]="undefined">--SELECCIONE--</option>
                           <option *ngFor="let s of serviceDeliveryInstitutions" [ngValue]="s._id">{{s.name | uppercase}}</option>
                         </select>
@@ -107,14 +111,22 @@
                                   </div>
                                   <div class="col-4 mt-2">
                                     <small>Tipo de Establecimiento</small>
-                                    <select class="form-select form-select-sm" name="typeInstitution" [(ngModel)]="establishment.typeInstitution">
+                                    <select class="form-select form-select-sm" name="typeInstitution" *ngIf="userLoged.usageSupabase" [(ngModel)]="establishment.type_institution_id">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let e of establishmentTypes" [ngValue]="e.id">{{e.name | uppercase}}</option>
+                                    </select>
+                                    <select class="form-select form-select-sm" name="typeInstitution" *ngIf="!userLoged.usageSupabase" [(ngModel)]="establishment.typeInstitution">
                                       <option [ngValue]="undefined">--SELECCIONE--</option>
                                       <option *ngFor="let e of establishmentTypes" [ngValue]="e._id">{{e.name | uppercase}}</option>
                                     </select>
                                   </div>
                                   <div class="col-4 mt-2">
                                     <small>Categoria</small>
-                                    <select class="form-select form-select-sm" name="category" [(ngModel)]="establishment.category">
+                                    <select class="form-select form-select-sm" name="category" *ngIf="userLoged.usageSupabase" [(ngModel)]="establishment.category_id">
+                                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                                      <option *ngFor="let c of establishmentCategories" [ngValue]="c.id">{{c.name | uppercase}}</option>
+                                    </select>
+                                    <select class="form-select form-select-sm" name="category" *ngIf="!userLoged.usageSupabase" [(ngModel)]="establishment.category">
                                       <option [ngValue]="undefined">--SELECCIONE--</option>
                                       <option *ngFor="let c of establishmentCategories" [ngValue]="c._id">{{c.name | uppercase}}</option>
                                     </select>
