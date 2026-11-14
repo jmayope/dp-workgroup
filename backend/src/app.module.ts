@@ -31,12 +31,14 @@ import { CampaignModule } from './campaign/campaign.module';
 import { CampaignMovementModule } from './campaign-movement/campaign-movement.module';
 import { MailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
+import { TwilioModule } from './twilio/twilio.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true
     }),
+    TwilioModule,
     MailModule,
     PatientModule, 
     MedicalStaffModule, 
@@ -63,7 +65,7 @@ import { ConfigModule } from '@nestjs/config';
     AreaModule, 
     CampaignModule, 
     CampaignMovementModule, 
-    MailModule],
+    MailModule, TwilioModule],
   controllers: [AppController],
   providers: [
     AppService,
