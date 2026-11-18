@@ -1,0 +1,244 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7fc;
+  color: #1a2c3e;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dashboard-wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 2rem;
+}
+
+/* Sidebar Vacunas - tema salud */
+.sidebar-minimal {
+  background-color: #ffffff;
+  border-radius: 28px;
+  padding: 1.5rem 0.75rem;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.brand {
+  padding: 0 1rem 1.5rem 1rem;
+  border-bottom: 1px solid #e6edf4;
+  margin-bottom: 1.5rem;
+}
+
+.brand h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.3px;
+  color: #0b3b5f;
+  margin: 0;
+}
+
+.brand span {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #5f8aaf;
+  display: block;
+  margin-top: 4px;
+}
+
+.nav-minimal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-minimal li {
+  margin-bottom: 0.5rem;
+}
+
+.nav-minimal a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.7rem 1rem;
+  border-radius: 18px;
+  text-decoration: none;
+  color: #2c4c6e;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.nav-minimal a i {
+  font-size: 1.2rem;
+  width: 24px;
+  color: #6c8eae;
+}
+
+.nav-minimal a:hover {
+  background-color: #eef3fc;
+  color: #0f5b8c;
+}
+
+.nav-minimal .active a {
+  background-color: #e1f0fe;
+  color: #1a6eae;
+}
+
+.nav-minimal .active i {
+  color: #2c7cb6;
+}
+
+/* Cards temática vacunación */
+.card-minimal {
+  background: #ffffff;
+  border: none;
+  border-radius: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.2s;
+  height: 100%;
+}
+
+.card-minimal:hover {
+  box-shadow: 0 12px 22px -12px rgba(0, 0, 0, 0.08);
+}
+
+.card-header-minimal {
+  background: transparent;
+  border-bottom: 1px solid #edf2f7;
+  padding: 1.2rem 1.5rem 0.7rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a405e;
+}
+
+.card-body-minimal {
+  padding: 1.2rem 1.5rem 1.5rem;
+}
+
+.metric-value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #0b3b5f;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: #6f8eae;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.trend-up {
+  background: #e1f7ed;
+  color: #1f8a5c;
+  border-radius: 40px;
+  padding: 2px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.badge-vaccine {
+  background-color: #e9f2fa;
+  color: #2c7cb6;
+  border-radius: 40px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.badge-supply {
+  background-color: #fef3e2;
+  color: #c47a2e;
+}
+
+.progress-bar-mini {
+  background-color: #e2eaf1;
+  border-radius: 20px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background-color: #3a8fc7;
+  height: 8px;
+  border-radius: 20px;
+}
+
+.table-minimal {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-minimal th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #6b8eae;
+  padding: 1rem 0.5rem 0.7rem 0;
+  border-bottom: 1px solid #eef3f8;
+}
+
+.table-minimal td {
+  padding: 0.85rem 0.5rem 0.85rem 0;
+  border-bottom: 1px solid #f0f5fa;
+  font-size: 0.85rem;
+  color: #1e3a5f;
+  font-weight: 500;
+}
+
+.search-bar {
+  position: relative;
+  max-width: 260px;
+}
+
+.search-bar i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9bb4cc;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 2.4rem;
+  border-radius: 40px;
+  border: 1px solid #dce5ec;
+  background: #fff;
+  font-size: 0.8rem;
+}
+
+.avatar-health {
+  width: 38px;
+  height: 38px;
+  background: #d9eafb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2c7cb6;
+  font-weight: 700;
+}
+
+hr {
+  opacity: 0.5;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    padding: 1rem;
+  }
+
+  .metric-value {
+    font-size: 1.7rem;
+  }
+}

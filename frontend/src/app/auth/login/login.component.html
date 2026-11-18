@@ -1,0 +1,339 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 mt-5">
+      <div class="card">
+        <div class="row g-0">
+          <!-- Imagen/Info lado izquierdo -->
+          <div class="col-md-5 d-none d-md-block">
+            <div class="welcome-image text-center">
+              <div class="app-logo">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h2 class="mb-4">¡Bienvenido!</h2>
+              <p class="mb-4" *ngIf="tabSelected && tabSelected.id === 1">Accede a tu cuenta para disfrutar de todos nuestros servicios exclusivos.</p>
+              <ng-container *ngIf="tabSelected && tabSelected.id === 2">
+                <p>¿No tienes una cuenta? <br>Regístrate en segundos.</p>
+                <br>
+                <p *ngIf="newUser.documentType==='DNI'">
+                  <strong>Si eres persona natural (con DNI)</strong>, será necesario que el administrador de Puesto de Salud <strong>TE ASOCIE</strong> a su Puesto de Salud.
+                </p>
+                <p *ngIf="newUser.documentType==='RUC'">
+                  <strong>Si eres persona jurídica (con RUC, ademas de Administrador)</strong>, será necesario que <strong>ASOCIE</strong> a otros usuarios (con DNI) a su Puesto de Salud.
+                </p>
+              </ng-container>
+            </div>
+          </div>
+
+          <!-- Formulario lado derecho -->
+          <div class="col-md-7">
+            <div class="card-body p-4 p-lg-5">
+              <!-- Pestañas de navegación -->
+              <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist" *ngIf="!isUnlockAccount">
+                <li class="nav-item" role="presentation" *ngFor="let t of tabs">
+                  <button class="nav-link" [disabled]="isForgotPassword" [ngClass]="{'active': tabSelected && tabSelected.id === t.id}"
+                    (click)="toggleTab(t)" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
+                    type="button" role="tab" aria-controls="pills-login" aria-selected="true">{{t.name}}</button>
+                </li>
+              </ul>
+
+              <!-- Contenido de las pestañas -->
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade" [ngClass]="{'show active': isUnlockAccount}"
+                  id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+                  <div class="row">
+                    <div class="col-12">
+                      <h2>Desbloqueo de Usuario</h2>
+                    </div>
+                    <div class="col-12">
+                      <small class="text-secondary">Ingrese el Correo Electrónico</small>
+                      <input type="text" name="unlockCode.username" [(ngModel)]="unlockCode.username" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                      <small class="text-secondary">Código de Desbloqueo</small>
+                      <input type="text" name="unlockCode.code" maxlength="8" minlength="8" [(ngModel)]="unlockCode.code" class="form-control" required>
+                    </div>
+                    <div class="col-12 mt-3 text-center">
+                      <button class="btn btn-light text-danger me-5" (click)="toggleUnlockAccount()">
+                        <i class="fa fa-times me-1"></i>Cancelar
+                      </button>
+                      <button class="btn btn-primary" [disabled]="!unlockCode.username || !unlockCode.code" (click)="registerUnlockAccount()">
+                        <i class="fa fa-save me-1"></i>Desbloquear Usuario
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Formulario de inicio de sesión -->
+                <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 1 && !isUnlockAccount}"
+                  id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+                  <h4 class="mb-4">{{isForgotPassword ? 'Recuperar Contraseña' : 'Iniciar Sesión'}}</h4>
+                  <form *ngIf="!isForgotPassword">
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Nombre de Usuario</label>
+                      <input type="email" class="form-control" name="username" (keydown)="onlyAlphanumeric($event)" [(ngModel)]="credentials.username"
+                        id="username" placeholder="jdoe" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">Contraseña</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" *ngIf="showPassword" name="password"
+                          [(ngModel)]="credentials.password" id="loginPassword" placeholder="Contraseña" required>
+                        <input type="password" class="form-control" *ngIf="!showPassword" name="password"
+                          [(ngModel)]="credentials.password" id="loginPassword" placeholder="******" required>
+                        <button class="btn btn-outline-secondary" (click)="showPassword = !showPassword" type="button"
+                          id="togglePassword">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Recordarme</label>
+                      <a (click)="toggleForgotPassword()" class="float-end hand" data-bs-toggle="modal"
+                        data-bs-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="d-grid gap-2 mb-4 text-center">
+                      <button type="submit" class="btn btn-primary" (click)="login()">Iniciar Sesión</button>
+                      <br>
+                      O tienes un Código de Desbloqueo
+                      <button type="type" class="btn btn-light text-primary" (click)="toggleUnlockAccount()">Desbloquear Usuario</button>
+                    </div>
+                  </form>
+                  <form *ngIf="isForgotPassword">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" name="email" (keydown)="onlyAlphanumeric($event)" [(ngModel)]="forgotPassword.email"
+                        id="email" placeholder="jdoe" required>
+                    </div>
+                    <div class="d-grid gap-2 mb-4">
+                      <div class="row">
+                        <div class="col-3">
+                          <button class="btn btn-outline-primary" (click)="toggleForgotPassword()">Cancelar</button>
+                        </div>
+                        <div class="col-9">
+                          <button type="submit" class="btn btn-block btn-primary" [disabled]="recovering" (click)="recoverPassword()">
+                            <span *ngIf="!recovering">
+                              Recuperar Contraseña
+                            </span>
+                            <div class="spinner-border" role="status" *ngIf="recovering">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Formulario de registro -->
+                <div class="tab-pane fade" [ngClass]="{'show active': tabSelected && tabSelected.id === 2 && !isUnlockAccount}"
+                  id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+                  <h4 class="mb-4">Crear Cuenta</h4>
+                  <form #registerForm="ngForm">
+                    <div class="row">
+                      <div class="col-md-7 mb-3">
+                        <small>Tipo de Documento</small>
+                        <select name="documentType" [(ngModel)]="newUser.documentType" (change)="selectDocumentType()" class="form-select">
+                          <option [ngValue]="undefined">--SELECCIONE TIPO--</option>
+                          <option *ngFor="let dt of documentTypes" [ngValue]="dt._id">{{dt.name | uppercase}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <small>Número de Documento</small>
+                        <div class="input-group">
+                          <input type="text" name="code" (keydown)="onlyNumber($event)" [disabled]="!newUser.documentType || newUser.searched" [maxlength]="newUser.documentNumberLength" placeholder="{{newUser.documentType === 'DNI' ? '99XXXXXX' : '20XXXXXXXXX'}}" [minlength]="newUser.documentNumberLength" [(ngModel)]="newUser.code" class="form-control" required>
+                          <button class="btn btn-light text-primary" (click)="validateDocument()" *ngIf="!newUser.searched && newUser.code && (newUser.code.length === newUser.documentNumberLength)">
+                            <i class="fa fa-search"></i>
+                          </button>
+                          <button class="btn btn-light text-danger" (click)="resetSearch()" *ngIf="newUser.searched">
+                            <i class="fa fa-times"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <ng-container *ngIf="newUser.documentTyoe === 'DNI'">
+                        <div class="col-md-6 mb-3">
+                          <label for="registerFirstName" class="form-label">Nombres</label>
+                          <input type="text" class="form-control" name="firstName" disabled id="registerFirstName"
+                            [(ngModel)]="newUser.firstName" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="registerLastName" class="form-label">Apellidos</label>
+                          <input type="text" class="form-control" name="lastName" disabled id="registerLastName"
+                            [(ngModel)]="newUser.lastName" placeholder="Tu apellido" required>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="newUser.documentType === 'RUC'">
+                        <div class="col-md-12 mb-2">
+                          <label for="registerBusinessName" class="form-label">Razon Social</label>
+                          <input type="text" class="form-control" name="businessName" disabled id="registerBusinessName"
+                            [(ngModel)]="newUser.businessName" placeholder="Empresa SAC" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                          <label for="registerBusinessAddress" class="form-label">Dirección</label>
+                          <input type="text" class="form-control" name="businessAddress" disabled id="registerBusinessAddress"
+                            [(ngModel)]="newUser.businessAddress" placeholder="Avenida, Calle, Jiron, Prolongación, etc." required>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="mb-3">
+                      <label for="registerEmail" class="form-label">Correo electrónico</label>
+                      <input type="email" class="form-control" (keydown)="onlyAlphanumeric($event)" id="registerEmail" name="email"
+                        [(ngModel)]="newUser.email" placeholder="correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" name="acceptTerms"
+                        [(ngModel)]="newUser.acceptTerms" id="termsCheck" required>
+                      <label class="form-check-label" for="termsCheck">
+                        Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">términos y
+                          condiciones</a>
+                      </label>
+                    </div>
+                    <div class="d-grid gap-2 mb-4">
+                      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || registering"
+                        (click)="register()">Crear Cuenta</button>
+                    </div>
+                  </form>
+                  <!-- Enlace para iniciar sesión (móvil) -->
+                  <div class="text-center">
+                    <p>¿Ya tienes una cuenta? <br> <a class="btn btn-outline-primary rounded-pill" (click)="toggleTab(tabByDefault)" id="switchToLogin">Inicia sesión</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para recuperar contraseña -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgotPasswordModalLabel">Recuperar contraseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Introduce tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
+        <form>
+          <div class="mb-3">
+            <label for="recoveryEmail" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="recoveryEmail" placeholder="correo@ejemplo.com" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Enviar instrucciones</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para términos y condiciones -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>1. Aceptación de los Términos</h5>
+        <p>Al registrarse y utilizar nuestra aplicación, usted acepta estar sujeto a estos Términos y Condiciones y a
+          nuestra Política de Privacidad.</p>
+
+        <h5>2. Registro de Cuenta</h5>
+        <p>Para utilizar ciertas funciones de la aplicación, debe registrarse y proporcionar información precisa y
+          completa. Usted es responsable de mantener la confidencialidad de su contraseña y cuenta.</p>
+
+        <h5>3. Privacidad</h5>
+        <p>Su privacidad es importante para nosotros. Consulte nuestra Política de Privacidad para comprender cómo
+          recopilamos, usamos y divulgamos información sobre usted.</p>
+
+        <h5>4. Propiedad Intelectual</h5>
+        <p>Todos los derechos de propiedad intelectual relacionados con la aplicación son propiedad de nuestra empresa o
+          de nuestros licenciantes.</p>
+
+        <h5>5. Modificaciones</h5>
+        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en
+          vigor inmediatamente después de su publicación.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="animate fadeIn">
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row" *ngIf="!hasProfiles">
+                        <div class="col-12">
+                            <h1>Hola</h1>
+                            <p>Ingresa para iniciar.</p>
+                        </div>
+                        <div class="col-12">
+                            <form #loginForm="ngForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="username">Nombre de Usuario</label>
+                                        <input type="text" name="username" [(ngModel)]="credentials.username" class="form-control" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="password">Contraseña</label>
+                                        <input type="password" name="password" [(ngModel)]="credentials.password" class="form-control" required>
+                                    </div>
+                                    <div class="col-12 mt-2 text-center">
+                                        <button class="btn btn-primary" [disabled]="loginForm.invalid" (click)="login()">
+                                            Ingresar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="hasProfiles && userLoged">
+                        <div class="col-12">
+                            <h1>Owww</h1>
+                            <p>Tienes mas de un perfil, elige uno para continuar:</p>
+                        </div>
+                        <div class="col-12">
+                            <ul class="list-group">
+                                <li class="list-group-item hand" [ngClass]="{'list-group-item-primary': userLoged.currentProfile && userLoged.currentProfile._id === p._id}" *ngFor="let p of userLoged.profiles" (click)="toggleSelectProfile(p)">
+                                    <div class="row">
+                                        <div class="col-1 align-middle">
+                                            <i class="bi bi-person-circle mr-1"></i>
+                                        </div>
+                                        <div class="col-9">
+                                            <strong>{{p.name}}</strong> <br>
+                                            <small>{{p.description | uppercase}}</small>
+                                        </div>
+                                        <div class="col-2">
+                                            <i class="bi" [ngClass]="{'bi-circle-fill': userLoged.currentProfile && userLoged.currentProfile._id === p._id, 'bi-circle': userLoged.currentProfile && userLoged.currentProfile._id !== p._id}"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <button class="btn btn-primary" (click)="goToDashboard()">
+                                Seleccionar perfil e Ingresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div> -->

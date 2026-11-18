@@ -1,0 +1,10 @@
+{
+    "name?": "sdasdasd",
+    "code?": "sdasdasd",
+    "description?": "sdasdasd",
+    "status?": true,
+    "createdAt?": "@datetime",
+    "createdBy?": "$medical_staff",
+    "updatedAt?": "@datetime",
+    "updatedBy?": "$medical_staff"
+}

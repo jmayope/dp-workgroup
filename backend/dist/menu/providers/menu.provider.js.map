@@ -1,0 +1,1 @@
+{"version":3,"file":"menu.provider.js","sourceRoot":"","sources":["../../../src/menu/providers/menu.provider.ts"],"names":[],"mappings":";;;AACA,wDAA8C;AAEjC,QAAA,YAAY,GAAG;IAC1B;QACE,OAAO,EAAE,YAAY;QACrB,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,OAAO,EAAE,kBAAI,CAAC;QACvE,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAChC;CACF,CAAA"}

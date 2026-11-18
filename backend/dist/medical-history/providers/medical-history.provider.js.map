@@ -1,0 +1,1 @@
+{"version":3,"file":"medical-history.provider.js","sourceRoot":"","sources":["../../../src/medical-history/providers/medical-history.provider.ts"],"names":[],"mappings":";;;AACA,8EAAmE;AAEtD,QAAA,sBAAsB,GAAG;IAClC;QACI,OAAO,EAAE,uBAAuB;QAChC,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,kBAAkB,EAAE,uCAAc,CAAC;QAC5F,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

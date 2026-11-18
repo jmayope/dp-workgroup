@@ -1,0 +1,1 @@
+{"version":3,"file":"kardex.provider.js","sourceRoot":"","sources":["../../../src/kardex/providers/kardex.provider.ts"],"names":[],"mappings":";;;AACA,4DAAkD;AAErC,QAAA,cAAc,GAAG;IAC5B;QACE,OAAO,EAAE,cAAc;QACvB,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,SAAS,EAAE,sBAAM,CAAC;QAC3E,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAChC;CACF,CAAA"}

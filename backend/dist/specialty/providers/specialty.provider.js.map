@@ -1,0 +1,1 @@
+{"version":3,"file":"specialty.provider.js","sourceRoot":"","sources":["../../../src/specialty/providers/specialty.provider.ts"],"names":[],"mappings":";;;AACA,kEAAwD;AAE3C,QAAA,iBAAiB,GAAG;IAC7B;QACI,OAAO,EAAE,iBAAiB;QAC1B,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,KAAK,CAAC,aAAa,EAAE,4BAAS,CAAC;QAClF,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAClC;CACJ,CAAA"}

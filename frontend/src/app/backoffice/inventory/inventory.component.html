@@ -1,0 +1,247 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-7">
+      <i class="bi bi-diagram-3-fill me-1"></i>Gestión de Inventario
+    </div>
+    <div class="col-5 text-end">
+      <button class="btn btn-sm bg-primary-color text-white" (click)="toggleMovement()">
+        <i class="bi bi-signpost-split-fill me-1"></i>Nuevo Movimiento
+      </button>
+    </div>
+    <div class="col-12 mt-2">
+      <div class="row">
+        <div class="col-3">
+          <div class="card card-body bg-light-color text-primary-color">
+            <div class="row">
+              <div class="col-12">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <div class="col-12 text-center">
+                Total Articulos <br>
+                <h2>
+                  {{totals.products || 0}} productos
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="totals.kardexs">
+          <div class="card card-body bg-light-info-color text-info-color">
+            <div class="row">
+              <div class="col-12">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <div class="col-12 text-center">
+                Total items <br>
+                <h2>
+                  {{totals.kardexs || 0}} productos
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="totals.medicalStaffs">
+          <div class="card card-body bg-light-success-color text-success-color">
+            <div class="row">
+              <div class="col-12">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <div class="col-12 text-center">
+                Total Personal <br>
+                <h2>
+                  {{totals.medicalStaffs || 0}} productos
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 mt-2">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="row">
+            <div class="col-6">
+              <div class="input-group">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control text-uppercase" name="text" [(ngModel)]="filter.text" placeholder="BUSCAR POR NOMBRE" aria-label="BUSCAR POR NOMBRE" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-2">
+              <select name="status" [(ngModel)]="filter.status" class="form-select">
+                <option [ngValue]="undefined">--TODOS--</option>
+                <option [ngValue]="true">ACTIVO</option>
+                <option [ngValue]="false">INACTIVO</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-123"></i></span>
+                <select name="limit" [(ngModel)]="filter.pagination.limit" class="form-select">
+                  <option *ngFor="let n of numberRows" [ngValue]="n">{{n}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2 text-end">
+              <button class="btn btn-block bg-primary-color text-white" (click)="search()">
+                <i class="bi bi-search me-1"></i>Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="filter.searched">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body text-center" *ngIf="!results.length">
+            <i class="bi bi-x-lg"></i> <br>
+            No se encontraron registros
+          </div>
+          <div class="card-body" *ngIf="results.length">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-secondary" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: -3px; z-index: 1;" *ngIf="results.length">
+                <div class="row font-xs text-primary-color">
+                  <div class="col-1"><strong>Registrado</strong></div>
+                  <div class="col-1"><strong>Tipo</strong></div>
+                  <div class="col-3"><strong>Producto</strong></div>
+                  <div class="col-1"><strong>Cantidad</strong></div>
+                  <div class="col-2"><strong><i class="bi bi-messages me-1"></i>Motivo</strong></div>
+                  <div class="col-2"><strong>Asignado a</strong></div>
+                  <div class="col-2 text-end"><strong>Acciones</strong></div>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group" style="max-height: 450px; overflow: auto;">
+              <li class="list-group-item" *ngFor="let p of results">
+                <div class="row font-nm">
+                  <div class="col-1 pt-1">
+                    {{p.createAt | date:'dd/MM/yy'}}
+                    <i class="bi bi-clock me-1" title="{{p.createAt | date:'HH:mm:ss'}}"></i><br>
+                  </div>
+                  <div class="col-1 pt-1">
+                    <span class="badge" [ngClass]="{'bg-success': p.inputType.name === 'ENTRADA', 'bg-danger': p.inputType.name === 'SALIDA'}">
+                      {{p.inputType.name | uppercase}}
+                    </span>
+                  </div>
+                  <div class="col-3">
+                    <span class="badge bg-primary">
+                      {{p.product.code}}
+                    </span> {{p.product.name | uppercase}} <br>
+                    <small>{{p.product.description | uppercase}}</small>
+                  </div>
+                  <div class="col-1">
+                    {{p.quantity}}
+                  </div>
+                  <div class="col-2">
+                    <small>
+                      {{p.reason | uppercase}}
+                    </small>
+                  </div>
+                  <div class="col-2">
+                    <span *ngIf="p.assignedTo">
+                      {{p.assignedTo.code}} <br>
+                      {{p.assignedTo.firstName}}
+                    </span>
+                  </div>
+                  
+                  <div class="col-2 text-end">
+                    <button class="btn btn-sm btn-light text-primary-color" (click)="toggleMovement(p)">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-light text-danger" (click)="deleteMovement(p)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-secondary" style="border-top-left-radius: 0; border-top-right-radius: 0; margin-top:-3px; z-index: 1;" *ngIf="results.length">
+                <div class="row font-xs">
+                  <div class="col-10 pt-2">Mostrando {{(filter.pagination.page - 1) * filter.pagination.limit + 1}}-{{filter.pagination.page * filter.pagination.limit}} de {{filter.totalRows}}</div>
+                  <div class="col-2 text-end">
+                    <div class="input-group input-group-sm">
+                      <button class="btn btn-light text-primary" type="button" id="button-addon1" *ngIf="filter.pagination.page !== 1" (click)="changePage(filter.pagination.page-1)">Anterior</button>
+                      <select name="page" [(ngModel)]="filter.pagination.page" (change)="getKardexs()" class="form-select">
+                        <option *ngFor="let p of pages" [ngValue]="p">{{p}}</option>
+                      </select>
+                      <button class="btn btn-light text-primary-color" type="button" id="button-addon2" *ngIf="filter.pagination.page < pages.length" (click)="changePage(filter.pagination.page+1)">Siguiente</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #itemModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-nm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Nuevo Movimiento</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleMovement()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="newItem">
+        <div class="row">
+          <div class="col-12">
+            <form #inputForm="ngForm">
+              <div class="row">
+                <div class="col-12">
+                  <label for="inputType">Tipo de Movimiento</label>
+                  <select name="inputType" [(ngModel)]="newItem.inputType" class="form-select" required>
+                    <option [ngValue]="undefined">--SELECCIONE--</option>
+                    <option *ngFor="let it of inputTypes" [ngValue]="it._id">{{it.name | uppercase}}</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="product">Vacuna</label>
+                  <select name="product" [(ngModel)]="newItem.product" (change)="getInputTypeByProduct()" class="form-select" required>
+                    <option [ngValue]="undefined">--SELECCIONE--</option>
+                    <option *ngFor="let v of vaccines" [ngValue]="v._id">{{v.code | uppercase}} - {{v.name | uppercase}}</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="quantity">Cantidad</label>
+                  <input type="number" name="quantity" [(ngModel)]="newItem.quantity" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label for="reason">Motivo</label>
+                  <textarea name="reason" rows="3" [(ngModel)]="newItem.reason" class="form-control no-resize text-uppercase"></textarea>
+                </div>
+                <ng-container *ngIf="inputTypeFound && inputTypeFound.valueToCalculate == -1">
+                  <div class="col-12">
+                    <label for="assignedTo">Asignado a</label>
+                    <select name="assignedTo" [(ngModel)]="newItem.assignedTo" class="form-select" required>
+                      <option [ngValue]="undefined">--SELECCIONE--</option>
+                      <option *ngFor="let ms of medicalStaffs" [ngValue]="ms._id">{{ms.code}} - {{ms.firstName | uppercase}}</option>
+                    </select>
+                  </div>
+                </ng-container>
+                <div class="col-12" *ngIf="newItem.editing">
+                  <label for="status">Estado</label>
+                  <select name="status" [(ngModel)]="newItem.status" class="form-select" required>
+                    <option *ngFor="let r of recordStates" [ngValue]="r._id">{{r.name | uppercase}}</option>
+                  </select>
+                </div>
+                <div class="col-12 text-center pt-3">
+                  <button class="btn btn-sm bg-primary-color text-white" [disabled]="inputForm.invalid" (click)="saveKardex()">
+                    <i class="bi bi-save me-1"></i>Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

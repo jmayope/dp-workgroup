@@ -1,0 +1,12 @@
+{
+    "serviceDeliveryInstitution?": "$service_delivery_institution",
+    "name?": "asdasda",
+    "campaignType?": "$type_list",
+    "startDate?": "@datetime",
+    "finishDate?": "@datetime",
+    "usageExternalForm?": true,
+    "urlExternalForm?": "asdasda",
+    "campaignStatus?": "$type_list",
+    "status?": true,
+    "createAt?": "@datetime"
+}

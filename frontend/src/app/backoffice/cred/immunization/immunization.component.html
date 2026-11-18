@@ -1,0 +1,588 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-12 mb-3 text-primary-color">
+      <i class="bi bi-gear me-1"></i>Area de Inmunizaciones
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <!-- ADMINISTRACIÓN DE ETAPAS DE CRECIMIENTO -->
+            <div class="col-12 mb-3">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-8">
+                      <i class="bi bi-ladder me-1"></i>Administración de Etapas de Crecimiento
+                    </div>
+                    <div class="col-4 text-end">
+                      <button class="btn btn-sm bg-primary-color text-white" (click)="toggleGrowthStageModal()">
+                        <i class="bi bi-plus me-1"></i>Agregar Etapa de Crecimiento
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label for="name">Buscar</label>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control text-uppercase" placeholder="ETAPA DE CRECIMIENTO" aria-label="ETAPA DE CRECIMIENTO" aria-describedby="basic-addon1">
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <label for="status">Estado</label>
+                      <select name="status" id="" class="form-select form-select-sm">
+                        <option [ngValue]="undefined">--TODOS--</option>
+                        <option [ngValue]="true">Activos</option>
+                        <option [ngValue]="false">Inactivos</option>
+                      </select>
+                    </div>
+                    <div class="col-3 pt-3 text-end d-grid gap-2">
+                      <button class="btn btn-sm bg-primary-color text-white">
+                        Buscar
+                      </button>
+                    </div>
+                  </div>
+                  <ul class="list-group" style="max-height: 400px; overflow: auto;">
+                    <ng-container *ngIf="!growthStages.length">
+                      <li class="list-group-item text-center">
+                        <i class="bi bi-x-lg"></i><br>
+                        No se encontraron registros.
+                      </li>
+                    </ng-container>
+                    <ng-container *ngIf="growthStages.length">
+                      <li *ngFor="let g of growthStages" class="list-group-item">
+                        <div class="row">
+                          <div class="col-5">
+                            <strong>{{g.name | uppercase}}</strong> <br>
+                            <span class="text-secondary">{{g.description | uppercase}}</span>
+                          </div>
+                          <div class="col-2 pt-2">
+                            <div *ngIf="g.doses">
+                              <div *ngIf="g.doses.length">
+                                <button class="btn btn-sm btn-light rounded-circle px-2 py-1 list-circle-nested" title="{{d.description | uppercase}}" *ngFor="let d of g.doses">
+                                  {{d.number}}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-2">
+                            <span class="badge" [ngClass]="{'bg-success': g.status, 'bg-danger': !g.status}">
+                              {{g.status ? 'ACTIVO' : 'INACTIVO'}}
+                            </span>
+                          </div>
+                          <div class="col-3 text-end">
+                            <button class="btn btn-sm btn-light text-success-color me-2" (click)="toggleConfigGrowthStageModal(g)">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleGrowthStageModal(g)">
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm text-danger btn-light" (click)="deleteGrowthStage(g)">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- ADMINISTRACIÓN DE VACUNAS -->
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-8">
+                      <i class="bi bi-capsule me-1"></i>Administración de Articulos
+                    </div>
+                    <div class="col-4 text-end">
+                      <button class="btn btn-sm bg-primary-color text-white me-2" (click)="toggleCategoryModal()">
+                        <i class="bi bi-plus me-1"></i>Categorias
+                      </button>
+                      <button class="btn btn-sm bg-primary-color text-white" (click)="toggleArticleModal()">
+                        <i class="bi bi-plus me-1"></i>Agregar Articulo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label for="name">Buscar</label>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control text-uppercase" placeholder="VACUNA" aria-label="VACUNA" aria-describedby="basic-addon1">
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <label for="status">Estado</label>
+                      <select name="status" id="" class="form-select form-select-sm">
+                        <option [ngValue]="undefined">--TODOS--</option>
+                        <option [ngValue]="true">Activos</option>
+                        <option [ngValue]="false">Inactivos</option>
+                      </select>
+                    </div>
+                    <div class="col-3 pt-3 text-end d-grid gap-2">
+                      <button class="btn btn-sm bg-primary-color text-white">
+                        Buscar
+                      </button>
+                    </div>
+                  </div>
+                  <tabset>
+                    <tab heading="Categorias" id="tab1">
+                      <ul class="list-group" style="max-height: 400px; overflow: auto;">
+                        <ng-container *ngIf="!categories.length">
+                          <li class="list-group-item text-center">
+                            <i class="bi bi-x-lg"></i><br>
+                            No se encontraron registros.
+                          </li>
+                        </ng-container>
+                        <ng-container *ngIf="categories.length">
+                          <li *ngFor="let v of categories" class="list-group-item">
+                            <div class="row">
+                              <div class="col-8">
+                                <strong>{{v.name | uppercase}}</strong> <br>
+                                {{v.description}}
+                              </div>
+                              <div class="col-2 pt-2">
+                                <span class="badge" [ngClass]="{'bg-success': v.status, 'bg-danger': !v.status}">
+                                  {{v.status ? 'ACTIVO' : 'INACTIVO'}}
+                                </span>
+                              </div>
+                              <div class="col-2 text-end">
+                                <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleCategoryModal(v)">
+                                  <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm text-danger btn-light" (click)="deleteCategory(v)">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </tab>
+                    <tab heading="Articulos">
+                      <ul class="list-group" style="max-height: 400px; overflow: auto;">
+                        <ng-container *ngIf="!articles.length">
+                          <li class="list-group-item text-center">
+                            <i class="bi bi-x-lg"></i><br>
+                            No se encontraron registros.
+                          </li>
+                        </ng-container>
+                        <ng-container *ngIf="articles.length">
+                          <li *ngFor="let v of articles" class="list-group-item">
+                            <div class="row">
+                              <div class="col-4">
+                                <strong>{{v.name | uppercase}}</strong> <br>
+                                {{v.description}}
+                              </div>
+                              <div class="col-2 pt-2">
+                                <div *ngIf="v.doses">
+                                  <div *ngIf="v.doses.length">
+                                    <button class="btn btn-sm btn-light rounded-circle px-2 py-1 list-circle-nested" title="{{d.description | uppercase}}" *ngFor="let d of v.doses">
+                                      {{d.number}}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-2 pt-2">
+                                <span class="badge bg-warning text-dark" >
+                                  {{v.category.name | uppercase}}
+                                </span>
+                              </div>
+                              <div class="col-2 pt-2">
+                                <span class="badge" [ngClass]="{'bg-success': v.status, 'bg-danger': !v.status}">
+                                  {{v.status ? 'ACTIVO' : 'INACTIVO'}}
+                                </span>
+                              </div>
+                              <div class="col-2 text-end">
+                                <button class="btn btn-sm btn-light text-success me-2" *ngIf="v.category && v.category.additionalFields && v.category.additionalFields.doseApply" (click)="toggleDoseModal(v)">
+                                  <i class="bi bi-list-stars"></i>
+                                </button>
+                                <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleArticleModal(v)">
+                                  <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm text-danger btn-light" (click)="deleteArticle(v)">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </tab>
+                  </tabset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #articleModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-nm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Vacuna</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleArticleModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="newArticle">
+        <div class="row">
+          <div class="col-12">
+            <form #articleForm="ngForm">
+              <div class="row">
+                <div class="col-12">
+                  <label for="category">Categoria</label>
+                  <select name="category" [(ngModel)]="newArticle.category" class="form-select">
+                    <option [ngValue]="undefined">--SELECCIONE--</option>
+                    <option *ngFor="let c of categories" [ngValue]="c._id">{{c.name | uppercase}}</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="code">Código</label>
+                  <input type="text" name="code" [(ngModel)]="newArticle.code" class="form-control" required>
+                </div>
+                <div class="col-8">
+                  <label for="name">Nombre</label>
+                  <input type="text" name="name" [(ngModel)]="newArticle.name" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label for="description">Descripción</label>
+                  <textarea name="description" rows="4" [(ngModel)]="newArticle.description" class="form-control no-resize" required></textarea>
+                </div>
+                <div class="col-6">
+                  <label for="measurementUnit">Unidad</label>
+                  <input type="text" name="measurementUnit" [(ngModel)]="newArticle.measurementUnit" class="form-control">
+                </div>
+                <div class="col-6">
+                  <label for="minimumStock">Stock min.</label>
+                  <input type="text" name="minimumStock" [(ngModel)]="newArticle.minimumStock" class="form-control">
+                </div>
+                <div class="col-12 mt-2 text-end">
+                  <button class="btn btn-sm btn-light" [ngClass]="{'text-primary': !newArticle.showOptionalFields, 'text-danger': newArticle.showOptionalFields}" (click)="toggleShowOptionalFields()">
+                    <i class="bi me-1" [ngClass]="{'bi-eye': !newArticle.showOptionalFields, 'bi-eye-slash': newArticle.showOptionalFields}"></i>{{newArticle.showOptionalFields ? 'Ocultar' : 'Ver'}}&nbsp;Campos adicionales
+                  </button>
+                </div>
+                <ng-container *ngIf="newArticle.showOptionalFields">
+                  <div class="col-12">
+                    <label for="location">Ubicación</label>
+                    <textarea rows="3" name="location" [(ngModel)]="newArticle.location" class="form-control no-resize"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <label for="provider">Proveedor</label>
+                    <textarea rows="3" name="provider" [(ngModel)]="newArticle.provider" class="form-control no-resize"></textarea>
+                  </div>
+                </ng-container>
+                <div class="col-12" *ngIf="newArticle.editing">
+                  <label for="status">Estado</label>
+                  <select name="status" [(ngModel)]="newArticle.status" class="form-select" required>
+                    <option [ngValue]="true">ACTIVO</option>
+                    <option [ngValue]="false">INACTIVO</option>
+                  </select>
+                </div>
+                <div class="col-12 text-center pt-3">
+                  <button class="btn btn-sm bg-primary-color text-white" (click)="saveArticle()">
+                    <i class="bi bi-save me-1"></i>Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #categoryModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Categoria</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleCategoryModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="newCategory">
+        <div class="row">
+          <div class="col-12">
+            <form #categoryForm="ngForm">
+              <div class="row">
+                <div class="col-4">
+                  <label for="code">Código</label>
+                  <input type="text" name="code" [(ngModel)]="newCategory.code" class="form-control" required>
+                </div>
+                <div class="col-8">
+                  <label for="name">Nombre</label>
+                  <input type="text" name="name" [(ngModel)]="newCategory.name" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label for="description">Descripción</label>
+                  <textarea name="description" rows="4" [(ngModel)]="newCategory.description" class="form-control no-resize" required></textarea>
+                </div>
+                <div class="col-12 mt-2" *ngIf="newCategory.additionalFields">
+                  <div class="card hand" [ngClass]="{'text-success': newCategory.additionalFields.doseApply, 'text-secondary': !newCategory.additionalFields.doseApply}" (click)="toggleDoseApply(newCategory)">
+                    <div class="card-body p-1">
+                      <div class="row">
+                        <div class="col-2 text-center">
+                          <i class="bi" [ngClass]="{'bi-toggle-on': newCategory.additionalFields.doseApply, 'bi-toggle-off': !newCategory.additionalFields.doseApply}"></i>
+                        </div>
+                        <div class="col-10">
+                          Se aplica dosis?
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" *ngIf="newCategory.editing">
+                  <label for="status">Estado</label>
+                  <select name="status" [(ngModel)]="newCategory.status" class="form-select" required>
+                    <option [ngValue]="true">ACTIVO</option>
+                    <option [ngValue]="false">INACTIVO</option>
+                  </select>
+                </div>
+                <div class="col-12 text-center pt-3">
+                  <button class="btn btn-sm bg-primary-color text-white" (click)="saveCategory()">
+                    <i class="bi bi-save me-1"></i>Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" bsModal #doseModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Dosis de la Vacuna</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleDoseModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="articleSelected">
+        <div class="row">
+          <div class="col-12">
+            <ul class="list-group">
+              <ng-container *ngIf="newDose">
+                <li class="list-group-item bg-secondary text-white">
+                  Nueva Dosis
+                </li>
+                <li class="list-group-item">
+                  <form #doseForm="ngForm">
+                    <div class="row">
+                      <div class="col-3">
+                        <label for="number">Número</label>
+                        <input type="number" name="number" [(ngModel)]="newDose.number" class="form-control" required>
+                      </div>
+                      <div class="col-9">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" [(ngModel)]="newDose.name" class="form-control" required>
+                      </div>
+                      <div class="col-9">
+                        <label for="growthStage">Etapa de Crecimiento</label>
+                        <select name="growthStage" [(ngModel)]="newDose.growthStage" class="form-select">
+                          <option [ngValue]="undefined">--NINGUNO--</option>
+                          <option *ngFor="let g of growthStages" [ngValue]="g._id">{{g.name | uppercase}}</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <label for="description">Descripción</label>
+                        <textarea name="description" rows="4" [(ngModel)]="newDose.description" class="form-control no-resize" required></textarea>
+                      </div>
+                      <div class="col-12" *ngIf="newDose.editing">
+                        <label for="status">Estado</label>
+                        <select name="status" [(ngModel)]="newDose.status" class="form-select" required>
+                          <option [ngValue]="true">ACTIVO</option>
+                          <option [ngValue]="false">INACTIVO</option>
+                        </select>
+                      </div>
+                      <div class="col-12 text-center pt-3">
+                        <button class="btn btn-sm bg-primary-color text-white" (click)="saveDose()">
+                          <i class="bi bi-save me-1"></i>Guardar cambios
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+              </ng-container>
+              <li class="list-group-item text-center" *ngIf="!newDose">
+                <button class="btn btn-sm btn-light text-primary" (click)="toggleDose()">
+                  <i class="bi bi-plus me-1"></i>Agregar Dosis
+                </button>
+              </li>
+              <li class="list-group-item text-center" *ngIf="!articleSelected.doses.length">
+                <i class="bi bi-x-lg"></i><br>
+                No se registraron dosis para esta vacuna.
+              </li>
+              <ng-container *ngIf="articleSelected.doses.length">
+                <li class="list-group-item" *ngFor="let d of articleSelected.doses">
+                  <div class="row">
+                    <div class="col-1">
+                      {{d.number}}
+                    </div>
+                    <div class="col-5">
+                      <strong>{{d.name | uppercase}}</strong><br>
+                      {{d.description}}
+                    </div>
+                    <div class="col-3">
+                      {{(d.growthStage ? d.growthStage.name : '') | uppercase}}
+                    </div>
+                    <div class="col-3 text-end">
+                      <button class="btn btn-light me-2 text-primary" (click)="toggleDose(d)">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-light text-danger" (click)="deleteDose(d)">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #growthStageModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Etapa de Crecimiento</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleGrowthStageModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="newGrowthStage">
+        <div class="row">
+          <div class="col-12">
+            <form #growthForm="ngForm">
+              <div class="row">
+                <div class="col-12">
+                  <label for="name">Nombre</label>
+                  <input type="text" name="name" [(ngModel)]="newGrowthStage.name" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label for="description">Descripción</label>
+                  <textarea name="description" rows="4" [(ngModel)]="newGrowthStage.description" class="form-control no-resize" required></textarea>
+                </div>
+                <div class="col-12" *ngIf="newGrowthStage.editing">
+                  <label for="status">Estado</label>
+                  <select name="status" [(ngModel)]="newGrowthStage.status" class="form-select" required>
+                    <option [ngValue]="true">ACTIVO</option>
+                    <option [ngValue]="false">INACTIVO</option>
+                  </select>
+                </div>
+                <div class="col-12 text-center pt-3">
+                  <button class="btn btn-sm bg-primary-color text-white" (click)="saveGrowthStage()">
+                    <i class="bi bi-save me-1"></i>Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #configGrowthStageModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-nm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Configuración de Etapa</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleConfigGrowthStageModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="growthStageSelected">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <small class="text-secondary">Etapa de Crecimiento</small><br>
+                    <span>{{growthStageSelected.name | uppercase}}</span> <br>
+                    <span class="text-secondary">{{growthStageSelected.description | uppercase}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mt-2 text-center" *ngIf="!newVaccine">
+            <div class="card" (click)="addVaccine()">
+              <div class="card-body p-1 hand text-secondary text-center">
+                <i class="bi bi-plus me-1"></i>Agregar Vacuna
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mt-2" *ngIf="newVaccine">
+            <div class="card">
+              <div class="card-header">
+                Nueva Vacuna
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <small class="text-secondary">Vacuna</small>
+                  <select name="id" [(ngModel)]="newVaccine._id" class="form-select">
+                    <option [ngValue]="undefined">--SELECCIONE--</option>
+                    <option *ngFor="let v of vaccines" [ngValue]="v._id">{{v.name | uppercase}}</option>
+                  </select>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-6">
+                    <button class="btn btn-light text-danger" (click)="addVaccine()">
+                      Cancelar
+                    </button>
+                  </div>
+                  <div class="col-6 text-end">
+                    <button class="btn btn-sm btn-light text-primary" (click)="saveVaccine()">
+                      Grabar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="card mb-2" *ngFor="let v of growthStageSelected.vaccines">
+              <div class="card-body p-1">
+                <div class="row">
+                  <div class="col-10 pt-1 ps-3">
+                    {{v.name | uppercase}}
+                  </div>
+                  <div class="col-2 text-end">
+                    <button class="btn btn-sm btn-light text-danger" (click)="deleteVaccine(v)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

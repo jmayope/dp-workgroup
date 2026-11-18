@@ -1,0 +1,186 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-8 pt-2 text-primary-color">
+          <i class="bi bi-table me-1"></i>Gestión de Historias Clínicas
+        </div>
+        <div class="col-4 text-end">
+          <button class="btn btn-sm bg-primary-color text-white" (click)="toggleMedicalHistory()">
+            <i class="bi bi-arrow-repeat me-1"></i>Nueva Historia Clínica
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control text-uppercase" name="text" [(ngModel)]="filter.text" placeholder="BUSCAR POR CÓDIGO" aria-label="BUSCAR POR CÓDIGO" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-table"></i></span>
+                <select name="limit" [(ngModel)]="filter.pagination.limit" class="form-select">
+                  <option *ngFor="let n of numberRows" [ngValue]="n">{{n}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-1">
+              <button class="btn bg-primary-color text-white btn-sm btn-block" (click)="search()">
+                <i class="bi bi-search me-1"></i>Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <ng-container *ngIf="results.length">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-secondary" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: -3px; z-index: 1;" *ngIf="results.length">
+            <div class="row font-xs text-primary-color">
+              <div class="col-1"><strong>DNI</strong></div>
+              <div class="col-4"><strong>Nombre Completo</strong></div>
+              <div class="col-1"><strong>Fecha Nacimiento</strong></div>
+              <div class="col-1"><strong>Sexo</strong></div>
+              <div class="col-2"><strong>Correo</strong></div>
+              <div class="col-1"><strong>Estado</strong></div>
+              <div class="col-2 text-end"><strong>Acciones</strong></div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-group" style="max-height: 450px; overflow: auto;">
+          <li class="list-group-item" *ngFor="let p of results">
+            <div class="row font-nm">
+              <div class="col-1">
+                {{p.code}}
+              </div>
+              <div class="col-4">
+                {{p.paternalSurname | uppercase}} {{p.maternalSurname | uppercase}}, {{p.firstName | titlecase}}
+              </div>
+              <div class="col-1">
+                {{p.dateOfBirth | date:'dd/MM/yyyy'}}
+              </div>
+              <div class="col-1">
+                {{p.gender}}
+              </div>
+              <div class="col-2">
+                {{p.email}}
+              </div>
+              <div class="col-1">
+                {{p.status ? 'ACTIVO' : 'INACTIVO'}}
+              </div>
+              <div class="col-2 text-end">
+                <button class="btn btn-sm btn-light text-primary-color" (click)="verifyMedicalHistory(p)">
+                  <i class="bi bi-archive"></i>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-secondary" style="border-top-left-radius: 0; border-top-right-radius: 0; margin-top:-3px; z-index: 1;" *ngIf="results.length">
+          <div class="row font-xs">
+            <div class="col-10 pt-2">Mostrando {{(filter.pagination.page - 1) * filter.pagination.limit + 1}}-{{filter.pagination.page * filter.pagination.limit}} de {{filter.totalRows}}</div>
+            <div class="col-2 text-end">
+              <div class="input-group input-group-sm">
+                <button class="btn btn-light text-primary" type="button" id="button-addon1" *ngIf="filter.pagination.page !== 1" (click)="changePage(filter.pagination.page-1)">Anterior</button>
+                <select name="page" [(ngModel)]="filter.pagination.page" (change)="getPatients()" class="form-select">
+                  <option *ngFor="let p of pages" [ngValue]="p">{{p}}</option>
+                </select>
+                <button class="btn btn-light text-primary-color" type="button" id="button-addon2" *ngIf="filter.pagination.page < pages.length" (click)="changePage(filter.pagination.page+1)">Siguiente</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #medicalHistoryModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-nm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"><span *ngIf="!hasMedicalHistory">Nueva&nbsp;</span>Historia Clínica</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleMedicalHistory()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="newMedicalHistory">
+        <div class="row">
+          <div class="col-12">
+            <form #medicalHistoryForm="ngForm">
+              <div class="row">
+                <div class="col-5">
+                  <label for="code">Código</label>
+                  <input type="text" disabled name="code" [(ngModel)]="newMedicalHistory.code" class="form-control" required>
+                </div>
+                <div class="col-7" *ngIf="newMedicalHistory.code">
+                  <label for=""></label>
+                  <div class="alert bg-light font-xs p-2 text-danger">
+                    <i class="bi bi-info-circle-fill me-1"></i>El código de la H.C. es único como el DNI.
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="patientSearch">Buscar paciente por DNI</label>
+                  <div class="input-group">
+                    <input type="text" name="patientSearch" [(ngModel)]="newMedicalHistory.patientSearch" class="form-control" required>
+                    <button class="btn btn-secondary" *ngIf="newMedicalHistory.patientSearch" type="button" (click)="searchPatientByCode()" id="button-addon2">
+                      <i class="bi bi-search me-1"></i>Buscar
+                    </button>
+                  </div>
+                </div>
+                <div class="col-12 mt-2 mb-2" *ngIf="patientFound">
+                  <em>Paciente Seleccionado:</em>
+                  <div class="card bg-success text-white">
+                    <div class="card-body p-2">
+                      <div class="row">
+                        <div class="col-2 pt-2 text-center">
+                          <i class="font-lg bi bi-gender-{{patientFound.gender === 'M' ? 'male' : 'female'}}"></i>
+                        </div>
+                        <div class="col-8">
+                          <strong>{{patientFound.paternalSurname | uppercase}} {{patientFound.maternalSurname | uppercase}}, {{patientFound.firstName | titlecase}}</strong> <br>
+                          DNI: {{patientFound.code}} - F.N.: {{patientFound.dateOfBirth | date:'dd/MM/yyyy'}}
+                        </div>
+                        <div class="col-2 pt-2 text-end">
+                          <button class="btn btn-sm btn-danger" title="Reiniciar Busqueda" (click)="resetPatientSearch()">
+                            <i class="bi bi-x-lg"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <div class="col-12">
+                  <label for="observation">Observación</label>
+                  <textarea rows="4" name="observation" [(ngModel)]="newMedicalHistory.observation" id="" class="form-control no-resize"></textarea>
+                </div>
+                <div class="col-12" *ngIf="newMedicalHistory.editing">
+                  <label for="status">Estado</label>
+                  <select name="status" [(ngModel)]="newMedicalHistory.status" class="form-select" required>
+                    <option [ngValue]="true">ACTIVO</option>
+                    <option [ngValue]="false">INACTIVO</option>
+                  </select>
+                </div>
+                <div class="col-12 text-center pt-3">
+                  <button class="btn btn-sm bg-primary-color text-white" [disabled]="newMedicalHistory.error || medicalHistoryForm.invalid || !newMedicalHistory.patient" (click)="saveMedicalHistory()">
+                    <i class="bi bi-save me-1"></i>Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

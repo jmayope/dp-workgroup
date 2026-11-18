@@ -1,0 +1,166 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Página-1" id="32Nidg6xHuENZvTnG3Sa">
+    <mxGraphModel dx="872" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-1" value="Usuario autorizado" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="35" height="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-2" value="Dashboard Web" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="304" y="20" width="150" height="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-3" value="DashboardController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="514" y="20" width="171" height="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-4" value="DashboardService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="782" y="20" width="150" height="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-5" value="MongoDB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;" vertex="1" parent="1">
+          <mxGeometry x="1059" y="20" width="150" height="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-6" value="par" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30" vertex="1" parent="1">
+          <mxGeometry x="846" y="239" width="299" height="423" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-7" value="[Avance de campañas]" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="yGSzHHRugJeWTiGLWjSj-6">
+          <mxGeometry x="30" width="269" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-8" value="[Vacunaciones]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="yGSzHHRugJeWTiGLWjSj-6">
+          <mxGeometry y="146" width="299" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-9" value="[Personal activo]" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" vertex="1" parent="yGSzHHRugJeWTiGLWjSj-6">
+          <mxGeometry y="287" width="299" height="2" as="geometry" />
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-10" value="Abrir dashboard" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-1" target="yGSzHHRugJeWTiGLWjSj-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="248" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-11" value="GET /dashboard" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-2" target="yGSzHHRugJeWTiGLWjSj-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="498" y="171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-12" value="obtenerIndicadores()" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-3" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="737" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-13" value="Consultar Campaign" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1004" y="312" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-14" value="Datos de campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-5" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1007" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-15" value="Consultar VaccinationRecord" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1004" y="453" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-16" value="Registros" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-5" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1007" y="501" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-17" value="Consultar MedicalStaff" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1004" y="594" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-18" value="Personal" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-5" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1007" y="642" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-19" value="Calcular indicadores" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="908" y="700" />
+              <mxPoint x="908" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-20" value="Calcular cobertura" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="908" y="778" />
+              <mxPoint x="908" y="808" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-21" value="Calcular avance de metas" style="curved=1;endArrow=block;rounded=0;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="908" y="856" />
+              <mxPoint x="908" y="886" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-22" value="Indicadores y estadísticas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-4" target="yGSzHHRugJeWTiGLWjSj-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="934" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-23" value="Datos del dashboard" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-3" target="yGSzHHRugJeWTiGLWjSj-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="501" y="982" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-24" value="Mostrar gráficos" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-2" target="yGSzHHRugJeWTiGLWjSj-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="1030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-25" value="Mostrar cobertura" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-2" target="yGSzHHRugJeWTiGLWjSj-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="1078" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-26" value="Mostrar avance de campañas" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-2" target="yGSzHHRugJeWTiGLWjSj-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="1126" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yGSzHHRugJeWTiGLWjSj-27" value="Mostrar personal activo" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" edge="1" parent="1" source="yGSzHHRugJeWTiGLWjSj-2" target="yGSzHHRugJeWTiGLWjSj-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="251" y="1174" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

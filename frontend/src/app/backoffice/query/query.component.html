@@ -1,0 +1,202 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12 mb-3 text-primary-color">
+      <i class="bi bi-search me-1"></i>Consulta de Pacientes
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control text-uppercase" [disabled]="filter.searched"
+                  placeholder="BUSCAR POR TEXTO" aria-label="text" name="text" [(ngModel)]="filter.text"
+                  aria-describedby="basic-addon1">
+                <button class="btn bg-primary-color text-white" *ngIf="filter.text && !filter.searched" (click)="search()" type="button"
+                  id="button-addon2"><i class="bi bi-search me-1"></i>Buscar</button>
+                <button class="btn btn-light text-danger" *ngIf="filter.searched" (click)="resetSearch()" type="button"
+                  id="button-addon2"><i class="bi-x-lg me-1"></i>Limpiar</button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="input-group input-group-sm" *ngIf="filter.searched && results.length">
+                <span class="input-group-text" id="basic-addon2">Cantidad</span>
+                <select name="limit" [(ngModel)]="filter.pagination.limit" (change)="getPatients()" class="form-select">
+                  <option *ngFor="let r of numberRows" [ngValue]="r">{{r}}</option>
+                </select>
+                <span class="input-group-text" id="basic-addon2">Pagina</span>
+                <select name="page" [(ngModel)]="filter.pagination.page" (change)="getPatients()" class="form-select">
+                  <option *ngFor="let p of pages" [ngValue]="p">{{p}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="filter.searching">
+            <div class="col-12 text-center">
+              <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div class="spinner-grow text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div class="spinner-grow text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div> <br>
+              Buscando información
+            </div>
+          </div>
+          <div class="row" *ngIf="!filter.searching">
+            <div class="col-12 text-center" *ngIf="!filter.searched">
+              <i class="bi bi-search me-1"></i> <br>
+              Ingresa un parametro a buscar
+            </div>
+            <div class="col-12 text-center" *ngIf="filter.searched && !results.length">
+              <i class="bi bi-x-lg"></i> <br>
+              No se encontraron registros con el parametro: <code>{{filter.text}}</code>
+            </div>
+            <div class="col-12" *ngIf="filter.searched && results.length">
+              <div class="row">
+                <div class="col-12">
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let r of results">
+                      <div class="row">
+                        <div class="col-3 pt-1">
+                          <div class="row">
+                            <div class="col-6">
+                              <i class="bi bi-hospital me-1"></i>{{r.healthNetwork.name | uppercase}}
+                            </div>
+                            <div class="col-6">
+                              <i class="bi bi-building me-1"></i>{{r.serviceDeliveryInstitution.name | uppercase}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-2 pt-1">
+                          <i class="bi me-1"
+                            [ngClass]="{'bi-gender-female text-danger-emphasis': r.gender === 'F', 'bi-gender-male text-primary-emphasis': r.gender === 'M', 'bi-dash': r.gender === 'O'}"></i>
+                          {{r.code | uppercase}}
+                        </div>
+                        <div class="col-3 pt-1">
+                          <i class="bi bi-person me-1"></i>{{r.firstName | titlecase}}, {{r.paternalSurname |
+                          uppercase}} {{(r.maternalSurname || '') | uppercase}}<br>
+                        </div>
+                        <div class="col-2 pt-1">
+                          <i class="bi bi-calendar me-1"></i>{{r.dateOfBirth | date:'dd/MM/yyyy'}}
+                        </div>
+                        <div class="col-2 text-end">
+                          <button class="btn btn-sm btn-light text-primary" (click)="toggleMedicalHistory(r)">
+                            <i class="bi bi-copy me-1"></i>Historia Clínica
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" bsModal #medicalHistoryModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-nm">
+    <div class="modal-content" *ngIf="patientSelected">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Historial Médico</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleMedicalHistory()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"
+        *ngIf="!patientSelected.currentMedicalHistory && patientSelected.medicalHistories.length > 1">
+        <div class="row">
+          <div class="col-12">
+            Cuentas con mas de 1 Historia Médica:
+          </div>
+          <div class="col-12">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let h of patientSelected.medicalHistories"
+                (click)="toggleSelectMedicalHistory(h)">
+                HC. Nro {{h.code}} <br>
+                <p>Ultima Observación: {{h.observation | uppercase}}</p>
+                <p>Cantidad de consultas: {{h.details.length}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" *ngIf="patientSelected.currentMedicalHistory">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="card">
+              <div class="card-header">
+                <small>DATOS DEL PACIENTE</small>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <small class="text-primary">Nombre Completo</small> <br>
+                    {{patientSelected.firstName | titlecase}}, {{patientSelected.paternalSurname | uppercase}}
+                    {{(patientSelected.maternalSurname || '') | uppercase}}
+                  </div>
+                  <div class="col-12">
+                    <small class="text-primary">Micro Red</small><br>
+                    {{patientSelected.healthNetwork.name | uppercase}}
+                  </div>
+                  <div class="col-12">
+                    <small class="text-primary">IPRESS</small><br>
+                    {{patientSelected.serviceDeliveryInstitution.name | uppercase}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <small>
+                  DATOS DE LA HISTORIA CLÍNICA
+                </small>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <small class="text-primary">Historia Clínica Nro</small> <br>
+                    {{patientSelected.currentMedicalHistory.code}}
+                  </div>
+                  <div class="col-12">
+                    <small class="text-primary">Última observación</small> <br>
+                    {{patientSelected.currentMedicalHistory.observation | uppercase}}
+                  </div>
+                </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <small class="text-primary">Detalle de Historia:</small>
+                </li>
+                <li class="list-group-item" *ngFor="let d of patientSelected.currentMedicalHistory.details">
+                  <div class="row">
+                    <div class="col-12">
+                      <i class="bi bi-calendar me-1"></i>{{d.attentionDate}}
+                    </div>
+                    <div class="col-4">Act: {{d.activity}}</div>
+                    <div class="col-4">Dx: {{d.diagnosticNumber}}</div>
+                    <div class="col-4">Tipo: <span class="badge bg-primary">{{d.type}}</span></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

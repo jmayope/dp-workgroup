@@ -1,0 +1,137 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-8 pt-1 mb-3 text-primary-color">
+      <i class="bi bi-arrows-expand-vertical me-1"></i>
+      Medidas Antropométricas
+    </div>
+    <div class="col-4 mb-3 text-end">
+      <button class="btn btn-sm bg-primary-color text-white" (click)="toggleConfigModal()">
+        <i class="bi bi-gear-wide me-1"></i>Configuración
+      </button>
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <ng-container>
+              <div class="col-2">
+              </div>
+              <div class="col-8">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                  <input type="text" class="form-control" placeholder="BUSCAR POR NOMBRE" [(ngModel)]="filter.text" aria-label="patient" aria-describedby="basic-addon1">
+                  <button class="btn btn-primary" (click)="getQuantityOfPatientMeasurement()" type="button" *ngIf="filter.text" [disabled]="filter.searching" id="button-addon2">Buscar</button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!filter.searched">
+              <div class="col-12 text-center">
+                <i class="bi bi-search"></i><br>
+                Ingresa valor a buscar.
+              </div>
+            </ng-container>
+            <ng-container *ngIf="filter.searched">
+              <div class="col-12 text-center" *ngIf="!results.length">
+                <i class="bi bi-x-lg me-1"></i> <br>
+                No se han registrado Medidas Antropométricas de pacientes
+              </div>
+              <div class="col-12" *ngIf="results.length">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let r of results">
+                    {{r}}
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #configModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Configuración</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="toggleConfigModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <ul class="list-group">
+              <ng-container *ngIf="newAnthropometricMeasurement">
+                <li class="list-group-item bg-secondary text-white">
+                  Nueva Medida Antropométrica
+                </li>
+                <li class="list-group-item">
+                  <form #anthropometricMeasurementForm="ngForm">
+                    <div class="row">
+                      <div class="col-12">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" [(ngModel)]="newAnthropometricMeasurement.name" class="form-control" required>
+                      </div>
+                      <div class="col-12">
+                        <label for="description">Descripción</label>
+                        <input type="text" name="description" [(ngModel)]="newAnthropometricMeasurement.description" class="form-control" required>
+                      </div>
+                      <div class="col-4">
+                        <label for="measurementUnit">Unidad de Medida</label>
+                        <input type="text" name="measurementUnit" [(ngModel)]="newAnthropometricMeasurement.measurementUnit" class="form-control" required>
+                      </div>
+                      <div class="col-8">
+                        <label for="category">Descripción</label>
+                        <select name="category" [(ngModel)]="newAnthropometricMeasurement.category" class="form-select" required>
+                          <option [ngValue]="undefined">--SELECCIONE--</option>
+                          <option *ngFor="let c of categories" [ngValue]="c">{{c | uppercase}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+                <li class="list-group-item text-center mb-3">
+                  <button class="btn btn-sm btn-light text-danger me-5" (click)="toggleAnthropometricMeasurement()">
+                    Cancelar
+                  </button>
+                  <button class="btn btn-sm bg-primary-color text-white" [disabled]="anthropometricMeasurementForm.invalid" (click)="saveAnthropometricMeasurement()">
+                    Guardar los cambios
+                  </button>
+                </li>
+              </ng-container>
+              <li class="list-group-item text-center" *ngIf="!newAnthropometricMeasurement">
+                <button class="btn btn-light text-primary-color" (click)="toggleAnthropometricMeasurement()">
+                  <i class="bi bi-plus me-1"></i>Agregar nueva Medida Antropométrica
+                </button>
+              </li>
+              <li class="list-group-item" *ngFor="let a of anthropometricMeasurements">
+                <div class="row">
+                  <div class="col-6">
+                    <strong>{{a.name | uppercase}}</strong><br>
+                    {{a.description}}
+                  </div>
+                  <div class="col-1">
+                    {{a.measurementUnit}}
+                  </div>
+                  <div class="col-2">
+                    {{a.category}}
+                  </div>
+                  <div class="col-3 text-end">
+                    <button class="btn btn-sm btn-light text-primary-color me-2" (click)="toggleAnthropometricMeasurement(a)">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-light text-danger" (click)="deleteAnthropometricMeasurement(a)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{
+    "code?": "sdfsadfsadf",
+    "documentType?": "sdfsadfsadf",
+    "firstName?": "sdfsadfsadf",
+    "lastName?": "sdfsadfsadf",
+    "username?": "sdfsadfsadf",
+    "password?": "sdfsadfsadf",
+    "changedPassword?": true,
+    "profession?": "sdfsadfsadf",
+    "healthEstablisments?": "$[]user_health_establishment",
+    "workingCondition?": "sdfsadfsadf",
+    "ups?": "sdfsadfsadf",
+    "status?": true,
+    "blocked?": true,
+    "profiles?": "$[]user_profile",
+    "phone?": "sdfsadfsadf",
+    "email?": "sdfsadfsadf"
+}

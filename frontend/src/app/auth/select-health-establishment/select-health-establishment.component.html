@@ -1,0 +1,54 @@
+<div class="row mt-5" *ngIf="userLoged">
+  <div class="col-6 offset-3">
+    <div class="card mb-2">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8 text-center offset-2">
+            <i class="bi bi-person-circle font-xxl me-1 "></i> <br>
+            <strong>{{userLoged.firstName}}</strong> <br>
+            <span>{{userLoged.code}} | {{userLoged.username}}</span>
+          </div>
+          <div class="col-12 mt-4 text-center">
+            <span class="text-primary-color font-xl">Seleccione un Establecimiento</span> <br>
+            <span class="text-secondary font-lg">Elige el centro médico donde deseas trabajar hoy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card rounded mb-2" (click)="selectHealthEstablishment(h)" *ngFor="let h of userLoged.healthEstablisments">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <div class="card bg-success text-white">
+              <div class="card-body pt-3 pb-3 ps-0 pe-0 text-center">
+                <i class="bi bi-building"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-9">
+            <strong class="text-primary-color font-xl">{{h.serviceDeliveryInstitution.name | titlecase}}</strong> <br>
+            <span class="font-lg text-secondary">{{h.serviceDeliveryInstitution.description | uppercase}}</span>
+          </div>
+          <div class="col-1 text-end">
+            <i class="bi font-xl" [ngClass]="{'bi-circle text-secondary': healthEstablishmentSelected._id !== h._id, 'bi-check-circle-fill text-primary-color': healthEstablishmentSelected._id === h._id}"></i>
+          </div>
+          <div class="col-12">
+            <hr>
+          </div>
+          <div class="col-12">
+            <small>
+              <i class="bi bi-geo-alt me-1 text-primary-color"></i>{{h.serviceDeliveryInstitution.address}} | <i class="bi bi-telephone me-1 text-primary-color"></i>{{h.serviceDeliveryInstitution.phone}} | <i class="bi bi-clock me-1 text-primary-color"></i>{{h.serviceDeliveryInstitution.openAllDay ? '24 Hrs' : 'Horario Establecido'}}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="healthEstablishmentSelected._id">
+      <div class="col-12 text-center">
+        <button class="btn btn-lg bg-primary-color text-white" (click)="saveCurrentHealth()">
+          <i class="bi bi-arrow-right-circle-fill me-1"></i>Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

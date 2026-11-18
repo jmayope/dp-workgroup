@@ -1,0 +1,146 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primary: #023059;
+}
+
+.hand {
+    cursor: pointer !important;
+}
+
+.card-full-height {
+    height: 98vh !important;
+}
+
+.text-primary-color {
+    color: var(--color-primary) !important;
+}
+
+.text-success-color {
+    color: #125f3f!important;
+}
+
+.text-info-color {
+    color: #45425a !important;
+}
+
+.text-light-color {
+    color: #daedf5 !important;
+}
+
+.bg-primary-color {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-secondary-color {
+    background-color: #3f77bf !important;
+}
+
+.bg-light-color {
+    background-color: #daedf5 !important;
+}
+
+.bg-success-color {
+    background-color: #125f3f!important;
+}
+
+.bg-light-success-color {
+    background-color: #aad2ba !important;
+}
+
+.bg-light-info-color {
+    background-color: #c9d6ea !important;
+}
+
+.bg-dark-color {
+    background-color: #283b4c!important;
+}
+
+.bg-white-color {
+    background-color: #e7e7e7!important;
+}
+
+.bg-warning-color {
+    background-color: #ffaf00!important;
+}
+
+.no-resize {
+    resize: none;
+}
+
+.list-circle-nested {
+    margin-left: -5px;
+    z-index: -2;
+}
+
+.list-circle-nested:first {
+    margin-left: 0;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+.sidebar {
+    min-height: 100vh;
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+}
+.sidebar.nav-link {
+    counter-reset: #000 !important; 
+}
+.sidebar .nav-link.active {
+    background-color: #f2f6ff;
+    border-radius: 8px;
+}
+.table thead th {
+    font-weight: 600;
+}
+.actions a {
+    margin-right: 8px;
+}
+
+.list-group-item-selected {
+  padding-left: 10px !important;
+  background-color: #3733a1 !important;
+  border-left: 5px solid #fff !important;
+}
+
+.font-xs {
+    font-size: 11px !important;
+}
+
+.font-nm {
+    font-size: 13px !important;
+}
+
+.font-lg {
+    font-size: 18px !important;
+}
+
+.font-xl {
+    font-size: 24px !important;
+}
+
+.font-xxl {
+    font-size: 32px !important;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+  padding: 0.125rem 0.25rem;
+  font-size: 0.1637 rem;
+}
+
+.font-semi-bold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 800;
+}
+
+.btn-block {
+    width: 100% !important;
+}
+
+.border-primary {
+    border: 1px solid var(--color-primary);
+}
