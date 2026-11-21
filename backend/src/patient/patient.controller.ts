@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseInterceptors, UploadedFile, Headers } from '@nestjs/common';
 import { PatientService } from './patient.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { UploadFileInterceptor } from 'src/common/interceptors/upload-file.interceptor';
+import { UploadFileInterceptor } from '../common/interceptors/upload-file.interceptor';
 import { ConfigService } from '@nestjs/config';
 
 @Controller('patient')
