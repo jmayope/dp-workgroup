@@ -1,11 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ServiceDeliveryInstitutionService } from './service-delivery-institution.service';
+import { Public } from '../../src/common/decorators/public.decorator';
 
 @Controller('service-delivery-institution')
 export class ServiceDeliveryInstitutionController {
   constructor(private readonly serviceDeliveryInstitutionService: ServiceDeliveryInstitutionService) {}
 
   @Post()
+  @Public()
   create(@Body() body: any) {
     return this.serviceDeliveryInstitutionService.create(body);
   }
