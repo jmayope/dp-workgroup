@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseInterceptors, UploadedFile, Headers } from '@nestjs/common';
 import { PatientService } from './patient.service';
-import { UploadFileInterceptor } from '../common/interceptors/upload-file.interceptor';
+// import { UploadFileInterceptor } from '../common/interceptors/upload-file.interceptor';
 import { ConfigService } from '@nestjs/config';
 
 @Controller('patient')
@@ -68,7 +68,7 @@ export class PatientController {
   }
 
   @Post('migrate')
-  @UseInterceptors(UploadFileInterceptor)
+  // @UseInterceptors(UploadFileInterceptor)
   migrate(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
     return this.patientService.migrate(file);
