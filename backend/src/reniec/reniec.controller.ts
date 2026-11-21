@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ReniecService } from './reniec.service';
-import { Public } from 'src/common/decorators/public.decorator';
+import { Public } from '../../src/common/decorators/public.decorator';
 
 @Controller('reniec')
 export class ReniecController {
