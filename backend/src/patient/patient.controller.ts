@@ -1,12 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseInterceptors, UploadedFile, Headers } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { URI_FILES } from 'src/constants';
+import { UploadFileInterceptor } from 'src/common/interceptors/upload-file.interceptor';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('patient')
 export class PatientController {
-  constructor(private readonly patientService: PatientService) {}
+  constructor(
+    private readonly patientService: PatientService,
+    private readonly configService: ConfigService
+  ) {}
 
   @Post()
   create(@Body() body: any) {
@@ -66,15 +69,7 @@ export class PatientController {
   }
 
   @Post('migrate')
-  @UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
-      destination: URI_FILES,
-      filename: (req, file, cb) => {
-        cb(null, `${Date.now()}.${file.originalname.substring(6).split('.')[1]}`);
-      }
-    })
-  }
-))
+  @UseInterceptors(UploadFileInterceptor)
   migrate(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
     return this.patientService.migrate(file);
