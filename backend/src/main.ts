@@ -4,13 +4,28 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 
 async function bootstrap() {
 
+  const allowedOrigins = [
+    'http://localhost:4200',
+    'http://localhost:4300',
+    'https://dp-workgroup-npuw.vercel.app',
+    process.env.FRONTEND_URL,
+    process.env.FRONTEND_PREVIEW_URL
+  ].filter((origin): origin is string => Boolean(origin));
+
   const CORS: CorsOptions = {
-    origin: [
-      'http://localhost:4200',
-      'http://localhost:4300',
-      'https://dp-workgroup-npuw.vercel.app',
-      'https://dp-workgroup-gamp.vercel.app'
-    ],
+    origin: (origin, callback) => {
+      // Permitir solicitudes sin Origin (health checks, herramientas, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Origen no permitido por CORS: ${origin}`));
+    },
+    // [
+    //   'http://localhost:4200',
+    //   'http://localhost:4300',
+    //   'https://dp-workgroup-npuw.vercel.app',
+    // ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [
