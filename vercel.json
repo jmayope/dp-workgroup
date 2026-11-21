@@ -3,8 +3,7 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "nestjs",
-      "installCommand": "npm install --legacy-peer-deps"
+      "framework": "nestjs"
     },
     "frontend": {
       "root": "frontend",
