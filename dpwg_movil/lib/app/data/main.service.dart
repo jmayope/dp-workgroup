@@ -23,12 +23,62 @@ class MainService {
         options: Options(extra: {'skipAuth': true}), 
       );
 
-      if (response.statusCode == 200) {
+      print("respoinse.status");
+      print(response);
+
+      if (response != null) {
         final user = MedicalStaff.fromJson(response.data);
         await PreferenceService.setSession(user);
         // Sincronizar el token en memoria del interceptor
+        print("<<<<<<<<<<<<<<user.token!>>>>>>>>>>>>>>");
+        print(user.token!);
         await DioClient.updateToken(user.token!); 
       }
+      return response.data;
+    } on DioException catch (e) {
+      // Devolver mensaje de error más claro
+      return {'message': _mapDioError(e), 'error': true};
+    }
+  }
+
+  Future<dynamic> searchPatient(dynamic body) async {
+    try {
+      final response = await _dio.post(
+        '/patient/where',
+        data: body,
+        // Forzar que el login no lleve el token antiguo
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      // Devolver mensaje de error más claro
+      return {'message': _mapDioError(e), 'error': true};
+    }
+  }
+
+  Future<dynamic> allVaccines(dynamic body) async {
+    try {
+      final response = await _dio.post(
+        '/vaccine/where',
+        data: body,
+        // Forzar que el login no lleve el token antiguo
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      // Devolver mensaje de error más claro
+      return {'message': _mapDioError(e), 'error': true};
+    }
+  }
+
+  Future<dynamic> allDoses(dynamic body) async {
+    try {
+      final response = await _dio.post(
+        '/dose/where',
+        data: body,
+        // Forzar que el login no lleve el token antiguo
+      );
+
       return response.data;
     } on DioException catch (e) {
       // Devolver mensaje de error más claro

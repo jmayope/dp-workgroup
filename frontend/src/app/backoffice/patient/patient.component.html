@@ -124,7 +124,12 @@
               <div class="row">
                 <div class="col-12">
                   <label for="code">DNI</label>
-                  <input type="text" name="code" [(ngModel)]="newPatient.code" class="form-control" required>
+                  <div class="input-group">
+                    <input type="text" name="code" [(ngModel)]="newPatient.code" maxlength="8" minlength="8" class="form-control" required>
+                    <button class="btn btn-light text-primary" *ngIf="newPatient.code" (click)="validateDocument()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
                 </div>
                 <div class="col-12">
                   <label for="paternalSurname">A. Paterno</label>

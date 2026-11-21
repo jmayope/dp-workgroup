@@ -7,6 +7,7 @@ async function bootstrap() {
   const allowedOrigins = [
     'http://localhost:4200',
     'http://localhost:4300',
+    'https://dniruc.apisperu.com',
     'https://dp-frontend-rho.vercel.app',
     process.env.FRONTEND_URL,
     process.env.FRONTEND_PREVIEW_URL

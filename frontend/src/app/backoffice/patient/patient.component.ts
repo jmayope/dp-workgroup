@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { buildPagination, NUMBER_ROWS } from '../../constants';
+import { buildPagination, messageAlert, NUMBER_ROWS } from '../../constants';
 import { MainService } from '../../services/main.service';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
@@ -206,6 +207,18 @@ export class PatientComponent implements OnInit {
         this.getPatients();
       }
     });  
+  }
+
+  async validateDocument() {
+    let result: any = await firstValueFrom(this.Main.getPatients({where: {code: this.newPatient.code}}));
+    console.log(result);
+    if (result.length) {
+      messageAlert("Aviso", "El documento ya esta siendo usado por otro paciente.", "warning");
+      return;
+    }
+    let resultDNI: any = await firstValueFrom(this.Main.findDNI(this.newPatient.code));
+    console.log(resultDNI);
+    
   }
 
 }

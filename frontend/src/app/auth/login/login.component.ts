@@ -179,7 +179,10 @@ export class LoginComponent implements OnInit{
     } else {
       if (result.healthEstablisments.length == 1) {
         result.currentHealthEstablishment = result.healthEstablisments[0];
-        let profilesOfHealthEstablishment = result.profiles.filter((p: any) => p.serviceDeliveryInstitution === result.currentHealthEstablishment.serviceDeliveryInstitution._id);
+        console.log(result.profiles);
+        let profilesOfHealthEstablishment = result.profiles.filter((p: any) => p.serviceDeliveryInstitution._id === result.currentHealthEstablishment.serviceDeliveryInstitution._id);
+        console.log("<<<<<<<<profilesOfHealthEstablishment.length>>>>>>>>");
+        console.log(profilesOfHealthEstablishment.length);
         if (profilesOfHealthEstablishment.length === 1) {
           result.currentProfile = profilesOfHealthEstablishment[0];
           this.Main.setSession(result);

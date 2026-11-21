@@ -1,5 +1,6 @@
 import 'package:dpwg_movil/app/data/constants.dart';
 import 'package:dpwg_movil/app/routes/app_pages.dart';
+import 'package:dpwg_movil/app/widgets/loader.widget.dart';
 import 'package:dpwg_movil/models/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,13 +13,12 @@ class VaccineApplicationView extends GetView<VaccineApplicationController> {
   const VaccineApplicationView({super.key});
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Colors.transparent,
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
+
+    final container = Obx(() {
+      return controller.isLoading.value ? 
+        LoaderWidget(message: "Cargango formulario de Vacunación")
+      :
+        Column(
           children: [
             const _Cabecera(),
             Expanded(
@@ -67,7 +67,16 @@ class VaccineApplicationView extends GetView<VaccineApplicationController> {
             ),
             _botonAplicar(),
           ],
-        ),
+        );
+    });
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.transparent,
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: container,
       ),
     );
   }
@@ -102,8 +111,8 @@ class VaccineApplicationView extends GetView<VaccineApplicationController> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
-              gradient: const LinearGradient(
-                colors: [AppColors.navyLight, AppColors.navy],
+              gradient: LinearGradient(
+                colors: controller.existsPerson.value ? [AppColors.danger, AppColors.danger] : [AppColors.navyLight, AppColors.navy],
               ),
               boxShadow: [
                 BoxShadow(
@@ -114,21 +123,25 @@ class VaccineApplicationView extends GetView<VaccineApplicationController> {
               ],
             ),
             child: IconButton(
-              tooltip: 'Buscar',
-              onPressed: () {
-                // TODO: buscar persona por DNI y luego setState(...)
-                FocusScope.of(Get.context!).unfocus();
-                controller.dataConfirmed.value = false;
-                controller.vaccineSelected.value = Vaccine();
-                controller.doseSelected.value = Dose();
-
-                // setState(() {
-                //   _datosConfirmados = false;
-                //   _vacunaSeleccionada = null;
-                //   _dosisSeleccionada = null;
-                // });
+              tooltip: controller.existsPerson.value ? 'Reiniciar' : 'Buscar',
+              onPressed: () async {
+                if (controller.existsPerson.value) {
+                  await controller.resetSearch();
+                } else {
+                  // TODO: buscar persona por DNI y luego setState(...)
+                  FocusScope.of(Get.context!).unfocus();
+                  
+                  print("Buscar persona");
+                  await controller.searchPatient();
+                  // setState(() {
+                  //   _datosConfirmados = false;
+                  //   _vacunaSeleccionada = null;
+                  //   _dosisSeleccionada = null;
+                  // });
+                }
               },
-              icon: const Icon(Icons.search_rounded,
+              icon: Icon(
+                controller.existsPerson.value ? Icons.close : Icons.search_rounded,
                   color: Colors.white, size: 28),
             ),
           ),
@@ -267,7 +280,7 @@ class VaccineApplicationView extends GetView<VaccineApplicationController> {
       ),
       items: [
         for (final d in controller.doses)
-          DropdownMenuItem<Dose>(value: d, child: Text("${d.name!} - ${d.number}")),
+          DropdownMenuItem<Dose>(value: d, child: Text("${d.name!} - ${d.number}".toUpperCase())),
       ],
       onChanged: controller.dataConfirmed.value
           ? (d) => controller.doseSelected.value = d!

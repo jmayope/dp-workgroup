@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="dpwg_movil"
+        android:label="Mi Vacuna App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

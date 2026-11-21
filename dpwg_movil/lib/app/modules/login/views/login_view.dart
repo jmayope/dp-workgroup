@@ -22,7 +22,7 @@ class LoginView extends GetView<LoginController> {
             // Altura mínima para que el diseño no se rompa en pantallas chicas
             // o cuando aparece el teclado (en ese caso hace scroll).
             final double h =
-                constraints.maxHeight < 800 ? 910 : constraints.maxHeight;
+                constraints.maxHeight < 750 ? 950 : constraints.maxHeight;
             final double w = constraints.maxWidth;
             final double imgH = h * 0.40;
 
@@ -86,7 +86,7 @@ class LoginView extends GetView<LoginController> {
 
                     // ---------------- Escudo / logo ----------------
                     Positioned(
-                      top: imgH - 62,
+                      top: imgH - 92,
                       left: 0,
                       right: 0,
                       child: const Center(child: _LogoEscudo()),
@@ -94,7 +94,7 @@ class LoginView extends GetView<LoginController> {
 
                     // ---------------- Contenido ----------------
                     Positioned.fill(
-                      top: imgH + 72,
+                      top: imgH + 32,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Column(
