@@ -5,9 +5,19 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 async function bootstrap() {
 
   const CORS: CorsOptions = {
-    origin: true,
+    origin: [
+      'http://localhost:4200',
+      'http://localhost:4300',
+      'https://dp-workgroup.vercel.app',
+      'https://dp-workgroup-4bdu4krbu-jmayopes-projects.vercel.app'
+    ],
     credentials: true,
-    methods: 'GET, POST, PUT, DELETE, PATCH',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'app-type'
+    ],
   };
 
   const app = await NestFactory.create(AppModule);
