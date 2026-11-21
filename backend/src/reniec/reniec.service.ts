@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { BadGatewayException, GatewayTimeoutException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { isAxiosError } from 'node_modules/axios/index.cjs';
+import axios from 'axios';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -44,7 +44,7 @@ export class ReniecService {
             return response.data;
 
         } catch (error) {
-            if (isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 if (
                     error.code === 'ECONNABORTED' ||
                     error.code === 'ETIMEDOUT'

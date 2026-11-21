@@ -50,7 +50,7 @@ export class MainService {
   // API RENIEC
 
   findDNI(dni: string) {
-    return this.Http.get(`${this.uriRENIEC}/api/v1/dni/${dni}?token=${environment.tokenReniec}`);
+    return this.Http.get(`${this.uri}/reniec/dni/${dni}`);
   }
 
   findRUC(ruc: string) {
