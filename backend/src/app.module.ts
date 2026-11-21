@@ -32,6 +32,7 @@ import { CampaignMovementModule } from './campaign-movement/campaign-movement.mo
 import { MailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { TwilioModule } from './twilio/twilio.module';
+import { ReniecModule } from './reniec/reniec.module';
 
 @Module({
   imports: [
@@ -65,7 +66,7 @@ import { TwilioModule } from './twilio/twilio.module';
     AreaModule, 
     CampaignModule, 
     CampaignMovementModule, 
-    MailModule, TwilioModule],
+    MailModule, TwilioModule, ReniecModule],
   controllers: [AppController],
   providers: [
     AppService,
