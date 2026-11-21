@@ -54,7 +54,7 @@ export class MainService {
   }
 
   findRUC(ruc: string) {
-    return this.Http.get(`${this.uriRENIEC}/api/v1/ruc/${ruc}?token=${environment.tokenReniec}`);
+    return this.Http.get(`${this.uri}/reniec/ruc/${ruc}`);
   }
 
   // AUTHENTICATION

@@ -11,4 +11,10 @@ export class ReniecController {
   async findDNI(@Param('dni') dni: string) {
     return await this.reniecService.findDNI(dni);
   }
+
+  @Public()
+  @Get('ruc/:ruc')
+  async findRUC(@Param('ruc') ruc: string) {
+    return await this.reniecService.findRUC(ruc);
+  }
 }

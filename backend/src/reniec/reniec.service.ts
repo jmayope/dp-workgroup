@@ -63,5 +63,52 @@ export class ReniecService {
         }
     }
 
+    async findRUC(ruc: string) {
+        if (!/^\d{11}$/.test(ruc)) {
+            throw new BadGatewayException('El RUC debe contener 8 dígitos');
+        }
+
+        if (!this.token) {
+            throw new BadGatewayException(
+                'No se encuentra configurado el token de RENIEC'
+            );
+        }
+
+        const url = `${this.apiUrl}/api/v1/ruc/${encodeURIComponent(ruc)}`;
+
+        try {
+            const response = await firstValueFrom(
+                this.httpService.get(url, {
+                    params: {
+                        token: this.token
+                    },
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                })
+            );
+
+            return response.data;
+
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (
+                    error.code === 'ECONNABORTED' ||
+                    error.code === 'ETIMEDOUT'
+                ) {
+                    throw new GatewayTimeoutException(
+                        'El servicio de RENIEC tardó demasiado en responder'
+                    );
+                }
+
+                throw new BadGatewayException(
+                    'No fue posible consultar los datos en RENIEC'
+                );
+            }
+
+            throw error;
+        }
+    }
+
     
 }
