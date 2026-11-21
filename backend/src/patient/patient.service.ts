@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Model } from 'mongoose';
 import * as XLSX from 'xlsx';
 import * as XL from 'excel4node';
