@@ -1,5 +1,7 @@
+import { ConfigService } from '@nestjs/config';
 import * as mongoose from 'mongoose';
 export declare const DatabaseProvider: {
     provide: string;
-    useFactory: () => Promise<typeof mongoose>;
+    useFactory: (configService: ConfigService) => Promise<typeof mongoose>;
+    inject: (typeof ConfigService)[];
 }[];

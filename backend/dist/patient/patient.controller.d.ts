@@ -1,7 +1,9 @@
 import { PatientService } from './patient.service';
+import { ConfigService } from '@nestjs/config';
 export declare class PatientController {
     private readonly patientService;
-    constructor(patientService: PatientService);
+    private readonly configService;
+    constructor(patientService: PatientService, configService: ConfigService);
     create(body: any): Promise<any>;
     findAll(headers: any, body: any): Promise<any>;
     getQuantity(headers: any, body: any): Promise<{

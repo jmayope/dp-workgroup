@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PatientService = void 0;
 const common_1 = require("@nestjs/common");
-const moment = require("moment");
+const moment_1 = require("moment");
 const mongoose_1 = require("mongoose");
 const XLSX = require("xlsx");
 const XL = require("excel4node");
@@ -47,7 +47,7 @@ let PatientService = class PatientService {
             let ws = wb.addWorksheet('RESULTADO');
             ws.cell(1, 1).number(100);
             let filepath = '/home/pkador666/tmp_files/excel/';
-            let filename = path.join(filepath, `${moment().unix()}.xlsx`);
+            let filename = path.join(filepath, `${(0, moment_1.default)().unix()}.xlsx`);
             wb.write(filename);
             return { existsData: true, filename: filename };
         }
@@ -92,7 +92,7 @@ let PatientService = class PatientService {
                     lastName: r[`Apell y Nomb. Pers. Salud`],
                     profession: r[`Profesion`],
                     workingCondition: r[`Cond. Lab.`],
-                    email: `${r[`Docu `]}${moment().unix()}@gmail.com`,
+                    email: `${r[`Docu `]}${(0, moment_1.default)().unix()}@gmail.com`,
                     ups: r[`UPS`]
                 };
                 let resultMedicalStaff = await this.MedicalStaff.create(newMedicalStaff);
@@ -102,13 +102,13 @@ let PatientService = class PatientService {
             let patiendFound = patients.find((p) => p.code === r['Nro. Docu']);
             if (!patiendFound) {
                 let newPatient = {
-                    code: r['Nro. Docu'] || moment().unix(),
+                    code: r['Nro. Docu'] || (0, moment_1.default)().unix(),
                     paternalSurname: r['Apell Pater Paciente'],
                     maternalSurname: r['Apell Mater Paciente'],
                     firstName: r['Nombres PacienteNac.'],
-                    dateOfBirth: moment(this.excelDateToJSDate(r['Fech.Nac.'])).add(1, 'day'),
+                    dateOfBirth: (0, moment_1.default)(this.excelDateToJSDate(r['Fech.Nac.'])).add(1, 'day'),
                     gender: r[`Sexo`],
-                    email: `${r['Nro. Docu'] || moment().unix()}@gmail.com`,
+                    email: `${r['Nro. Docu'] || (0, moment_1.default)().unix()}@gmail.com`,
                     healthNetwork: r[`MICRO`],
                     serviceDeliveryInstitution: r[`IPRESS`]
                 };
@@ -135,7 +135,7 @@ let PatientService = class PatientService {
                             activity: r[`DxActi${pd}`],
                             laboratory: r[`lab${pd}`],
                             medicalStaff: medicalStaffFound._id || 'SIN MEDICO',
-                            attentionDate: moment(this.excelDateToJSDate(r[`Fech.Aten`])).add(1, 'day').format('DD/MM/YYYY'),
+                            attentionDate: (0, moment_1.default)(this.excelDateToJSDate(r[`Fech.Aten`])).add(1, 'day').format('DD/MM/YYYY'),
                         });
                     }
                 });

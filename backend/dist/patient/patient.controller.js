@@ -15,12 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PatientController = void 0;
 const common_1 = require("@nestjs/common");
 const patient_service_1 = require("./patient.service");
-const platform_express_1 = require("@nestjs/platform-express");
-const multer_1 = require("multer");
-const constants_1 = require("../constants");
+const upload_file_interceptor_1 = require("../common/interceptors/upload-file.interceptor");
+const config_1 = require("@nestjs/config");
 let PatientController = class PatientController {
-    constructor(patientService) {
+    constructor(patientService, configService) {
         this.patientService = patientService;
+        this.configService = configService;
     }
     create(body) {
         return this.patientService.create(body);
@@ -118,14 +118,7 @@ __decorate([
 ], PatientController.prototype, "export", null);
 __decorate([
     (0, common_1.Post)('migrate'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
-        storage: (0, multer_1.diskStorage)({
-            destination: constants_1.URI_FILES,
-            filename: (req, file, cb) => {
-                cb(null, `${Date.now()}.${file.originalname.substring(6).split('.')[1]}`);
-            }
-        })
-    })),
+    (0, common_1.UseInterceptors)(upload_file_interceptor_1.UploadFileInterceptor),
     __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -155,6 +148,7 @@ __decorate([
 ], PatientController.prototype, "remove", null);
 exports.PatientController = PatientController = __decorate([
     (0, common_1.Controller)('patient'),
-    __metadata("design:paramtypes", [patient_service_1.PatientService])
+    __metadata("design:paramtypes", [patient_service_1.PatientService,
+        config_1.ConfigService])
 ], PatientController);
 //# sourceMappingURL=patient.controller.js.map

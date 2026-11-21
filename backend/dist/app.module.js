@@ -48,7 +48,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({
-                isGlobal: true
+                isGlobal: true,
             }),
             twilio_module_1.TwilioModule,
             mail_module_1.MailModule,

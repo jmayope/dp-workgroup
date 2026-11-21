@@ -25,8 +25,6 @@ let MenuService = class MenuService {
     }
     async findAll(where, options) {
         let result = await this.Menu.find(where).populate({ path: 'parent', model: 'menus' });
-        console.log("menus completos");
-        console.log(result);
         if (options.grouped) {
             let headers = JSON.parse(JSON.stringify(result.filter((r) => !r.parent)));
             headers.forEach((h) => {

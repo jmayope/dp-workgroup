@@ -32,21 +32,11 @@ import { CampaignMovementModule } from './campaign-movement/campaign-movement.mo
 import { MailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { TwilioModule } from './twilio/twilio.module';
-import Joi from 'joi';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: Joi.object({
-        DB_URL: Joi.string().required(),
-        MAIL_HOST: Joi.string().required(),
-        MAIL_PORT: Joi.number().required(),
-        MAIL_USER: Joi.string().required(),
-        MAIL_PASS: Joi.string().required(),
-        TWILIO_ACCOUNT_SID: Joi.string().required(),
-        TWILIO_AUTH_TOKEN: Joi.string().required(),
-    }),
     }),
     TwilioModule,
     MailModule,
