@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PatientController = void 0;
 const common_1 = require("@nestjs/common");
 const patient_service_1 = require("./patient.service");
-const upload_file_interceptor_1 = require("../common/interceptors/upload-file.interceptor");
 const config_1 = require("@nestjs/config");
 let PatientController = class PatientController {
     constructor(patientService, configService) {
@@ -118,7 +117,6 @@ __decorate([
 ], PatientController.prototype, "export", null);
 __decorate([
     (0, common_1.Post)('migrate'),
-    (0, common_1.UseInterceptors)(upload_file_interceptor_1.UploadFileInterceptor),
     __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
