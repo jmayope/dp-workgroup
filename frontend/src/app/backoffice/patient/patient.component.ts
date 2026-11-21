@@ -40,6 +40,9 @@ export class PatientComponent implements OnInit {
   newPatient: any;
   healthNetworks: any[] = [];
   serviceDeliveryInstitutions: any[] = [];
+
+  canEdit: boolean = false;
+
   ngOnInit(): void {
     this.getHealthNetworks();
     this.getServiceDeliveryInstitutions();
@@ -218,6 +221,16 @@ export class PatientComponent implements OnInit {
     }
     let resultDNI: any = await firstValueFrom(this.Main.findDNI(this.newPatient.code));
     console.log(resultDNI);
+    if (!resultDNI) {
+      messageAlert("Validación", "No existe el número de documento, registrelo.", "warning");
+      this.canEdit = true;
+      return;
+    }
+
+    this.newPatient.paternalSurname = resultDNI.apellidoPaterno;
+    this.newPatient.maternalSurname = resultDNI.apellidoMaterno;
+    this.newPatient.firstName = resultDNI.nombres;
+    this.canEdit = false;
     
   }
 

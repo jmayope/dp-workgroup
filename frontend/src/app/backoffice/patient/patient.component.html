@@ -133,15 +133,15 @@
                 </div>
                 <div class="col-12">
                   <label for="paternalSurname">A. Paterno</label>
-                  <input type="text" name="paternalSurname" [(ngModel)]="newPatient.paternalSurname" class="form-control" required>
+                  <input type="text" name="paternalSurname" [disabled]="!canEdit" [(ngModel)]="newPatient.paternalSurname" class="form-control" required>
                 </div>
                 <div class="col-12">
                   <label for="maternalSurname">A. Materno</label>
-                  <input type="text" name="maternalSurname" [(ngModel)]="newPatient.maternalSurname" class="form-control" required>
+                  <input type="text" name="maternalSurname" [disabled]="!canEdit" [(ngModel)]="newPatient.maternalSurname" class="form-control" required>
                 </div>
                 <div class="col-12">
                   <label for="firstName">Nombres</label>
-                  <input type="text" name="firstName" [(ngModel)]="newPatient.firstName" class="form-control" required>
+                  <input type="text" name="firstName" [disabled]="!canEdit" [(ngModel)]="newPatient.firstName" class="form-control" required>
                 </div>
                 <div class="col-12">
                   <label for="dateOfBirth">Fecha de Nacimiento</label>

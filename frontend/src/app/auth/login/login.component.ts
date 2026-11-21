@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit{
   tabByDefault: any = this.tabs[0];
   documentTypes: any[] = [
     {_id: "DNI", name: "Documento Nacional de Identidad", maxLength: 8},
-    {_id: "RUC", name: "Registro Único de Contribuyente", maxLength: 11},
+    // {_id: "RUC", name: "Registro Único de Contribuyente", maxLength: 11},
   ];
   tabSelected: any;
   showPassword: boolean = false;
@@ -255,7 +255,7 @@ export class LoginComponent implements OnInit{
     switch (this.newUser.documentType) {
       case "DNI":
         resultRENIEC = await firstValueFrom(this.Main.findDNI(this.newUser.code));
-        if (!resultRENIEC.success) {
+        if (!resultRENIEC) {
           messageAlert("Error de Conexión", resultRENIEC.message, "error");
           return;
         }
