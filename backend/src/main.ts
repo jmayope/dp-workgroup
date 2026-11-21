@@ -8,8 +8,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:4200',
       'http://localhost:4300',
-      'https://dp-workgroup.vercel.app',
-      'https://dp-workgroup-nlvbgwhlh-jmayopes-projects.vercel.app'
+      'https://dp-workgroup-npuw.vercel.app',
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
