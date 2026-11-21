@@ -1,8 +1,10 @@
 export 'service_delivery_institution.dart';
+export 'patient.dart';
 export 'vaccine.dart';
 export 'user_health_establishment.dart';
 export 'profile.dart';
 export 'type_list.dart';
+export 'dose.dart';
 export 'medical_staff.dart';
 export 'campaign.dart';
 export 'user_profile.dart';

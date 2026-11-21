@@ -8,6 +8,8 @@ import '../modules/select_entity/bindings/select_entity_binding.dart';
 import '../modules/select_entity/views/select_entity_view.dart';
 import '../modules/select_profile/bindings/select_profile_binding.dart';
 import '../modules/select_profile/views/select_profile_view.dart';
+import '../modules/triage/bindings/triage_binding.dart';
+import '../modules/triage/views/triage_view.dart';
 import '../modules/unlock_user/bindings/unlock_user_binding.dart';
 import '../modules/unlock_user/views/unlock_user_view.dart';
 import '../modules/vaccine_application/bindings/vaccine_application_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.VACCINE_APPLICATION,
       page: () => const VaccineApplicationView(),
       binding: VaccineApplicationBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRIAGE,
+      page: () => const TriageView(),
+      binding: TriageBinding(),
     ),
   ];
 }

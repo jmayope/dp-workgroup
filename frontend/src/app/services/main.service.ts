@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_URI, API_URI_RENIEC, messageAlert, TOKEN_NAME, TOKEN_RENIEC } from '../constants';
+import { messageAlert, TOKEN_NAME,  } from '../constants';
 import Swal from 'sweetalert2';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class MainService {
     private Http: HttpClient
   ) { }
 
-  uri: string = API_URI;
-  uriRENIEC: string = API_URI_RENIEC;
+  uri: string = environment.apiUrl;
+  uriRENIEC: string = environment.apiUriReniec;
 
   // SESSION
   setSession(user: any) {
@@ -49,11 +50,11 @@ export class MainService {
   // API RENIEC
 
   findDNI(dni: string) {
-    return this.Http.get(`${this.uriRENIEC}/api/v1/dni/${dni}?token=${TOKEN_RENIEC}`);
+    return this.Http.get(`${this.uriRENIEC}/api/v1/dni/${dni}?token=${environment.tokenReniec}`);
   }
 
   findRUC(ruc: string) {
-    return this.Http.get(`${this.uriRENIEC}/api/v1/ruc/${ruc}?token=${TOKEN_RENIEC}`);
+    return this.Http.get(`${this.uriRENIEC}/api/v1/ruc/${ruc}?token=${environment.tokenReniec}`);
   }
 
   // AUTHENTICATION

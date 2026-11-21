@@ -1,12 +1,26 @@
+import 'package:dpwg_movil/app/data/preference.service.dart';
+import 'package:dpwg_movil/app/routes/app_pages.dart';
+import 'package:dpwg_movil/models/index.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
-  final count = 0.obs;
+  final isLoading = true.obs;
+  final userLoged = MedicalStaff().obs;
+
+  
   @override
   void onInit() {
     super.onInit();
+    getInitialData();
+  }
+
+  Future<void> getInitialData() async {
+
+    userLoged.value = await PreferenceService.getSession();
+
+    isLoading.value = false;
   }
 
   @override
@@ -19,5 +33,9 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  Future<void> logout() async {
+    PreferenceService.clearAll();
+    Get.offAllNamed(Routes.LOGIN);
+  }
+  
 }

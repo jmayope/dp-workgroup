@@ -9,6 +9,7 @@ abstract class Routes {
   static const SELECT_ENTITY = _Paths.SELECT_ENTITY;
   static const SELECT_PROFILE = _Paths.SELECT_PROFILE;
   static const VACCINE_APPLICATION = _Paths.VACCINE_APPLICATION;
+  static const TRIAGE = _Paths.TRIAGE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const SELECT_ENTITY = '/select-entity';
   static const SELECT_PROFILE = '/select-profile';
   static const VACCINE_APPLICATION = '/vaccine-application';
+  static const TRIAGE = '/triage';
 }

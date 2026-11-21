@@ -1,11 +1,6 @@
 import moment from "moment";
 import Swal, { SweetAlertOptions } from "sweetalert2";
 
-export const API_URI = 'http://localhost:3000/api';
-// export const API_URI = 'http://192.168.1.18:3000/api';
-export const API_URI_RENIEC = 'https://dniruc.apisperu.com';
-export const TOKEN_RENIEC = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImpvcmdlbWF5by5wZUBnbWFpbC5jb20iLCJqdGkiOiJhNmVlMWNhMDNlMGViZWY0In0.lddwmw4av0lcR-LNVdQPd0atCXPLNH4sprbe8SlhqXI';
-
 export const SUPABASE_URL = "https://mvxkmaqhfxxfnxrxmqvr.supabase.co/rest/v1/";
 export const SUPABASE_API_KEY = "sb_publishable_vkT5u5R7-cPAcNDTKqtt6w_rkmZ5Z50";
 

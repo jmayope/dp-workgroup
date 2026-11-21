@@ -8,11 +8,13 @@
     "changedPassword?": true,
     "profession?": "sdfsadfsadf",
     "healthEstablisments?": "$[]user_health_establishment",
+    "currentHealthEstablishment?": "$user_health_establishment",
     "workingCondition?": "sdfsadfsadf",
     "ups?": "sdfsadfsadf",
     "status?": true,
     "blocked?": true,
     "profiles?": "$[]user_profile",
+    "currentProfile?": "$user_profile",
     "phone?": "sdfsadfsadf",
     "email?": "sdfsadfsadf"
 }
