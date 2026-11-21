@@ -10,7 +10,7 @@ exports.ProfileMenuModule = void 0;
 const common_1 = require("@nestjs/common");
 const profile_menu_service_1 = require("./profile-menu.service");
 const profile_menu_controller_1 = require("./profile-menu.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const profile_menu_provider_1 = require("./providers/profile-menu.provider");
 let ProfileMenuModule = class ProfileMenuModule {
 };

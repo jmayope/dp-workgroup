@@ -10,7 +10,7 @@ exports.AnthropometricMeasurementModule = void 0;
 const common_1 = require("@nestjs/common");
 const anthropometric_measurement_service_1 = require("./anthropometric-measurement.service");
 const anthropometric_measurement_controller_1 = require("./anthropometric-measurement.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const anthropometric_measurement_provider_1 = require("./providers/anthropometric-measurement.provider");
 let AnthropometricMeasurementModule = class AnthropometricMeasurementModule {
 };

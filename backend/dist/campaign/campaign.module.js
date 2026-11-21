@@ -10,7 +10,7 @@ exports.CampaignModule = void 0;
 const common_1 = require("@nestjs/common");
 const campaign_service_1 = require("./campaign.service");
 const campaign_controller_1 = require("./campaign.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const campaign_provider_1 = require("./providers/campaign.provider");
 let CampaignModule = class CampaignModule {
 };

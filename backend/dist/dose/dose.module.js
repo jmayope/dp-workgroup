@@ -10,7 +10,7 @@ exports.DoseModule = void 0;
 const common_1 = require("@nestjs/common");
 const dose_service_1 = require("./dose.service");
 const dose_controller_1 = require("./dose.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const dose_provider_1 = require("./providers/dose.provider");
 let DoseModule = class DoseModule {
 };

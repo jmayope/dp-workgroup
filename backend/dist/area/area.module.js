@@ -10,7 +10,7 @@ exports.AreaModule = void 0;
 const common_1 = require("@nestjs/common");
 const area_service_1 = require("./area.service");
 const area_controller_1 = require("./area.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const area_provider_1 = require("./providers/area.provider");
 let AreaModule = class AreaModule {
 };

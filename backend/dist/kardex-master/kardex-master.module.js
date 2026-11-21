@@ -10,7 +10,7 @@ exports.KardexMasterModule = void 0;
 const common_1 = require("@nestjs/common");
 const kardex_master_service_1 = require("./kardex-master.service");
 const kardex_master_controller_1 = require("./kardex-master.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const kardex_master_provider_1 = require("./providers/kardex-master.provider");
 let KardexMasterModule = class KardexMasterModule {
 };

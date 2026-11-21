@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileController = void 0;
 const common_1 = require("@nestjs/common");
 const profile_service_1 = require("./profile.service");
-const public_decorator_1 = require("../common/decorators/public.decorator");
+const public_decorator_1 = require("../../src/common/decorators/public.decorator");
 let ProfileController = class ProfileController {
     constructor(profileService) {
         this.profileService = profileService;

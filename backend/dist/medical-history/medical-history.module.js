@@ -10,7 +10,7 @@ exports.MedicalHistoryModule = void 0;
 const common_1 = require("@nestjs/common");
 const medical_history_service_1 = require("./medical-history.service");
 const medical_history_controller_1 = require("./medical-history.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const medical_history_provider_1 = require("./providers/medical-history.provider");
 let MedicalHistoryModule = class MedicalHistoryModule {
 };

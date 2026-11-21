@@ -13,7 +13,7 @@ const mail_controller_1 = require("./mail.controller");
 const mailer_1 = require("@nestjs-modules/mailer");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
-const handlebars_adapter_js_1 = require("@nestjs-modules/mailer/adapters/handlebars.adapter.js");
+const handlebars_adapter_1 = require("@nestjs-modules/mailer/adapters/handlebars.adapter");
 let MailModule = class MailModule {
 };
 exports.MailModule = MailModule;
@@ -38,7 +38,7 @@ exports.MailModule = MailModule = __decorate([
                     },
                     template: {
                         dir: (0, path_1.join)(__dirname, 'templates'),
-                        adapter: new handlebars_adapter_js_1.HandlebarsAdapter(),
+                        adapter: new handlebars_adapter_1.HandlebarsAdapter(),
                         options: {
                             strict: true,
                         },

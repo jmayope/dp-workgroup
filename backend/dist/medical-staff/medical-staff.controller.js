@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MedicalStaffController = void 0;
 const common_1 = require("@nestjs/common");
 const medical_staff_service_1 = require("./medical-staff.service");
-const public_decorator_1 = require("../common/decorators/public.decorator");
+const public_decorator_1 = require("../../src/common/decorators/public.decorator");
 let MedicalStaffController = class MedicalStaffController {
     constructor(medicalStaffService) {
         this.medicalStaffService = medicalStaffService;

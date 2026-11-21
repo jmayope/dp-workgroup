@@ -10,7 +10,7 @@ exports.PatientMeasurementModule = void 0;
 const common_1 = require("@nestjs/common");
 const patient_measurement_service_1 = require("./patient-measurement.service");
 const patient_measurement_controller_1 = require("./patient-measurement.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const patient_measurement_provider_1 = require("./providers/patient-measurement.provider");
 let PatientMeasurementModule = class PatientMeasurementModule {
 };

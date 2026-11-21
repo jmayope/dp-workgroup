@@ -10,7 +10,7 @@ exports.CampaignMovementModule = void 0;
 const common_1 = require("@nestjs/common");
 const campaign_movement_service_1 = require("./campaign-movement.service");
 const campaign_movement_controller_1 = require("./campaign-movement.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const campaign_movement_provider_1 = require("./providers/campaign-movement.provider");
 let CampaignMovementModule = class CampaignMovementModule {
 };

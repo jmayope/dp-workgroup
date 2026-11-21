@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeListController = void 0;
 const common_1 = require("@nestjs/common");
 const type_list_service_1 = require("./type-list.service");
-const public_decorator_1 = require("../common/decorators/public.decorator");
+const public_decorator_1 = require("../../src/common/decorators/public.decorator");
 let TypeListController = class TypeListController {
     constructor(typeListService) {
         this.typeListService = typeListService;

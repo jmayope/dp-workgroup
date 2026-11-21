@@ -10,7 +10,7 @@ exports.SpecialtyModule = void 0;
 const common_1 = require("@nestjs/common");
 const specialty_service_1 = require("./specialty.service");
 const specialty_controller_1 = require("./specialty.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const specialty_provider_1 = require("./providers/specialty.provider");
 let SpecialtyModule = class SpecialtyModule {
 };

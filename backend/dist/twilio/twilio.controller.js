@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TwilioController = void 0;
 const common_1 = require("@nestjs/common");
 const twilio_service_1 = require("./twilio.service");
-const public_decorator_1 = require("../common/decorators/public.decorator");
+const public_decorator_1 = require("../../src/common/decorators/public.decorator");
 let TwilioController = class TwilioController {
     constructor(twilioService) {
         this.twilioService = twilioService;

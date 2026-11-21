@@ -10,7 +10,7 @@ exports.VaccineModule = void 0;
 const common_1 = require("@nestjs/common");
 const vaccine_service_1 = require("./vaccine.service");
 const vaccine_controller_1 = require("./vaccine.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const vaccine_provider_1 = require("./providers/vaccine.provider");
 let VaccineModule = class VaccineModule {
 };

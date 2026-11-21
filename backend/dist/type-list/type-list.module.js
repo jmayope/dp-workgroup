@@ -10,7 +10,7 @@ exports.TypeListModule = void 0;
 const common_1 = require("@nestjs/common");
 const type_list_service_1 = require("./type-list.service");
 const type_list_controller_1 = require("./type-list.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const type_list_provider_1 = require("./providers/type-list.provider");
 let TypeListModule = class TypeListModule {
 };

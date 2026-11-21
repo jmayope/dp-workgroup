@@ -10,7 +10,7 @@ exports.SpecialtyProcessModule = void 0;
 const common_1 = require("@nestjs/common");
 const specialty_process_service_1 = require("./specialty-process.service");
 const specialty_process_controller_1 = require("./specialty-process.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const specialty_process_provider_1 = require("./providers/specialty-process.provider");
 let SpecialtyProcessModule = class SpecialtyProcessModule {
 };

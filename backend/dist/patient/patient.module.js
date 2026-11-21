@@ -10,10 +10,10 @@ exports.PatientModule = void 0;
 const common_1 = require("@nestjs/common");
 const patient_service_1 = require("./patient.service");
 const patient_controller_1 = require("./patient.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const patient_provider_1 = require("./providers/patient.provider");
-const medical_history_provider_1 = require("../medical-history/providers/medical-history.provider");
-const medical_staff_provider_1 = require("../medical-staff/providers/medical-staff.provider");
+const medical_history_provider_1 = require("../../src/medical-history/providers/medical-history.provider");
+const medical_staff_provider_1 = require("../../src/medical-staff/providers/medical-staff.provider");
 let PatientModule = class PatientModule {
 };
 exports.PatientModule = PatientModule;

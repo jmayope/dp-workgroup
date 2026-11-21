@@ -10,7 +10,7 @@ exports.HealthNetworkModule = void 0;
 const common_1 = require("@nestjs/common");
 const health_network_service_1 = require("./health-network.service");
 const health_network_controller_1 = require("./health-network.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const health_network_provider_1 = require("./providers/health-network.provider");
 let HealthNetworkModule = class HealthNetworkModule {
 };

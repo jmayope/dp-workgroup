@@ -10,7 +10,7 @@ exports.MenuModule = void 0;
 const common_1 = require("@nestjs/common");
 const menu_service_1 = require("./menu.service");
 const menu_controller_1 = require("./menu.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const menu_provider_1 = require("./providers/menu.provider");
 let MenuModule = class MenuModule {
 };

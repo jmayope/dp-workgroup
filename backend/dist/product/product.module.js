@@ -10,7 +10,7 @@ exports.ProductModule = void 0;
 const common_1 = require("@nestjs/common");
 const product_service_1 = require("./product.service");
 const product_controller_1 = require("./product.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const product_provider_1 = require("./providers/product.provider");
 let ProductModule = class ProductModule {
 };

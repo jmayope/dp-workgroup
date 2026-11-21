@@ -10,7 +10,7 @@ exports.GrowthStageModule = void 0;
 const common_1 = require("@nestjs/common");
 const growth_stage_service_1 = require("./growth-stage.service");
 const growth_stage_controller_1 = require("./growth-stage.controller");
-const database_module_1 = require("../database/database.module");
+const database_module_1 = require("../../src/database/database.module");
 const growth_stage_provider_1 = require("./providers/growth-stage.provider");
 let GrowthStageModule = class GrowthStageModule {
 };
