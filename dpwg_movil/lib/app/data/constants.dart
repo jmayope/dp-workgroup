@@ -17,7 +17,8 @@ const List<Color> profileColors = [
   AppColors.navyLight,
 ];
 
-
+const String API_URI = 'https://dp-backend-navy.vercel.app';
+// const String API_URI = 'https://dp-backend-navy.vercel.app';
 
 String formatDateToYYYYMMDD(DateTime date) {
   return date.toIso8601String().split('T')[0];

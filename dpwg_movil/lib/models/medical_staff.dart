@@ -7,6 +7,7 @@ import 'index.dart';
 class MedicalStaff {
 
   const MedicalStaff({
+    this.id,
     this.code,
     this.documentType,
     this.firstName,
@@ -25,8 +26,10 @@ class MedicalStaff {
     this.currentProfile,
     this.phone,
     this.email,
+    this.token,
   });
 
+  final String? id;
   final String? code;
   final String? documentType;
   final String? firstName;
@@ -45,8 +48,10 @@ class MedicalStaff {
   final UserProfile? currentProfile;
   final String? phone;
   final String? email;
+  final String? token;
 
   factory MedicalStaff.fromJson(Map<String,dynamic> json) => MedicalStaff(
+    id: json['_id']?.toString(),
     code: json['code']?.toString(),
     documentType: json['documentType']?.toString(),
     firstName: json['firstName']?.toString(),
@@ -64,10 +69,12 @@ class MedicalStaff {
     profiles: json['profiles'] != null ? (json['profiles'] as List? ?? []).map((e) => UserProfile.fromJson(e as Map<String, dynamic>)).toList() : null,
     currentProfile: json['currentProfile'] != null ? UserProfile.fromJson(json['currentProfile'] as Map<String, dynamic>) : null,
     phone: json['phone']?.toString(),
-    email: json['email']?.toString()
+    email: json['email']?.toString(),
+    token: json['token']?.toString()
   );
   
   Map<String, dynamic> toJson() => {
+    '_id': id,
     'code': code,
     'documentType': documentType,
     'firstName': firstName,
@@ -85,10 +92,12 @@ class MedicalStaff {
     'profiles': profiles?.map((e) => e.toJson()).toList(),
     'currentProfile': currentProfile?.toJson(),
     'phone': phone,
-    'email': email
+    'email': email,
+    'token': token
   };
 
   MedicalStaff clone() => MedicalStaff(
+    id: id,
     code: code,
     documentType: documentType,
     firstName: firstName,
@@ -106,11 +115,13 @@ class MedicalStaff {
     profiles: profiles?.map((e) => e.clone()).toList(),
     currentProfile: currentProfile?.clone(),
     phone: phone,
-    email: email
+    email: email,
+    token: token
   );
 
 
   MedicalStaff copyWith({
+    Optional<String?>? id,
     Optional<String?>? code,
     Optional<String?>? documentType,
     Optional<String?>? firstName,
@@ -128,8 +139,10 @@ class MedicalStaff {
     Optional<List<UserProfile>?>? profiles,
     Optional<UserProfile?>? currentProfile,
     Optional<String?>? phone,
-    Optional<String?>? email
+    Optional<String?>? email,
+    Optional<String?>? token
   }) => MedicalStaff(
+    id: checkOptional(id, () => this.id),
     code: checkOptional(code, () => this.code),
     documentType: checkOptional(documentType, () => this.documentType),
     firstName: checkOptional(firstName, () => this.firstName),
@@ -148,12 +161,13 @@ class MedicalStaff {
     currentProfile: checkOptional(currentProfile, () => this.currentProfile),
     phone: checkOptional(phone, () => this.phone),
     email: checkOptional(email, () => this.email),
+    token: checkOptional(token, () => this.token),
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is MedicalStaff && code == other.code && documentType == other.documentType && firstName == other.firstName && lastName == other.lastName && username == other.username && password == other.password && changedPassword == other.changedPassword && profession == other.profession && healthEstablisments == other.healthEstablisments && currentHealthEstablishment == other.currentHealthEstablishment && workingCondition == other.workingCondition && ups == other.ups && status == other.status && blocked == other.blocked && profiles == other.profiles && currentProfile == other.currentProfile && phone == other.phone && email == other.email;
+    || other is MedicalStaff && id == other.id && code == other.code && documentType == other.documentType && firstName == other.firstName && lastName == other.lastName && username == other.username && password == other.password && changedPassword == other.changedPassword && profession == other.profession && healthEstablisments == other.healthEstablisments && currentHealthEstablishment == other.currentHealthEstablishment && workingCondition == other.workingCondition && ups == other.ups && status == other.status && blocked == other.blocked && profiles == other.profiles && currentProfile == other.currentProfile && phone == other.phone && email == other.email && token == other.token;
 
   @override
-  int get hashCode => code.hashCode ^ documentType.hashCode ^ firstName.hashCode ^ lastName.hashCode ^ username.hashCode ^ password.hashCode ^ changedPassword.hashCode ^ profession.hashCode ^ healthEstablisments.hashCode ^ currentHealthEstablishment.hashCode ^ workingCondition.hashCode ^ ups.hashCode ^ status.hashCode ^ blocked.hashCode ^ profiles.hashCode ^ currentProfile.hashCode ^ phone.hashCode ^ email.hashCode;
+  int get hashCode => id.hashCode ^ code.hashCode ^ documentType.hashCode ^ firstName.hashCode ^ lastName.hashCode ^ username.hashCode ^ password.hashCode ^ changedPassword.hashCode ^ profession.hashCode ^ healthEstablisments.hashCode ^ currentHealthEstablishment.hashCode ^ workingCondition.hashCode ^ ups.hashCode ^ status.hashCode ^ blocked.hashCode ^ profiles.hashCode ^ currentProfile.hashCode ^ phone.hashCode ^ email.hashCode ^ token.hashCode;
 }

@@ -9,8 +9,6 @@ class ServiceDeliveryInstitution {
   const ServiceDeliveryInstitution({
     this.name,
     this.code,
-    this.typeInstitution,
-    this.category,
     this.ruc,
     this.description,
     this.openAllDay,
@@ -30,8 +28,6 @@ class ServiceDeliveryInstitution {
 
   final String? name;
   final String? code;
-  final TypeList? typeInstitution;
-  final String? category;
   final String? ruc;
   final String? description;
   final bool? openAllDay;
@@ -51,8 +47,6 @@ class ServiceDeliveryInstitution {
   factory ServiceDeliveryInstitution.fromJson(Map<String,dynamic> json) => ServiceDeliveryInstitution(
     name: json['name']?.toString(),
     code: json['code']?.toString(),
-    typeInstitution: json['typeInstitution'] != null ? TypeList.fromJson(json['typeInstitution'] as Map<String, dynamic>) : null,
-    category: json['category']?.toString(),
     ruc: json['ruc']?.toString(),
     description: json['description']?.toString(),
     openAllDay: json['openAllDay'] != null ? json['openAllDay'] as bool : null,
@@ -73,8 +67,6 @@ class ServiceDeliveryInstitution {
   Map<String, dynamic> toJson() => {
     'name': name,
     'code': code,
-    'typeInstitution': typeInstitution?.toJson(),
-    'category': category,
     'ruc': ruc,
     'description': description,
     'openAllDay': openAllDay,
@@ -95,8 +87,6 @@ class ServiceDeliveryInstitution {
   ServiceDeliveryInstitution clone() => ServiceDeliveryInstitution(
     name: name,
     code: code,
-    typeInstitution: typeInstitution?.clone(),
-    category: category,
     ruc: ruc,
     description: description,
     openAllDay: openAllDay,
@@ -118,8 +108,6 @@ class ServiceDeliveryInstitution {
   ServiceDeliveryInstitution copyWith({
     Optional<String?>? name,
     Optional<String?>? code,
-    Optional<TypeList?>? typeInstitution,
-    Optional<String?>? category,
     Optional<String?>? ruc,
     Optional<String?>? description,
     Optional<bool?>? openAllDay,
@@ -138,8 +126,6 @@ class ServiceDeliveryInstitution {
   }) => ServiceDeliveryInstitution(
     name: checkOptional(name, () => this.name),
     code: checkOptional(code, () => this.code),
-    typeInstitution: checkOptional(typeInstitution, () => this.typeInstitution),
-    category: checkOptional(category, () => this.category),
     ruc: checkOptional(ruc, () => this.ruc),
     description: checkOptional(description, () => this.description),
     openAllDay: checkOptional(openAllDay, () => this.openAllDay),
@@ -159,8 +145,8 @@ class ServiceDeliveryInstitution {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is ServiceDeliveryInstitution && name == other.name && code == other.code && typeInstitution == other.typeInstitution && category == other.category && ruc == other.ruc && description == other.description && openAllDay == other.openAllDay && address == other.address && reference == other.reference && department == other.department && province == other.province && district == other.district && ubigeo == other.ubigeo && phone == other.phone && cellphone == other.cellphone && email == other.email && website == other.website && logo == other.logo && status == other.status;
+    || other is ServiceDeliveryInstitution && name == other.name && code == other.code && ruc == other.ruc && description == other.description && openAllDay == other.openAllDay && address == other.address && reference == other.reference && department == other.department && province == other.province && district == other.district && ubigeo == other.ubigeo && phone == other.phone && cellphone == other.cellphone && email == other.email && website == other.website && logo == other.logo && status == other.status;
 
   @override
-  int get hashCode => name.hashCode ^ code.hashCode ^ typeInstitution.hashCode ^ category.hashCode ^ ruc.hashCode ^ description.hashCode ^ openAllDay.hashCode ^ address.hashCode ^ reference.hashCode ^ department.hashCode ^ province.hashCode ^ district.hashCode ^ ubigeo.hashCode ^ phone.hashCode ^ cellphone.hashCode ^ email.hashCode ^ website.hashCode ^ logo.hashCode ^ status.hashCode;
+  int get hashCode => name.hashCode ^ code.hashCode ^ ruc.hashCode ^ description.hashCode ^ openAllDay.hashCode ^ address.hashCode ^ reference.hashCode ^ department.hashCode ^ province.hashCode ^ district.hashCode ^ ubigeo.hashCode ^ phone.hashCode ^ cellphone.hashCode ^ email.hashCode ^ website.hashCode ^ logo.hashCode ^ status.hashCode;
 }

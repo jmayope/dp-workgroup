@@ -210,7 +210,7 @@ class LoginView extends GetView<LoginController> {
   // Botón
   // ---------------------------------------------------------------------------
   Widget _botonIngresar() {
-    return SizedBox(
+    return Obx(() => SizedBox(
       height: 56,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -227,9 +227,9 @@ class LoginView extends GetView<LoginController> {
           ],
         ),
         child: ElevatedButton.icon(
-          onPressed: () {
+          onPressed: controller.logging.value ? null : () async {
             // TODO: lógica de inicio de sesión
-            controller.login();
+            await controller.login();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -240,13 +240,13 @@ class LoginView extends GetView<LoginController> {
             ),
           ),
           icon: const Icon(Icons.login_rounded, size: 24),
-          label: const Text(
+          label: controller.logging.value ? CircularProgressIndicator() : Text(
             'Ingresar',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
         ),
       ),
-    );
+    )) ;
   }
 }
 

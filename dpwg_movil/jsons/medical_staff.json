@@ -1,4 +1,5 @@
 {
+    "_id?": "sdfsdfsdf",
     "code?": "sdfsadfsadf",
     "documentType?": "sdfsadfsadf",
     "firstName?": "sdfsadfsadf",
@@ -16,5 +17,6 @@
     "profiles?": "$[]user_profile",
     "currentProfile?": "$user_profile",
     "phone?": "sdfsadfsadf",
-    "email?": "sdfsadfsadf"
+    "email?": "sdfsadfsadf",
+    "token?": "sasdsdfsdfs"
 }

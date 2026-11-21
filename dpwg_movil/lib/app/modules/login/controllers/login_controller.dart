@@ -1,8 +1,10 @@
+import 'package:dpwg_movil/app/data/main.service.dart';
 import 'package:dpwg_movil/app/data/preference.service.dart';
 import 'package:dpwg_movil/app/routes/app_pages.dart';
 import 'package:dpwg_movil/models/index.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:quiver/core.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
@@ -11,6 +13,11 @@ class LoginController extends GetxController {
   final password = TextEditingController();
   final showPassword = false.obs;
   final userLoged = MedicalStaff().obs;
+
+  final logging = false.obs;
+
+  final main = Get.put(MainService());
+
   @override
   void onInit() {
     super.onInit();
@@ -29,31 +36,29 @@ class LoginController extends GetxController {
   Future<void> login() async {
     // Get.offAllNamed(Routes.SELECT_ENTITY);
     // Get.offAllNamed(Routes.SELECT_PROFILE);
-    
-    userLoged.value = MedicalStaff(
-      code: "sdfsadfsadf",
-      documentType: "234234234",
-      firstName: "Juan",
-      lastName: "Perez",
-      username: "jperez@gmail.com",
-      password: "12345678",
-      changedPassword: true,
-      profession: "Enfermero",
-      currentHealthEstablishment: UserHealthEstablishment(
+    if (logging.value) return;
+    logging.value = true;
+
+    final resultLogin = await main.login(email.value.text, password.value.text);
+    if (resultLogin == null) {
+      Get.snackbar("Validación", "Credenciales incorrectas");
+      return;
+    }
+    userLoged.value = MedicalStaff.fromJson(resultLogin);
+    userLoged.value = userLoged.value.copyWith(
+      currentHealthEstablishment: Optional.of(UserHealthEstablishment(
         serviceDeliveryInstitution: ServiceDeliveryInstitution(name: "UPS"),
-      ),
-      workingCondition: "Contratado",
-      ups: "342342342342",
-      status: true,
-      blocked: false,
-      currentProfile: UserProfile(
+      )),
+      currentProfile: Optional.of(UserProfile(
         profile: Profile(
           name: "Enfermero"
         )
-      ),
-      phone: "+51986584585",
-      email: "jperez@gmail.com"
+      )),
     );
+    print(resultLogin);
+    
+    logging.value = false;
+
     bool saved = await PreferenceService.setSession(userLoged.value);
     Get.offAllNamed(Routes.HOME);
   }
